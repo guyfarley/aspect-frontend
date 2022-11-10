@@ -1,7 +1,5 @@
 import Head from 'next/head'
-import Layout from '../../components/layout';
 import Image from 'next/image'
-import styles from '../styles/Home.module.css';
 import { allInstalls } from '../../data';
 import { GetStaticProps, GetStaticPaths } from 'next';
 
@@ -34,9 +32,9 @@ export default function OneInstall({ install }): JSX.Element {
   const installData = install;
 
   return (
-    <Layout>
-      <p>{installData.pm}</p>
-    </Layout>
+
+    <p>{installData.pm}</p>
+
   );
 
 }

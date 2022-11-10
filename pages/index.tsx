@@ -1,14 +1,15 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import Layout from '../components/layout';
 
 
 const Home: NextPage = () => {
   return (
-    <Layout home>
-      <Head></Head>
-      {/* <section>
+    <>
+      <h1>ASPECT GRAPHIC INSTALL TRACKER</h1><br />
+      <p>A work in progress...</p>
+      {/* <Head></Head>
+      <section>
         <div>
           {allInstallData.map((install) => (
             console.log(install.location),
@@ -16,7 +17,7 @@ const Home: NextPage = () => {
           ))}
         </div>
       </section> */}
-    </Layout>
+    </>
   );
 }
 
