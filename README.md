@@ -1,27 +1,75 @@
-# Next.js + Tailwind CSS Example
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+# Graphic Installation Tracker - Frontend
 
-## Deploy your own
+## A tracking and reporting app for retail graphic installs
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+**Author:** Guy Farley
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+## How to Run This Application
 
-## How to use
+## Problem Domain
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+In my previous career as a project manager for retail marketing, I was often tasked with managing nationwide installations of displays and signage. I quickly identified the need for a central portal, where all vital information surrounding such a rollout could be easily tracked and reported to the client.
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+During large campaign rollouts, graphic kits (consisting of printed and manufactured retail displays) would be shipped to hundreds of retail locations across the country. It was always essential that all installations happened as close to the product launch date as possible, and this resulted in a massive number of installations happening within a small window of time.
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+There was no software in place to help manage the data surrounding these installs, and the client often demanded updates in real time. The best solution at the time was to manage information within a shared Google doc or Smartsheet, but this was slow and cumbersome. What was needed was an application specific to graphic installs that could be securely logged into for access to information on an install (or all installs) instantly.
 
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
+**User Stories:**
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+- As a **Project Manager** I need a central hub of information for all installations related to a given marketing campaign. I need to enter and modify data for each location as needed
+
+- As a **Client** I need a way to quickly track the status of:
+  - Installation at a *single* location
+  - All installations at *all* locations
+
+- As an **Admin** I need the ability to delete installs from the database
+
+## Features / Routes
+
+- **GET:** Request data for a single install at a given location *(READ)*
+- **GET ALL:** Request all data for all locations, to be displayed as a full report *(READ)*
+- **POST:** Add a new install to the database *(CREATE)*
+- **PUT:** Modify an existing install at a given location *(UPDATE)*
+- **DELETE:**: Delete an existing install at a given location *(DELETE)*
+
+## Challenges & Constraints
+
+- **Challenge:**
+
+## Visual Documentation
+
+### Wireframe
+
+Before determining the data flow of my application, I first created a wireframe to help visualize how the final application would appear to the end user. This was the first step in determining how the app would function, as it required me to think through the user's experience and how they would be best served by the architecture.
+
+Through this wireframe process, I recognized the need for the following pages:
+
+- Home Page (pages/index)
+  - Report Request (all locations)
+  - Report Request (single location)
+  - Create Install (single location)
+- Single Install (pages/one-install/{id})
+- New Install Request (pages/new-install)
+- Report for All Install Locations (pages/report)
+- Single Install Modification Request (pages/modify)
+
+Visual Representation:
+
+![wireframe for Install Tracker](./public/install_wireframe2.png)
+
+### Web Request/Response Cycle
+
+![web request and responce cycle for Install Tracker](./public/install_wrrc.png)
+
+## Tech Stack
+
+Having recently learned the basics of Typescript, I wanted to incorporate the benefits of type safety into this app. And the Next.js framework, which sits on top of React, allows for easy incorporation of Typescript.
+
+On the back end, I decided to build an Express server that would handle the various database requests. And for the database itself I chose to use MongoDB (NoSQL database) due to the straightforward structure of the information.
+
+## Links and Resources
+
+Wireframing and Web Request/Response Cycle: <https://miro.com/app/board/uXjVPRDCNRU=/>
+
+<https://nextjs.org/docs/getting-started>
