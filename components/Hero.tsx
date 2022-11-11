@@ -1,5 +1,11 @@
+import Image from 'next/image'
+
 function Hero() {
-  return <div>Hero</div>
+  return (
+    <div>
+      <Image />
+    </div>
+  );
 }
 
 export default Hero;
