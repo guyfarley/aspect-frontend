@@ -14,7 +14,7 @@ function Header() {
 
         {/* title */}
         <div className="flex items-center">
-          <h1>ASCENT</h1>
+          <h1>ASPECT</h1>
         </div>
 
         {/* login/logout button */}
