@@ -10,12 +10,17 @@ function Header() {
             <li className="headerLink">Create</li>
             <li className="headerLink">Campaign Report</li>
           </ul>
-
         </div>
-        {/* title and subtitle */}
-        <div></div>
+
+        {/* title */}
+        <div className="flex items-center">
+          <h1>ASCENT</h1>
+        </div>
+
         {/* login/logout button */}
-        <div></div>
+        <div className="flex items-center">
+          <h1 className="headerLink">Log In</h1>
+        </div>
       </header>
     </>
   );
