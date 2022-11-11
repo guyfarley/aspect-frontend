@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* html, body, heading, etc. */
+@layer base {}
+
+@layer components {
+  .headerLink {
+    @apply cursor-pointer text-sm text-[#000000] transition duration-300 hover:text-[blue];
+  }
+}

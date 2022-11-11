@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Layout from '../components/layout';
 import Image from 'next/image'
 import { allInstalls } from '../data';
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
