@@ -3,14 +3,22 @@
 @tailwind utilities;
 
 /* html, body, heading, etc. */
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   header {
-    @apply fixed top-0 z-50 flex w-full items-center justify-between px-4 py-4;
+    @apply fixed top-0 z-50 flex w-full items-center justify-center px-4 py-4;
   }
 }
 
 @layer components {
   .headerLink {
-    @apply cursor-pointer text-sm text-[#000000] transition duration-300 hover:text-[blue];
+    @apply fixed right-8 cursor-pointer text-sm text-[#000000] transition duration-300 hover:text-[blue];
+  }
+
+  .menuLink {
+    @apply cursor-pointer text-center text-sm text-[#000000] transition duration-300 hover:text-[blue] mx-[6vw] my-[4vh];
   }
 }

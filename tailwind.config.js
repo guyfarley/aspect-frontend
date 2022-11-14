@@ -6,7 +6,14 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'lustria': ['"Lustria", serif'],
+        'laila': ['"Laila", sans-serif'],
+        'gruppo': ['"Gruppo", cursive'],
+        'inconsolata': ['"Inconsolata", monospace'],
+      },
+    },
   },
   plugins: [],
 }
