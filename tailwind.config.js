@@ -12,6 +12,7 @@ module.exports = {
         'laila': ['"Laila", sans-serif'],
         'gruppo': ['"Gruppo", cursive'],
         'inconsolata': ['"Inconsolata", monospace'],
+        'alata': ['"Alata", sans-serif'],
       },
     },
   },
