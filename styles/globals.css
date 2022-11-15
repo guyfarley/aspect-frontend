@@ -9,7 +9,7 @@ html {
 
 @layer base {
   header {
-    @apply fixed top-0 z-50 flex w-full items-center justify-center px-4 py-4;
+    @apply fixed top-0 z-50 flex flex-col w-full items-center justify-center px-4 py-4;
   }
 }
 
@@ -21,5 +21,9 @@ html {
   .menuButton {
     /* @apply cursor-pointer text-center text-sm text-[#000000] transition duration-300 hover:text-[blue] mx-[6vw] my-[4vh]; */
     @apply rounded px-5 py-4 text-sm transition hover:opacity-75 md:py-2.5 md:px-8 md:text-base;
+  }
+
+  .submitButton {
+    @apply rounded transition hover:opacity-75 bg-slate-600 text-white text-sm my-2 w-[80px];
   }
 }

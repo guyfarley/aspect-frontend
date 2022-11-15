@@ -1,11 +1,16 @@
+import Link from 'next/link';
+
 function Menu() {
   return (
     <div className="flex flex-col md:flex-row justify-center mt-[16vh]">
       <button className="menuButton">Log In</button>
-      <button className="menuButton">Find an Install</button>
+      <button className="menuButton">
+        <Link href="/get-install">
+          Find an Install
+        </Link>
+      </button>
       <button className="menuButton">Create an Install</button>
       <button className="menuButton">Campaign Report</button>
-
     </div>
   )
 }
