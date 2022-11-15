@@ -18,7 +18,8 @@ html {
     @apply fixed right-8 cursor-pointer text-sm text-[#000000] transition duration-300 hover:text-[blue];
   }
 
-  .menuLink {
-    @apply cursor-pointer text-center text-sm text-[#000000] transition duration-300 hover:text-[blue] mx-[6vw] my-[4vh];
+  .menuButton {
+    /* @apply cursor-pointer text-center text-sm text-[#000000] transition duration-300 hover:text-[blue] mx-[6vw] my-[4vh]; */
+    @apply rounded px-5 py-4 text-sm transition hover:opacity-75 md:py-2.5 md:px-8 md:text-base;
   }
 }
