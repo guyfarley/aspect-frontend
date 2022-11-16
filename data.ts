@@ -1,4 +1,4 @@
-export const allInstalls = [
+const allInstalls = [
   {
     id: 1,
     pm: "Guy Farley",
@@ -57,3 +57,5 @@ export const allInstalls = [
     pmNotes: ""
   }
 ]
+
+export default allInstalls;

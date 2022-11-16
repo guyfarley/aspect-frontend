@@ -33,16 +33,13 @@ export default function Report({ allInstallData }): JSX.Element {
   console.log(allInstallData);
 
   return (
-    <Layout home>
-      <Head></Head>
-      <section>
-        <div>
-          {allInstallData.map((install) => (
-            console.log(install.location),
-            <p className={styles.description} key={install.storeNum}>{install.location}</p>
-          ))}
-        </div>
-      </section>
-    </Layout>
+    <section>
+      <div>
+        {allInstallData.map((install) => (
+          console.log(install.location),
+          <p key={install.storeNum}>{install.location}</p>
+        ))}
+      </div>
+    </section>
   );
 }

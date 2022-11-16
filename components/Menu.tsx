@@ -9,8 +9,16 @@ function Menu() {
           Find an Install
         </Link>
       </button>
-      <button className="menuButton">Create an Install</button>
-      <button className="menuButton">Campaign Report</button>
+      <button className="menuButton">
+        <Link href="/create-install">
+          Create an Install
+        </Link>
+      </button>
+      <button className="menuButton">
+        <Link href="/report">
+          Campaign Report
+        </Link>
+      </button>
     </div>
   )
 }
