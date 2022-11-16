@@ -1,5 +1,4 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import Header from '../../components/Header'
 import { Install } from '../../typings'
 import allInstalls from '../../data';
 import { GetStaticProps, GetStaticPaths } from 'next';
@@ -37,7 +36,35 @@ export default function OneInstall({ install }: Props): JSX.Element {
   console.log('install data:', install);
 
   return (
-    <p>{install.location}</p>
-  );
+    <>
+      <Header />
+      <div className="flex items-center h-[120vh] w-full bg-slate-400 ">
+        <div className="flex flex-col items-center w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-lg md:mx-auto">
 
+          <h1 className="mb-6 mt-[100px] text-xl font-bold">{install.location}</h1>
+          <div className="flex flex-col mt-[60px]">
+
+            <p>Store Number: {install.storeNum}</p>
+            <p>Campaign: {install.campaign}</p>
+            <p>Project Manager: {install.pm}</p><br />
+
+            <p>Install Date: {install.installDate}</p>
+            <p>Install Time: {install.installTime}</p>
+            <p>Install Vendor: {install.installer}</p>
+            <p>Install Vendor Phone #: {install.installerPhone}</p><br />
+            <p>Installer Notes: {install.installerNotes}</p>
+
+            <p>Production Vendor: {install.vendorName}</p>
+            <p>Production Vendor Phone #: {install.vendorPhone}</p><br />
+
+            <p>Install Complete? {install.complete}</p>
+            <p>Revisit Needed? {install.revisitNeeded}</p>
+            <p>Revisit Date: {install.revisitDate}</p>
+
+            <p>PM Notes: {install.pmNotes}</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

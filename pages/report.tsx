@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { allInstalls } from '../data';
+import Header from '../components/Header'
+import { Install } from '../../typings'
+import allInstalls from '../data';
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 
 // initial request for all item data from database - runs at buildtime
@@ -17,6 +19,10 @@ import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 //   }
 // }
 
+interface Props {
+  allInstallData: Install[]
+}
+
 export const getStaticProps: GetStaticProps = () => {
   const data = { allInstalls };
 
@@ -28,18 +34,21 @@ export const getStaticProps: GetStaticProps = () => {
   }
 };
 
-export default function Report({ allInstallData }): JSX.Element {
+export default function Report({ allInstallData }: Props): JSX.Element {
 
   console.log(allInstallData);
 
   return (
-    <section>
-      <div>
-        {allInstallData.map((install) => (
-          console.log(install.location),
-          <p key={install.storeNum}>{install.location}</p>
-        ))}
-      </div>
-    </section>
+    <>
+      <Header />
+      <section>
+        <div>
+          {allInstallData.map((install) => (
+            console.log(install.location),
+            <p key={install.storeNum}>{install.location}</p>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

@@ -1,12 +1,12 @@
-import { allInstalls } from '../../data';
+import { NextApiRequest, NextApiResponse } from 'next';
+import allInstalls from '../../data';
 
-export default function handler(req, res) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   let { id } = req.params;
   let oneInstall = allInstalls.filter((install) => install.id === id);
   console.log(oneInstall);
   res.status(200).send(oneInstall);
-
 
   // Get data submitted in request's body.
   // const body = req.body

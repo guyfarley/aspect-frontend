@@ -20,7 +20,6 @@ export default function CreateInstallForm() {
         </div>
       </div>
       <div className="flex items-center h-full w-full bg-slate-400 ">
-        {/* <div> */}
         <div className="flex flex-col items-center w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
           {/* <div className="w-full bg-white rounded shadow-lg p-8 m-4"> */}
           <h1 className="mb-6 mt-[100px]">Create A New Install</h1>
