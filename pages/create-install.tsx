@@ -1,10 +1,9 @@
 import React from "react"
-import Header from '../components/Header'
 
 export default function CreateInstallForm() {
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log('form submitted');
     // this function will handle the data fetching upon form submission
     // on submission, routes to pages/one-install/[id]
