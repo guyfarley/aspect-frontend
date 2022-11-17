@@ -1,27 +1,21 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import Header from '../components/Header'
+import Menu from '../components/Menu'
 import Hero from '../components/Hero'
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
-    <div className="relative h-screen lg:h-[140vh]">
+    <div className="relative flex justify-center h-screen px-4 py-4 lg:h-[140vh]">
       <Head>
         <title>Aspect Install Tracker</title>
       </Head>
 
       <Header />
       <main>
-        <section>
-          {/* Hero */}
-          <Hero />
-        </section>
-        <section>
-          {/* Menu */}
-        </section>
-      </main>
-    </div>
+        <Menu />
+        <Hero />
+      </main >
+    </div >
   );
 }
 
