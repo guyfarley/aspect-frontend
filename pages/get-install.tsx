@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
+import { InstallsContext } from '../context/InstallsContext';
+import { useContext } from 'react';
 
 export default function GetInstallForm() {
 
@@ -13,6 +15,9 @@ export default function GetInstallForm() {
     // this function will handle the data fetching upon form submission
     // on submission, routes to pages/installs/[id]
   }
+
+  const { installs } = useContext(InstallsContext);
+  console.log('installs:', installs);
 
   return (
     <>
