@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
   }
 };
 
-export default function ModifyInstall({ install }: Props): JSX.Element {
+export default function OneInstall({ install }: Props): JSX.Element {
 
   const { installs } = useContext(InstallsContext);
   const stateInstalls = installs.filter(installFromState => installFromState.id.toString() === install.id);
