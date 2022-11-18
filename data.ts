@@ -50,7 +50,7 @@ const allInstalls = [
     installer: "Installs R Us",
     installerPhone: "(555) 858-7789",
     installerNotes: "",
-    complete: false,
+    complete: true,
     completionPics: {},
     revisitNeeded: false,
     revisitDate: null,

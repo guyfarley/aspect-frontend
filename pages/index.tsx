@@ -5,7 +5,7 @@ import Hero from '../components/Hero'
 
 const Home = () => {
   return (
-    <div className="relative flex justify-center h-screen px-4 py-4 lg:h-[140vh]">
+    <div className="relative flex justify-center h-screen px-4 py-4 lg:h-[140vh]  bg-slate-200">
       <Head>
         <title>Aspect Install Tracker</title>
       </Head>
