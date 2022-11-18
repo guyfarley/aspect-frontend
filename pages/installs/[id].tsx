@@ -1,14 +1,17 @@
 import Header from '../../components/Header'
-import { Install } from '../../typings'
 import allInstalls from '../../data';
+import { Install } from '../../typings'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
+import { InstallsContext } from '../../context/InstallsContext';
+import { useContext } from 'react';
 
 interface Props {
   install: Install
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
+
   const data = allInstalls;
   const paths = data.map(install => ({
     params: {
@@ -31,13 +34,22 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
 };
 
 export default function ModifyInstall({ install }: Props): JSX.Element {
-  console.log('install data:', install);
+
+  const { installs } = useContext(InstallsContext);
+  const stateInstalls = installs.filter(installFromState => installFromState.id.toString() === install.id);
+  const stateInstall = stateInstalls[0];
+
+  if (stateInstall) {
+    install = stateInstall;
+  }
 
   const router = useRouter();
 
   const handleClick = (install: Install) => {
     router.push(`/modify/${install.id}`)
   }
+
+  console.log('install data:', install);
 
   return (
     <>
