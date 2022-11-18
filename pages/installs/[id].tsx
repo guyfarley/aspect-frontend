@@ -2,9 +2,7 @@ import Header from '../../components/Header'
 import { Install } from '../../typings'
 import allInstalls from '../../data';
 import { GetStaticProps, GetStaticPaths } from 'next';
-
-// getStaticPaths() and getStaticProps() run at build time of this page
-// component will render all data for specific install being requested
+import { useRouter } from 'next/router';
 
 interface Props {
   install: Install
@@ -32,13 +30,19 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
   }
 };
 
-export default function OneInstall({ install }: Props): JSX.Element {
+export default function ModifyInstall({ install }: Props): JSX.Element {
   console.log('install data:', install);
+
+  const router = useRouter();
+
+  const handleClick = (install: Install) => {
+    router.push(`/modify/${install.id}`)
+  }
 
   return (
     <>
       <Header />
-      <div className="flex items-center h-[120vh] w-full bg-slate-400 ">
+      <div className="flex items-center h-[120vh] w-full bg-slate-200 ">
         <div className="flex flex-col items-center w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-lg md:mx-auto">
 
           <h1 className="mb-6 mt-[100px] text-xl font-bold">{install.location}</h1>
@@ -62,6 +66,10 @@ export default function OneInstall({ install }: Props): JSX.Element {
             <p>Revisit Date: {install.revisitDate}</p>
 
             <p>PM Notes: {install.pmNotes}</p>
+
+            // Submit button should post modified data to install in database, and redirect user to install/[id] page displaying updated info
+            <button onClick={() => handleClick(install)} className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-lg mx-auto p-4 rounded" type="submit">Modify
+            </button>
           </div>
         </div>
       </div>
