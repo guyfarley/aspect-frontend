@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
 // export default function ModifyInstall({ install }: Props): JSX.Element {
 export default function ModifyInstall({ install }: Props): JSX.Element {
 
-  const { installs, setInstalls } = useContext(InstallsContext);
+  const { installs, setInstalls, updateInstall } = useContext(InstallsContext);
   const stateInstalls = installs.filter(installFromState => installFromState.id.toString() === install.id);
   const stateInstall = stateInstalls[0];
 
@@ -45,8 +45,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
   }
   console.log('modify install data:', install);
 
-  const router = useRouter();
-  const [route, setRoute] = useState("");
+
 
   const [formData, setFormData] = useState({
     id: install.id,
@@ -75,17 +74,17 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     // console.log('new form data: ', formData);
   };
 
+  const router = useRouter();
+  const [route, setRoute] = useState("");
   // this function will handle the data fetching upon form submission
   // on submission, routes to pages/installs/[id]
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // console.log('installs: ', installs)
-    // console.log('new form data: ', formData);
-    setInstalls([...installs, formData]);
-    console.log('new installs: ', installs);
-    // setRoute((formData.id).toString());
-    // console.log(route);
-    // router.push(`/installs/${route}`)
+  const handleSubmitUpdate = (install) => {
+    // e.preventDefault();
+    console.log('new form data: ', formData);
+    updateInstall(formData);
+    setRoute((install.id).toString());
+    console.log('ROUTE: ', route);
+    router.push(`/installs/${route}`)
   }
 
   return (
@@ -95,7 +94,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
         <div className="flex flex-col items-center h-full w-full bg-slate-200 p-8 md:max-w-md md:mx-auto">
           {/* <div className="w-full bg-white rounded shadow-lg p-8 m-4"> */}
           <h1 className="mb-6 mt-[100px]">Modify Install</h1>
-          <form className="mb-6 mt-[15px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmit}>
+          <form className="mb-6 mt-[15px] md:flex md:flex-wrap md:justify-between" onSubmit={() => handleSubmitUpdate(install)}>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="store_number">Store Number</label>
               <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="number" id="store_number" name="storeNum" defaultValue={(install.storeNum).toString()} onChange={handleChange} />

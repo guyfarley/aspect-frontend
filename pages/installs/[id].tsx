@@ -11,7 +11,6 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
-
   const data = allInstalls;
   const paths = data.map(install => ({
     params: {
@@ -35,6 +34,7 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
 
 export default function OneInstall({ install }: Props): JSX.Element {
 
+  const router = useRouter();
   const { installs } = useContext(InstallsContext);
   const stateInstalls = installs.filter(installFromState => installFromState.id.toString() === install.id);
   const stateInstall = stateInstalls[0];
@@ -42,8 +42,6 @@ export default function OneInstall({ install }: Props): JSX.Element {
   if (stateInstall) {
     install = stateInstall;
   }
-
-  const router = useRouter();
 
   const handleClick = (install: Install) => {
     router.push(`/modify/${install.id}`)
@@ -79,7 +77,6 @@ export default function OneInstall({ install }: Props): JSX.Element {
 
             <p>PM Notes: {install.pmNotes}</p>
 
-            // Submit button should post modified data to install in database, and redirect user to install/[id] page displaying updated info
             <button onClick={() => handleClick(install)} className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-lg mx-auto p-4 rounded" type="submit">Modify
             </button>
           </div>
