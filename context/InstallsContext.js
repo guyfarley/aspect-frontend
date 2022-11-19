@@ -26,12 +26,25 @@ const InstallsProvider = ({ children }) => {
   // });
   // const [formData, setFormData] = useState({});
 
+  const updateInstall = (formData) => {
+
+    let updatedInstalls = installs.map(install => {
+      if (install.id === formData.id) {
+        install = formData;
+      }
+      return install;
+    })
+    setInstalls(updatedInstalls);
+  }
+
+  console.log('NEW installs', installs);
 
   return (
     <InstallsContext.Provider
       value={{
         installs,
         setInstalls,
+        updateInstall,
       }
       }
     >
