@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Header from '../components/Header'
 import { Install } from '../../typings'
-import allInstalls from '../data';
+import allInstalls from './api/data';
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 
 // initial request for all item data from database - runs at buildtime

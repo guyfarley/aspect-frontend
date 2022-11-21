@@ -1,5 +1,5 @@
 import Header from '../../components/Header'
-import allInstalls from '../../data';
+import allInstalls from '../api/data';
 import { Install } from '../../typings'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
@@ -36,18 +36,11 @@ export default function OneInstall({ install }: Props): JSX.Element {
 
   const router = useRouter();
   const { installs } = useContext(InstallsContext);
-  const stateInstalls = installs.filter(installFromState => installFromState.id.toString() === install.id);
-  const stateInstall = stateInstalls[0];
+  const stateInstall = (installs.filter(installFromState => installFromState.id === install.id))[0];
 
-  if (stateInstall) {
-    install = stateInstall;
-  }
+  if (stateInstall) install = stateInstall;
 
-  const handleClick = (install: Install) => {
-    router.push(`/modify/${install.id}`)
-  }
-
-  console.log('install data:', install);
+  const handleClick = (install: Install) => router.push(`/modify/${install.id}`)
 
   return (
     <>
@@ -77,7 +70,10 @@ export default function OneInstall({ install }: Props): JSX.Element {
 
             <p>PM Notes: {install.pmNotes}</p>
 
-            <button onClick={() => handleClick(install)} className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-lg mx-auto p-4 rounded" type="submit">Modify
+            <button
+              onClick={() => handleClick(install)}
+              className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-lg mx-auto p-4 rounded"
+              type="submit">Modify
             </button>
           </div>
         </div>

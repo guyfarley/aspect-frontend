@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Menu from '../components/Menu';
 import Hero from '../components/Hero';
 import { Install } from '../typings'
-import allInstalls from '../data';
+import allInstalls from './api/data';
 import { GetStaticProps } from 'next';
 import { InstallsContext } from '../context/InstallsContext';
 import { useEffect, useContext } from 'react';
@@ -12,9 +12,9 @@ interface Props {
   data: Install[];
 }
 
-export const getStaticProps: GetStaticProps = () => {
+export const getStaticProps: GetStaticProps = async () => {
 
-  // const res = await fetch('https://5juvutwp5d.execute-api.us-west-2.amazonaws.com/beta/flies');
+  // const res = await fetch('/api/get-form');
   // const data = await res.json();
 
   const data = allInstalls;
@@ -28,11 +28,11 @@ export const getStaticProps: GetStaticProps = () => {
 
 const Home = ({ data }: Props): JSX.Element => {
 
-  const { installs, setInstalls } = useContext(InstallsContext);
+  const { installs, setInitialInstalls } = useContext(InstallsContext);
 
   useEffect(() => {
     if (installs.length < 1) {
-      setInstalls(data);
+      setInitialInstalls(data);
     }
   }, []);
 

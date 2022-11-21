@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import allInstalls from '../../data';
+import allInstalls from './data';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
