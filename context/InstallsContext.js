@@ -1,30 +1,12 @@
 import { createContext, useState } from "react";
+import { useRouter } from 'next/router';
+
 
 const InstallsContext = createContext();
 
 const InstallsProvider = ({ children }) => {
 
   const [installs, setInstalls] = useState([]);
-  // const [formData, setFormData] = useState({
-  //   id: install.id,
-  //   pm: install.pm,
-  //   storeNum: install.storeNum,
-  //   location: install.location,
-  //   campaign: install.campaign,
-  //   vendorName: install.vendorName,
-  //   vendorPhone: install.vendorPhone,
-  //   installDate: install.installDate,
-  //   installTime: install.installTime,
-  //   installer: install.installer,
-  //   installerPhone: install.installerPhone,
-  //   installerNotes: install.installerNotes,
-  //   complete: install.complete,
-  //   completionPics: install.completionPics,
-  //   revisitNeeded: install.revisitNeeded,
-  //   revisitDate: install.revisitDate,
-  //   pmNotes: install.pmNotes,
-  // });
-  // const [formData, setFormData] = useState({});
 
   const updateInstall = (formData) => {
 
@@ -37,13 +19,14 @@ const InstallsProvider = ({ children }) => {
     setInstalls(updatedInstalls);
   }
 
-  console.log('NEW installs', installs);
+  const setInitialInstalls = data => setInstalls(data);
 
   return (
     <InstallsContext.Provider
       value={{
         installs,
         setInstalls,
+        setInitialInstalls,
         updateInstall,
       }
       }
