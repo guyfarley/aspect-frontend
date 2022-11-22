@@ -15,7 +15,7 @@ export default function CreateInstallForm() {
   const handleChange = (e) => {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setRoute(formData.id);
+    setRoute(formData.storeNum);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,7 +48,7 @@ export default function CreateInstallForm() {
           <form className="mb-6 mt-[15px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmit}>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="store_number">Store Number</label>
-              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="number" id="store_number" name="store_number" onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="number" id="store_number" name="storeNum" onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:ml-2" htmlFor="location">Location</label>

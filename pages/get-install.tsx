@@ -8,10 +8,24 @@ export default function GetInstallForm() {
   const router = useRouter();
   const [route, setRoute] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(`/installs/${route}`);
+
+    const getOne = async () => {
+
+      const response = await fetch(`/api/installs/${route}`);
+      return response.json();
+    };
+
+    getOne().then((response) => {
+      alert(response.message);
+    });
+
   }
+
+  // validate store number exists here?
+  // router.push(`/installs/${route}`);
+
 
   return (
     <>
@@ -22,7 +36,7 @@ export default function GetInstallForm() {
             <div className="flex flex-row">
               <label htmlFor="storeNumber">Store Number:</label>
               <div className="flex flex-col justify-center items-center ml-2">
-                <input className="w-[100px] border rounded" type="text" id="storeNumber" name="storeNumber" onChange={(e) => setRoute(e.target.value)} required />
+                <input className="w-[100px] border rounded" type="text" id="storeNumber" name="storeNum" onChange={(e) => setRoute(e.target.value)} required />
                 <button className="submitButton" type="submit">Submit</button>
               </div>
             </div>

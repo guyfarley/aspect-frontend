@@ -15,7 +15,7 @@ export const getStaticPaths: GetStaticPaths = () => {
   const data = allInstalls;
   const paths = data.map(install => ({
     params: {
-      id: install.id.toString()
+      storeNum: install.storeNum.toString()
     },
   }))
   return { paths, fallback: false }
@@ -23,7 +23,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 export const getStaticProps: GetStaticProps = ({ params }) => {
   const data = allInstalls;
-  const installs = data.filter(install => install.id.toString() === params!.id);
+  const installs = data.filter(install => install.storeNum.toString() === params!.storeNum);
   const install = installs[0];
 
   return {
@@ -40,7 +40,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
   const [route, setRoute] = useState("");
   console.log('Installs: ', installs)
 
-  const stateInstall = (installs.filter(installFromState => installFromState.id === install.id))[0];
+  const stateInstall = (installs.filter(installFromState => installFromState.storeNum === install.storeNum))[0];
 
   if (stateInstall) install = stateInstall;
 
@@ -67,7 +67,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
   const handleChange = (e) => {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setRoute(formData.id);
+    setRoute(formData.storeNum);
   };
 
   // this function will handle the data fetching upon form submission
