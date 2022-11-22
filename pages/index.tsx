@@ -41,7 +41,6 @@ const Home = ({ data }: Props): JSX.Element => {
       <Head>
         <title>Aspect Install Tracker</title>
       </Head>
-
       <Header />
       <main>
         <Menu />
