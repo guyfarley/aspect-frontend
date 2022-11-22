@@ -8,11 +8,24 @@ export default function GetInstallForm() {
   const router = useRouter();
   const [route, setRoute] = useState("");
 
-  const handleSubmit = (e) => {
-    // validate store number exists here?
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(`/installs/${route}`);
+
+    const getOne = async () => {
+
+      const response = await fetch(`/api/installs/${route}`);
+      return response.json();
+    };
+
+    getOne().then((response) => {
+      alert(response.message);
+    });
+
   }
+
+  // validate store number exists here?
+  // router.push(`/installs/${route}`);
+
 
   return (
     <>

@@ -1,8 +1,7 @@
 const allInstalls = [
   {
-    id: 1,
-    pm: "Guy Farley",
     storeNum: 234,
+    pm: "Guy Farley",
     location: "Bozeman, MT",
     campaign: "Omni-Heat 4D",
     vendorName: "Vectra",
@@ -19,9 +18,8 @@ const allInstalls = [
     pmNotes: ""
   },
   {
-    id: 2,
-    pm: "Guy Farley",
     storeNum: 123,
+    pm: "Guy Farley",
     location: "Fargo, SD",
     campaign: "Omni-Heat 4D",
     vendorName: "Vectra",
@@ -38,9 +36,8 @@ const allInstalls = [
     pmNotes: ""
   },
   {
-    id: 3,
-    pm: "Guy Farley",
     storeNum: 565,
+    pm: "Guy Farley",
     location: "Nashville, TN",
     campaign: "Omni-Heat 4D",
     vendorName: "Vectra",
