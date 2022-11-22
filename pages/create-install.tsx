@@ -20,9 +20,22 @@ export default function CreateInstallForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addInstall(formData);
+
+    const postData = async () => {
+
+      const response = await fetch('/api/create', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+      });
+      return response.json();
+    };
+    postData().then((formData) => {
+      alert(formData.message);
+      // console.log('Installs: ', installs);
+    });
+
+    // addInstall(formData);
     // console.log('Create install form submitted');
-    // console.log(installs);
     // router.push(`/installs/${route}`);
   }
 
