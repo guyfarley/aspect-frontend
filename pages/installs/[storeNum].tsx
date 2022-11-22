@@ -14,7 +14,7 @@ export const getStaticPaths: GetStaticPaths = () => {
   const data = allInstalls;
   const paths = data.map(install => ({
     params: {
-      id: install.id.toString()
+      storeNum: install.storeNum.toString()
     },
   }))
   return { paths, fallback: false }
@@ -22,7 +22,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 export const getStaticProps: GetStaticProps = ({ params }) => {
   const data = allInstalls;
-  const installs = data.filter(install => install.id.toString() === params!.id);
+  const installs = data.filter(install => install.storeNum.toString() === params!.storeNum);
   const install = installs[0];
 
   return {
@@ -36,11 +36,11 @@ export default function OneInstall({ install }: Props): JSX.Element {
 
   const router = useRouter();
   const { installs } = useContext(InstallsContext);
-  const stateInstall = (installs.filter(installFromState => installFromState.id === install.id))[0];
+  const stateInstall = (installs.filter(installFromState => installFromState.storeNum === install.storeNum))[0];
 
   if (stateInstall) install = stateInstall;
 
-  const handleClick = (install: Install) => router.push(`/modify/${install.id}`)
+  const handleClick = (install: Install) => router.push(`/modify/${install.storeNum}`)
 
   return (
     <>
