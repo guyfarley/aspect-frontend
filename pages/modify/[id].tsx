@@ -36,7 +36,8 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
 export default function ModifyInstall({ install }: Props): JSX.Element {
 
   const { installs, updateInstall } = useContext(InstallsContext);
-
+  const router = useRouter();
+  const [route, setRoute] = useState("");
   console.log('Installs: ', installs)
 
   const stateInstall = (installs.filter(installFromState => installFromState.id === install.id))[0];
@@ -69,14 +70,12 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     setRoute(formData.id);
   };
 
-  const router = useRouter();
-  const [route, setRoute] = useState("");
   // this function will handle the data fetching upon form submission
   // on submission, routes to pages/installs/[id]
   const handleSubmitUpdate = (e) => {
     e.preventDefault();
-    console.log('New install data: ', formData);
-    console.log('Route: ', route);
+    // console.log('New install data: ', formData);
+    // console.log('Route: ', route);
     updateInstall(formData);
     router.push(`/installs/${route}`);
   }

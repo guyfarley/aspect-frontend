@@ -1,6 +1,4 @@
 import { createContext, useState } from "react";
-import { useRouter } from 'next/router';
-
 
 const InstallsContext = createContext();
 
@@ -8,8 +6,11 @@ const InstallsProvider = ({ children }) => {
 
   const [installs, setInstalls] = useState([]);
 
-  const updateInstall = (formData) => {
+  const addInstall = (formData) => {
+    setInstalls([...installs, formData])
+  }
 
+  const updateInstall = (formData) => {
     let updatedInstalls = installs.map(install => {
       if (install.id === formData.id) {
         install = formData;
@@ -28,10 +29,11 @@ const InstallsProvider = ({ children }) => {
         setInstalls,
         setInitialInstalls,
         updateInstall,
-      }
-      }
+        addInstall,
+      }}
     >
-      {children}</InstallsContext.Provider>
+      {children}
+    </InstallsContext.Provider>
   )
 }
 
