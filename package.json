@@ -8,14 +8,12 @@
   "dependencies": {
     "@heroicons/react": "^2.0.13",
     "next": "latest",
-    "pg": "^8.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0"
   },
   "devDependencies": {
     "@types/node": "18.11.3",
-    "@types/pg": "^8.6.5",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.12",
