@@ -4,24 +4,28 @@ import Menu from '../components/Menu';
 import Hero from '../components/Hero';
 import { Install } from '../typings'
 import allInstalls from './api/data';
-import { GetStaticProps } from 'next';
+import { GetStaticProps, GetServerSideProps } from 'next';
 import { InstallsContext } from '../context/InstallsContext';
 import { useEffect, useContext } from 'react';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 interface Props {
   data: Install[];
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 
+  const installs = await prisma.install.findMany();
   // const res = await fetch('/api/get-form');
   // const data = await res.json();
 
-  const data = allInstalls;
+  // const data = allInstalls;
 
   return {
     props: {
-      data
+      data: installs
     }
   }
 }
