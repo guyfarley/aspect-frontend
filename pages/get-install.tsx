@@ -13,16 +13,22 @@ export default function GetInstallForm() {
     const getOne = async () => {
 
       const response = await fetch(`/api/installs/${route}`);
-      return response.json();
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      return await response.json();
     };
 
-    getOne().then((response) => {
-      alert(response.message);
+    getOne().then((data) => {
+      console.log(data);
+      alert(data.location);
     });
+    router.push(`/installs/${route}`);
   }
 
   // validate store number exists here?
-  // router.push(`/installs/${route}`);
 
   return (
     <>

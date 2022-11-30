@@ -18,10 +18,6 @@ interface Props {
 export const getServerSideProps: GetServerSideProps = async () => {
 
   const installs = await prisma.install.findMany();
-  // const res = await fetch('/api/get-form');
-  // const data = await res.json();
-
-  // const data = allInstalls;
 
   return {
     props: {

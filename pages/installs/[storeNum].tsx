@@ -5,14 +5,19 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import { InstallsContext } from '../../context/InstallsContext';
 import { useContext } from 'react';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 interface Props {
   install: Install
 }
 
-export const getStaticPaths: GetStaticPaths = () => {
-  const data = allInstalls;
-  const paths = data.map(install => ({
+export const getStaticPaths: GetStaticPaths = async () => {
+
+  const installs = await prisma.install.findMany();
+
+  const paths = installs.map(install => ({
     params: {
       storeNum: install.storeNum.toString()
     },
@@ -20,10 +25,11 @@ export const getStaticPaths: GetStaticPaths = () => {
   return { paths, fallback: false }
 };
 
-export const getStaticProps: GetStaticProps = ({ params }) => {
-  const data = allInstalls;
-  const installs = data.filter(install => install.storeNum.toString() === params!.storeNum);
-  const install = installs[0];
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const installs = await prisma.install.findMany();
+
+  const allInstalls = installs.filter(install => install.storeNum.toString() === params!.storeNum);
+  const install = allInstalls[0];
 
   return {
     props: {
