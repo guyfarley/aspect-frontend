@@ -1,8 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
 
-export default function createHandler(req: NextApiRequest, res: NextApiResponse) {
-  const newInstall = JSON.parse(req.body);
-  console.log(newInstall);
+const prisma = new PrismaClient();
 
-  res.status(200).json({ message: "Post created successfully" });
+export default async function createHandler(req: NextApiRequest, res: NextApiResponse) {
+
+  const installData = JSON.parse(req.body);
+  console.log(installData);
+
+  const savedInstall = await prisma.install.create({
+    data: installData
+  })
+
+  res.status(200).json(savedInstall);
 }
