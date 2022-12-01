@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Header from '../../components/Header'
-import allInstalls from '../api/data';
 import { Install } from '../../typings'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
