@@ -3,8 +3,7 @@ import Header from '../components/Header';
 import Menu from '../components/Menu';
 import Hero from '../components/Hero';
 import { Install } from '../typings'
-import allInstalls from './api/data';
-import { GetStaticProps, GetServerSideProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { InstallsContext } from '../context/InstallsContext';
 import { useEffect, useContext } from 'react';
 import { PrismaClient } from '@prisma/client';
