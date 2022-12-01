@@ -74,18 +74,22 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setRoute(formData.storeNum);
+    console.log('form data: ', formData)
   };
 
   // this function will handle the data fetching upon form submission
   // on submission, routes to pages/installs/[id]
-  const handleSubmitUpdate = async (e) => {
+  const handleSubmitUpdate = (e) => {
     e.preventDefault();
 
     const updateInstall = async () => {
 
-      const response = await fetch('/api/update', {
-        method: 'UPDATE',
-        body: JSON.stringify(formData),
+      const data = JSON.stringify(formData);
+      console.log('data:', data)
+
+      const response = await fetch(`/api/updates/${route}`, {
+        method: 'POST',
+        body: data,
       });
 
       if (!response.ok) {
@@ -102,7 +106,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     // console.log('New install data: ', formData);
     // console.log('Route: ', route);
     // updateInstall(formData);
-    // router.push(`/installs/${route}`);
+    router.push(`/installs/${route}`);
   }
 
   return (
