@@ -5,9 +5,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import { InstallsContext } from '../../context/InstallsContext';
 import { useContext } from 'react';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '../../db';
 
 interface Props {
   install: Install

@@ -3,9 +3,7 @@ import Image from 'next/image'
 import Header from '../components/Header'
 import { Install } from '../typings'
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '../db';
 
 interface Props {
   allInstallData: Install[]
