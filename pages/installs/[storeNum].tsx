@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = installs.map(install => ({
     params: {
-      storeNum: install.storeNum.toString()
+      storeNum: install.storeNum
     },
   }))
   return { paths, fallback: false }
@@ -27,7 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const installs = await prisma.install.findMany();
 
-  const allInstalls = installs.filter(install => install.storeNum.toString() === params!.storeNum);
+  const allInstalls = installs.filter(install => install.storeNum === params!.storeNum);
   const install = allInstalls[0];
 
   return {
@@ -40,10 +40,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export default function OneInstall({ install }: Props): JSX.Element {
 
   const router = useRouter();
-  const { installs } = useContext(InstallsContext);
-  const stateInstall = (installs.filter(installFromState => installFromState.storeNum === install.storeNum))[0];
+  // const { installs } = useContext(InstallsContext);
+  // const stateInstall = (installs.filter(installFromState => installFromState.storeNum === install.storeNum))[0];
 
-  if (stateInstall) install = stateInstall;
+  // if (stateInstall) install = stateInstall;
 
   const handleClick = (install: Install) => router.push(`/modify/${install.storeNum}`)
 
