@@ -19,7 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = installs.map(install => ({
     params: {
-      storeNum: install.storeNum.toString()
+      storeNum: install.storeNum
     },
   }))
   return { paths, fallback: false }
@@ -28,7 +28,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const installs = await prisma.install.findMany();
 
-  const allInstalls = installs.filter(install => install.storeNum.toString() === params!.storeNum);
+  const allInstalls = installs.filter(install => install.storeNum === params!.storeNum);
   const install = allInstalls[0];
 
   return {
@@ -40,14 +40,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export default function ModifyInstall({ install }: Props): JSX.Element {
 
-  const { installs, updateInstall } = useContext(InstallsContext);
+  console.log('install: ', install);
+  // const { installs, updateInstall } = useContext(InstallsContext);
   const router = useRouter();
   const [route, setRoute] = useState("");
-  console.log('Installs: ', installs)
+  // console.log('Installs: ', installs)
 
-  const stateInstall = (installs.filter(installFromState => installFromState.storeNum === install.storeNum))[0];
+  // const stateInstall = (installs.filter(installFromState => installFromState.storeNum === install.storeNum))[0];
 
-  if (stateInstall) install = stateInstall;
+  // if (stateInstall) install = stateInstall;
 
   const [formData, setFormData] = useState({
     id: install.id,
@@ -77,12 +78,31 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
 
   // this function will handle the data fetching upon form submission
   // on submission, routes to pages/installs/[id]
-  const handleSubmitUpdate = (e) => {
+  const handleSubmitUpdate = async (e) => {
     e.preventDefault();
+
+    const updateInstall = async () => {
+
+      const response = await fetch('/api/update', {
+        method: 'UPDATE',
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return await response.json();
+
+    };
+
+    updateInstall().then((data) => {
+      alert(data.location);
+    })
+
     // console.log('New install data: ', formData);
     // console.log('Route: ', route);
-    updateInstall(formData);
-    router.push(`/installs/${route}`);
+    // updateInstall(formData);
+    // router.push(`/installs/${route}`);
   }
 
   return (
@@ -95,7 +115,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
           <form className="mb-6 mt-[15px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmitUpdate}>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="storeNum">Store Number</label>
-              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="number" id="storeNum" name="storeNum" defaultValue={(install.storeNum).toString()} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="text" id="storeNum" name="storeNum" defaultValue={install.storeNum} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:ml-2" htmlFor="location">Location</label>

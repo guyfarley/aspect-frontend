@@ -1,7 +1,7 @@
 export interface Install {
   id: number
   pm: string
-  storeNum: number
+  storeNum: string
   location: string
   campaign: string
   vendorName: string
