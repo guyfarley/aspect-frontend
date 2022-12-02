@@ -48,8 +48,8 @@ export default function OneInstall({ install }: Props): JSX.Element {
             <p>Campaign: {install.campaign}</p>
             <p>Project Manager: {install.pm}</p><br />
 
-            <p>Install Date: {install.installDate}</p>
-            <p>Install Time: {install.installTime}</p>
+            {/* <p>Install Date: {install.installDate}</p>
+            <p>Install Time: {install.installTime}</p> */}
             <p>Install Vendor: {install.installer}</p>
             <p>Install Vendor Phone #: {install.installerPhone}</p><br />
             <p>Installer Notes: {install.installerNotes}</p>
@@ -57,9 +57,9 @@ export default function OneInstall({ install }: Props): JSX.Element {
             <p>Production Vendor: {install.vendorName}</p>
             <p>Production Vendor Phone #: {install.vendorPhone}</p><br />
 
-            <p>Install Complete? {install.complete}</p>
+            {/* <p>Install Complete? {install.complete}</p>
             <p>Revisit Needed? {install.revisitNeeded}</p>
-            <p>Revisit Date: {install.revisitDate}</p>
+            <p>Revisit Date: {install.revisitDate}</p> */}
 
             <p>PM Notes: {install.pmNotes}</p>
 

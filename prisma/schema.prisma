@@ -11,20 +11,14 @@ datasource db {
 }
 
 model Install {
-  storeNum       String   @id
+  storeNum       String  @id
   pm             String?
   location       String
   campaign       String
   vendorName     String
   vendorPhone    String?
-  installDate    String?
-  installTime    String?
-  installer      String?
+  installer      String
   installerPhone String?
   installerNotes String?
-  complete       Boolean?
-  completionPics String?
-  revisitNeeded  Boolean?
-  revisitDate    String?
   pmNotes        String?
 }

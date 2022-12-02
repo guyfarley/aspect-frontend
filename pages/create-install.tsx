@@ -28,10 +28,7 @@ export default function CreateInstallForm() {
       return await response.json();
     };
 
-    postData().then((data) => {
-      alert(data.location);
-    });
-
+    postData();
     router.push(`/installs/${route}`);
   }
 
@@ -51,6 +48,10 @@ export default function CreateInstallForm() {
               <input className="border py-2 px-3 text-grey-darkest md:ml-2" type="text" id="location" name="location" onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
+              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="pm">Project Manager</label>
+              <input className="border py-2 px-3 text-grey-darkest" type="text" id="pm" name="pm" onChange={handleChange} />
+            </div>
+            <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="campaign">Campaign</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="campaign" name="campaign" onChange={handleChange} />
             </div>
@@ -62,14 +63,14 @@ export default function CreateInstallForm() {
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="vendorPhone">Vendor Phone #</label>
               <input className="border py-2 px-3 text-grey-darkest" type="tel" id="vendorPhone" name="vendorPhone" onChange={handleChange} />
             </div>
-            <div className="flex flex-col mb-4 md:w-1/2">
+            {/* <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="installDate">Install Date</label>
               <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="date" id="installDate" name="installDate" onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:ml-2" htmlFor="installTime">Install Time</label>
               <input className="border py-2 px-3 text-grey-darkest md:ml-2" type="time" id="installTime" name="installTime" onChange={handleChange} />
-            </div>
+            </div> */}
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installer">Install Company</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="installer" name="installer" onChange={handleChange} />
@@ -82,18 +83,18 @@ export default function CreateInstallForm() {
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installerNotes">Installer Notes</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="installerNotes" name="installerNotes" onChange={handleChange} />
             </div>
-            <div className="flex mb-4 md:w-full">
+            {/* <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="complete">Install Complete?</label>
               <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="complete" name="complete" onChange={handleChange} />
             </div>
             <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="revisitNeeded">Revisit Needed?</label>
               <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="revisitNeeded" name="revisitNeeded" onChange={handleChange} />
-            </div>
-            <div className="flex flex-col mb-4 md:w-1/2">
+            </div> */}
+            {/* <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="revisitDate">Revisit Date</label>
               <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="date" id="revisitDate" name="revisitDate" onChange={handleChange} />
-            </div>
+            </div> */}
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="pmNotes">PM Notes</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="pmNotes" name="pmNotes" onChange={handleChange} />
