@@ -18,10 +18,7 @@ export default function GetInstallForm() {
       return await response.json();
     };
 
-    getOne().then((data) => {
-      console.log(data);
-      alert(data.location);
-    });
+    getOne();
     router.push(`/installs/${route}`);
   }
   // validate store number exists here?

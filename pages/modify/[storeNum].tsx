@@ -40,22 +40,21 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
   const [route, setRoute] = useState("");
 
   const [formData, setFormData] = useState({
-    id: install.id,
     pm: install.pm,
     storeNum: install.storeNum,
     location: install.location,
     campaign: install.campaign,
     vendorName: install.vendorName,
     vendorPhone: install.vendorPhone,
-    installDate: install.installDate,
-    installTime: install.installTime,
+    // installDate: install.installDate,
+    // installTime: install.installTime,
     installer: install.installer,
     installerPhone: install.installerPhone,
     installerNotes: install.installerNotes,
-    complete: install.complete,
-    completionPics: install.completionPics,
-    revisitNeeded: install.revisitNeeded,
-    revisitDate: install.revisitDate,
+    // complete: install.complete,
+    // completionPics: install.completionPics,
+    // revisitNeeded: install.revisitNeeded,
+    // revisitDate: install.revisitDate,
     pmNotes: install.pmNotes,
   });
 
@@ -83,10 +82,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
       return await response.json();
     };
 
-    updateInstall().then((data) => {
-      alert(data.location);
-    })
-
+    updateInstall();
     router.push(`/installs/${route}`);
   }
 
@@ -106,6 +102,10 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
               <input className="border py-2 px-3 text-grey-darkest md:ml-2" type="text" id="location" name="location" defaultValue={(install.location)} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
+              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="pm">Project Manager</label>
+              <input className="border py-2 px-3 text-grey-darkest" type="text" id="pm" name="pm" defaultValue={install.pm} onChange={handleChange} />
+            </div>
+            <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="campaign">Campaign</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="campaign" name="campaign" defaultValue={(install.campaign)} onChange={handleChange} />
             </div>
@@ -117,14 +117,14 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="vendorPhone">Vendor Phone #</label>
               <input className="border py-2 px-3 text-grey-darkest" type="tel" id="vendorPhone" name="vendorPhone" defaultValue={(install.vendorPhone)} onChange={handleChange} />
             </div>
-            <div className="flex flex-col mb-4 md:w-1/2">
+            {/* <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="installDate">Install Date</label>
               <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="date" id="installDate" name="installDate" onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:ml-2" htmlFor="installTime">Install Time</label>
               <input className="border py-2 px-3 text-grey-darkest md:ml-2" type="time" id="installTime" name="installTime" onChange={handleChange} />
-            </div>
+            </div> */}
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installer">Install Company</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="installer" name="installer" defaultValue={install.installer} onChange={handleChange} />
@@ -137,7 +137,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installerNotes">Installer Notes</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="installerNotes" name="installerNotes" defaultValue={(install.installerNotes)} onChange={handleChange} />
             </div>
-            <div className="flex mb-4 md:w-full">
+            {/* <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="complete">Install Complete?</label>
               <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="complete" name="complete" defaultChecked={(install.complete)} onChange={handleChange} />
             </div>
@@ -148,7 +148,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="revisitDate">Revisit Date</label>
               <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="date" id="revisitDate" name="revisitDate" onChange={handleChange} />
-            </div>
+            </div> */}
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="pmNotes">PM Notes</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="pmNotes" name="pmNotes" defaultValue={(install.pmNotes)} onChange={handleChange} />
