@@ -3,8 +3,6 @@ import Header from '../../components/Header'
 import { Install } from '../../typings'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
-import { InstallsContext } from '../../context/InstallsContext';
-import { useContext } from 'react';
 import { prisma } from '../../db';
 
 interface Props {
@@ -38,15 +36,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export default function ModifyInstall({ install }: Props): JSX.Element {
 
-  console.log('install: ', install);
-  // const { installs, updateInstall } = useContext(InstallsContext);
   const router = useRouter();
   const [route, setRoute] = useState("");
-  // console.log('Installs: ', installs)
-
-  // const stateInstall = (installs.filter(installFromState => installFromState.storeNum === install.storeNum))[0];
-
-  // if (stateInstall) install = stateInstall;
 
   const [formData, setFormData] = useState({
     id: install.id,
@@ -75,16 +66,11 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     console.log('form data: ', formData)
   };
 
-  // this function will handle the data fetching upon form submission
-  // on submission, routes to pages/installs/[id]
   const handleSubmitUpdate = (e) => {
     e.preventDefault();
 
     const updateInstall = async () => {
-
       const data = JSON.stringify(formData);
-      console.log('data:', data)
-
       const response = await fetch(`/api/updates/${route}`, {
         method: 'POST',
         body: data,
@@ -93,17 +79,14 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      return await response.json();
 
+      return await response.json();
     };
 
     updateInstall().then((data) => {
       alert(data.location);
     })
 
-    // console.log('New install data: ', formData);
-    // console.log('Route: ', route);
-    // updateInstall(formData);
     router.push(`/installs/${route}`);
   }
 
@@ -112,7 +95,6 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
       <Header />
       <div className="flex items-center h-full w-full bg-slate-200 ">
         <div className="flex flex-col items-center h-full w-full bg-slate-200 p-8 md:max-w-md md:mx-auto">
-          {/* <div className="w-full bg-white rounded shadow-lg p-8 m-4"> */}
           <h1 className="mb-6 mt-[100px]">Modify Install</h1>
           <form className="mb-6 mt-[15px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmitUpdate}>
             <div className="flex flex-col mb-4 md:w-1/2">

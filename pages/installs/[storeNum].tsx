@@ -2,8 +2,6 @@ import Header from '../../components/Header'
 import { Install } from '../../typings'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
-import { InstallsContext } from '../../context/InstallsContext';
-import { useContext } from 'react';
 import { prisma } from '../../db';
 
 interface Props {
@@ -11,9 +9,7 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-
   const installs = await prisma.install.findMany();
-
   const paths = installs.map(install => ({
     params: {
       storeNum: install.storeNum
@@ -24,7 +20,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const installs = await prisma.install.findMany();
-
   const allInstalls = installs.filter(install => install.storeNum === params!.storeNum);
   const install = allInstalls[0];
 
@@ -38,11 +33,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export default function OneInstall({ install }: Props): JSX.Element {
 
   const router = useRouter();
-  // const { installs } = useContext(InstallsContext);
-  // const stateInstall = (installs.filter(installFromState => installFromState.storeNum === install.storeNum))[0];
-
-  // if (stateInstall) install = stateInstall;
-
   const handleClick = (install: Install) => router.push(`/modify/${install.storeNum}`)
 
   return (

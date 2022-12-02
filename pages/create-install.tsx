@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { InstallsContext } from '../context/InstallsContext';
-import { useContext } from 'react';
 import Header from '../components/Header'
 
 export default function CreateInstallForm() {
 
-  const { installs, addInstall } = useContext(InstallsContext);
   const router = useRouter();
   const [route, setRoute] = useState("");
   const [formData, setFormData] = useState({});
-
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -22,26 +18,20 @@ export default function CreateInstallForm() {
     e.preventDefault();
 
     const postData = async () => {
-
       const response = await fetch('/api/create', {
         method: 'POST',
         body: JSON.stringify(formData),
       });
-
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-
       return await response.json();
     };
 
     postData().then((data) => {
       alert(data.location);
-      // console.log('Installs: ', installs);
     });
 
-    // addInstall(formData);
-    // console.log('Create install form submitted');
     router.push(`/installs/${route}`);
   }
 

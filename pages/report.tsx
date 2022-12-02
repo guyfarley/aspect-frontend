@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Header from '../components/Header'
 import { Install } from '../typings'
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { prisma } from '../db';
 
 interface Props {
@@ -21,8 +21,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 }
 
 export default function Report({ data }: Props): JSX.Element {
-
-  console.log(data);
 
   return (
     <>
