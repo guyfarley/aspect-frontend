@@ -11,13 +11,10 @@ export default function GetInstallForm() {
     e.preventDefault();
 
     const getOne = async () => {
-
       const response = await fetch(`/api/installs/${route}`);
-
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-
       return await response.json();
     };
 
@@ -27,7 +24,6 @@ export default function GetInstallForm() {
     });
     router.push(`/installs/${route}`);
   }
-
   // validate store number exists here?
 
   return (
