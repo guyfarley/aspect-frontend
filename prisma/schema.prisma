@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Install {
+  storeNum       String  @id
+  pm             String?
+  location       String
+  campaign       String
+  vendorName     String
+  vendorPhone    String?
+  installer      String
+  installerPhone String?
+  installerNotes String?
+  pmNotes        String?
+}

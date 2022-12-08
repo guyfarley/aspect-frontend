@@ -1,54 +1,38 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Header from '../components/Header'
-import { Install } from '../../typings'
-import allInstalls from '../data';
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
-
-// initial request for all item data from database - runs at buildtime
-
-// export async function getStaticProps() {
-
-//   const res = await fetch('https://5juvutwp5d.execute-api.us-west-2.amazonaws.com/beta/flies');
-//   const data = await res.json();
-
-//   return {
-//     props: {
-//       allItemsData: data
-//     }
-//   }
-// }
+import { Install } from '../typings'
+import { GetServerSideProps } from 'next';
+import { prisma } from '../db';
 
 interface Props {
   allInstallData: Install[]
 }
 
-export const getStaticProps: GetStaticProps = () => {
-  const data = { allInstalls };
+export const getServerSideProps: GetServerSideProps = async () => {
 
-  console.log(data);
+  const installs = await prisma.install.findMany();
+
   return {
     props: {
-      allInstallData: data.allInstalls
+      data: installs
     }
   }
-};
+}
 
-export default function Report({ allInstallData }: Props): JSX.Element {
-
-  console.log(allInstallData);
+export default function Report({ data }: Props): JSX.Element {
 
   return (
     <>
       <Header />
-      <section>
-        <div>
-          {allInstallData.map((install) => (
+      <div className="flex items-center h-full w-full bg-slate-200 ">
+        <div className="flex flex-col items-center h-full w-full bg-slate-200 mt-[24vh] p-8 md:max-w-md md:mx-auto">
+          {data.map((install) => (
             console.log(install.location),
             <p key={install.storeNum}>{install.location}</p>
           ))}
         </div>
-      </section>
+      </div>
     </>
   );
 }
