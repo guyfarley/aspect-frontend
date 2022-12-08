@@ -31,9 +31,9 @@ export default function BasicMenu() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-      // MenuListProps={{
-      //   'aria-labelledby': 'basic-button',
-      // }}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
       >
         <MenuItem onClick={handleClose}>LOG IN</MenuItem>
         <MenuItem onClick={handleClose}>

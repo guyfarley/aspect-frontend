@@ -19,11 +19,10 @@ html {
   }
 
   .menuButton {
-    /* @apply cursor-pointer text-center text-sm text-[#000000] transition duration-300 hover:text-[blue] mx-[6vw] my-[4vh]; */
     @apply rounded mt-[0.5em] font-roboto tracking-wide text-xs transition hover:opacity-75 md:text-sm md:mt-[0.5em] md:mx-[2vw];
   }
 
   .submitButton {
-    @apply rounded transition hover:opacity-75 bg-slate-600 text-white text-sm my-2 w-[80px];
+    @apply rounded transition hover:opacity-75 bg-slate-600 text-white font-roboto text-sm w-[90px] mt-2 py-[2px];
   }
 }
