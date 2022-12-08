@@ -19,6 +19,9 @@
     "jsx": "preserve",
     "incremental": true
   },
+  "files": [
+    "db.ts"
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
