@@ -14,15 +14,18 @@ html {
 }
 
 @layer components {
-  .headerLink {
+  /* .headerLink {
     @apply fixed right-8 cursor-pointer text-sm text-[#000000] transition duration-300 hover:text-[blue];
-  }
+  } */
 
   .menuButton {
-    @apply rounded mt-[0.5em] font-roboto tracking-wide text-xs transition hover:opacity-75 md:text-sm md:mt-[0.5em] md:mx-[2vw];
+    @apply rounded mt-[0.5em] font-roboto tracking-wider text-sm transition hover:opacity-75 md:mt-[0.5em] md:mx-[1.8vw];
   }
-
+/* 
   .submitButton {
     @apply rounded transition hover:opacity-75 bg-slate-600 text-white font-roboto text-sm w-[90px] mt-2 py-[2px];
+  } */
+  .submitButton {
+    @apply block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mt-2 rounded;
   }
 }
