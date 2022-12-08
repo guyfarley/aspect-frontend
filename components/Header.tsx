@@ -1,5 +1,4 @@
 import { GiFeatheredWing } from 'react-icons/gi';
-import { AiOutlineMenu } from 'react-icons/ai';
 import BasicMenu from './BasicMenu';
 import Link from 'next/link';
 
@@ -20,20 +19,20 @@ function Header() {
         </Link>
 
         <div className="hidden md:flex flex-row justify-between ml-[4vw]">
-          <button className="menuButton">Log In</button>
+          <button className="menuButton">LOG IN</button>
           <button className="menuButton">
             <Link href="/get-install">
-              Find an Install
+              FIND INSTALL
             </Link>
           </button>
           <button className="menuButton">
             <Link href="/create-install">
-              Create an Install
+              CREATE INSTALL
             </Link>
           </button>
           <button className="menuButton">
             <Link href="/report">
-              Campaign Report
+              CAMPAIGN REPORT
             </Link>
           </button>
         </div>

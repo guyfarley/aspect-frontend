@@ -13,6 +13,8 @@ module.exports = {
         'gruppo': ['"Gruppo", cursive'],
         'inconsolata': ['"Inconsolata", monospace'],
         'alata': ['"Alata", sans-serif'],
+        'ptserif': ['"PT Serif", serif'],
+        'roboto': ['"Roboto", sans-serif'],
       },
     },
   },

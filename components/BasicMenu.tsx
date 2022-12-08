@@ -1,4 +1,3 @@
-import react from 'react';
 import * as React from 'react';
 import Link from 'next/link';
 import Button from '@mui/material/Button';
@@ -36,21 +35,21 @@ export default function BasicMenu() {
       //   'aria-labelledby': 'basic-button',
       // }}
       >
-        <MenuItem onClick={handleClose}>Log In</MenuItem>
+        <MenuItem onClick={handleClose}>LOG IN</MenuItem>
         <MenuItem onClick={handleClose}>
           <Link
             href="/get-install">
-            Find an Install
+            FIND INSTALL
           </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Link href="/create-install">
-            Create an Install
+            CREATE INSTALL
           </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Link href="/report">
-            Campaign Report
+            CAMPAIGN REPORT
           </Link>
         </MenuItem>
       </Menu>

@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Header from '../components/Header';
-// import Menu from '../components/Menu';
 import Hero from '../components/Hero';
 
 const Home = (): JSX.Element => {
@@ -12,7 +11,6 @@ const Home = (): JSX.Element => {
       </Head>
       <Header />
       <main>
-        {/* <Menu /> */}
         <Hero />
       </main >
     </div >
