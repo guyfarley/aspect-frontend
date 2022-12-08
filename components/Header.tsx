@@ -10,10 +10,10 @@ function Header() {
           <button className="flex">
 
             <div>
-              <GiFeatheredWing className="text-3xl mr-[2px] mt-[2px]" />
+              <GiFeatheredWing className="text-3xl text-gray-800 mr-[2px] mt-[2px]" />
             </div>
             <div className="flex items-center">
-              <h1 className="font-alata text-3xl">Aspect</h1>
+              <h1 className="font-alata text-3xl text-gray-800">Aspect</h1>
             </div>
           </button>
         </Link>

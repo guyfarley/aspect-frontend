@@ -30,9 +30,9 @@ export default function GetInstallForm() {
         <div className="flex flex-col h-full w-full bg-slate-200 p-8 md:max-w-lg md:mx-auto md:items-start">
 
           <h1 className="font-ptserif text-gray-700 text-4xl mt-20">Looking for a specific install?</h1>
-          <h1 className="font-roboto text-gray-700 text-base mt-[34px]">Just enter your store number below and submit!</h1>
+          <h1 className="font-roboto text-gray-700 text-base mt-[20px]">Just enter your store number below and submit!</h1>
           <form className="flex flex-col items-center mt-[15vh] mb-[70vh] md:items-start" onSubmit={handleSubmit}>
-            <input className="w-[120px] border rounded pl-[6px]" type="text" id="storeNumber" name="storeNum" onChange={(e) => setRoute(e.target.value)} placeholder="Store #" required />
+            <input className="w-[130px] border rounded pl-[6px] py-[3px]" type="text" id="storeNumber" name="storeNum" onChange={(e) => setRoute(e.target.value)} placeholder="Store #" required />
             <button className="submitButton" type="submit">Submit</button>
           </form>
         </div>
