@@ -17,3 +17,7 @@ export interface Install {
   revisitDate: string
   pmNotes: string
 }
+
+declare global {
+  var prisma: PrismaClient;
+}
