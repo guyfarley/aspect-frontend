@@ -8,7 +8,6 @@ function Header() {
       <header>
         <Link href="/">
           <button className="flex">
-
             <div>
               <GiFeatheredWing className="text-3xl text-gray-800 mr-[2px] mt-[2px]" />
             </div>
@@ -17,7 +16,6 @@ function Header() {
             </div>
           </button>
         </Link>
-
         <div className="hidden md:flex flex-row justify-between ml-[4vw]">
           <button className="menuButton">LOG IN</button>
           <button className="menuButton">
@@ -36,17 +34,7 @@ function Header() {
             </Link>
           </button>
         </div>
-
-        {/* <div>
-          <AiOutlineMenu className="text-3xl mr-[2px] mt-[4px] md:hidden" /> */}
-        {/* right menu */}
-        {/* mobile view: menu icons
-          at medium (or large) breakpoint, becomes visible horizontal menu
-          if not logged in, only contains login option
-          if logged in, shows log out + all other options */}
-        {/* </div> */}
         <BasicMenu />
-
       </header>
     </>
   );
