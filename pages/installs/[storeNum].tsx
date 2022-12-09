@@ -2,7 +2,7 @@ import Header from '../../components/Header'
 import { Install } from '../../typings'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
-import { prisma } from '../../db';
+import prisma from '../../db';
 
 interface Props {
   install: Install

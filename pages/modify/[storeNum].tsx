@@ -3,7 +3,7 @@ import Header from '../../components/Header'
 import { Install } from '../../typings'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
-import { prisma } from '../../db';
+import prisma from '../../db';
 
 interface Props {
   install: Install
@@ -58,14 +58,18 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     pmNotes: install.pmNotes,
   });
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    // type assertion to access name and value properties on target
+    const target = event.target as HTMLInputElement;
+
+    setFormData({ ...formData, [target.name]: target.value });
     setRoute(formData.storeNum);
     console.log('form data: ', formData)
   };
 
-  const handleSubmitUpdate = (e) => {
+  const handleSubmitUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const updateInstall = async () => {
