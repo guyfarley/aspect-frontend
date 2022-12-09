@@ -3,10 +3,10 @@ import Image from 'next/image'
 import Header from '../components/Header'
 import { Install } from '../typings'
 import { GetServerSideProps } from 'next';
-import { prisma } from '../db';
+import prisma from '../db';
 
 interface Props {
-  allInstallData: Install[]
+  data: Install[]
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -27,7 +27,7 @@ export default function Report({ data }: Props): JSX.Element {
       <Header />
       <div className="flex items-center h-full w-full bg-slate-200 ">
         <div className="flex flex-col items-center h-full w-full bg-slate-200 mt-[24vh] p-8 md:max-w-md md:mx-auto">
-          {data.map((install) => (
+          {data.map((install: Install) => (
             console.log(install.location),
             <p key={install.storeNum}>{install.location}</p>
           ))}

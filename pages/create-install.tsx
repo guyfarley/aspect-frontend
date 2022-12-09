@@ -1,21 +1,43 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import Header from '../components/Header'
+import Header from '../components/Header';
+
 
 export default function CreateInstallForm() {
 
   const router = useRouter();
   const [route, setRoute] = useState("");
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    pm: "",
+    storeNum: "",
+    location: "",
+    campaign: "",
+    vendorName: "",
+    vendorPhone: "",
+    // installDate: install.installDate,
+    // installTime: install.installTime,
+    installer: "",
+    installerPhone: "",
+    installerNotes: "",
+    // complete: install.complete,
+    // completionPics: install.completionPics,
+    // revisitNeeded: install.revisitNeeded,
+    // revisitDate: install.revisitDate,
+    pmNotes: "",
+  });
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    const target = event.target as HTMLInputElement;
+
+    setFormData({ ...formData, [target.name]: target.value });
+
     setRoute(formData.storeNum);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     const postData = async () => {
       const response = await fetch('/api/create', {
