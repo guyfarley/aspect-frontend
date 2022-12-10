@@ -6,10 +6,10 @@ function Hero() {
       <h1 className="font-ptserif text-gray-700 text-4xl">See your marketing,</h1>
       <h1 className="font-ptserif text-gray-700 text-4xl mb-10">delivered.</h1>
       <Image
-        src="/heat_resized1.jpg"
+        src="/install_resized5.jpg"
         alt="retail installation photo"
-        width="3417"
-        height="2733"
+        width="2359"
+        height="1887"
       />
     </div>
   )
