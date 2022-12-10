@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import { Install } from '../typings'
 import { GetServerSideProps } from 'next';
 import prisma from '../db';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
 interface Props {
   data: Install[]
@@ -20,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-export default function Report({ data }: Props): JSX.Element {
+export default withPageAuthRequired(function Report({ data }: Props): JSX.Element {
 
   return (
     <>
@@ -35,4 +36,4 @@ export default function Report({ data }: Props): JSX.Element {
       </div>
     </>
   );
-}
+})
