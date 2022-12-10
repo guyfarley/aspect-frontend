@@ -26,12 +26,15 @@ export default withPageAuthRequired(function Report({ data }: Props): JSX.Elemen
   return (
     <>
       <Header />
-      <div className="flex items-center h-full w-full bg-slate-200 ">
-        <div className="flex flex-col items-center h-full w-full bg-slate-200 mt-[24vh] p-8 md:max-w-md md:mx-auto">
-          {data.map((install: Install) => (
-            console.log(install.location),
-            <p key={install.storeNum}>{install.location}</p>
-          ))}
+      <div className="h-full w-full bg-slate-200">
+
+        <div className="flex flex-col h-full w-full bg-slate-200 p-8 md:max-w-lg md:mx-auto md:items-start">
+          < div className="flex flex-col items-center mt-[15vh] mb-[70vh] md:items-start">
+            {data.map((install: Install) => (
+              console.log(install.location),
+              <p key={install.storeNum}>{install.location} - {install.storeNum}</p>
+            ))}
+          </div>
         </div>
       </div>
     </>

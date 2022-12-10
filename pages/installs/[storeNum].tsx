@@ -33,7 +33,23 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export default function OneInstall({ install }: Props): JSX.Element {
 
   const router = useRouter();
-  const handleClick = (install: Install) => router.push(`/modify/${install.storeNum}`)
+  const handleModify = (install: Install) => router.push(`/modify/${install.storeNum}`)
+
+  const handleDelete = (install: Install) => {
+
+    const storeNumber: string = install.storeNum;
+
+    const deleteOne = async () => {
+      const response = await fetch(`/api/delete/${storeNumber}`);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return await response.json();
+    };
+
+    deleteOne().then(data => alert(`Installation for store #${data.storeNum} has been deleted!`));
+    // router.push(`/modify/${install.storeNum}`)
+  }
 
   return (
     <>
@@ -64,9 +80,14 @@ export default function OneInstall({ install }: Props): JSX.Element {
             <p>PM Notes: {install.pmNotes}</p>
 
             <button
-              onClick={() => handleClick(install)}
+              onClick={() => handleModify(install)}
               className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-lg mx-auto p-4 rounded"
               type="submit">Modify
+            </button>
+            <button
+              onClick={() => handleDelete(install)}
+              className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-lg mx-auto p-4 rounded"
+              type="submit">Delete
             </button>
           </div>
         </div>
