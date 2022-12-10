@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
 
-export default function CreateInstallForm() {
+export default withPageAuthRequired(function CreateInstallForm() {
 
   const router = useRouter();
   const [route, setRoute] = useState("");
@@ -135,4 +136,4 @@ export default function CreateInstallForm() {
       {/* footer */}
     </>
   )
-}
+})
