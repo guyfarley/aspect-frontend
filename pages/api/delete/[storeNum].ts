@@ -3,9 +3,12 @@ import prisma from '../../../db';
 
 export default async function deleteOneHandler(req: NextApiRequest, res: NextApiResponse) {
 
+  const deleteStoreNum = (req.query.storeNum)?.toString();
+
+
   const deleteInstall = await prisma.install.delete({
     where: {
-      storeNum: req.query.storeNum,
+      storeNum: deleteStoreNum,
     }
   });
 
