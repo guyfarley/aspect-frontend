@@ -2,8 +2,37 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
+import { GetStaticProps, GetStaticPaths } from 'next';
+import prisma from '../db';
+import { Install } from '../typings'
 
-export default withPageAuthRequired(function GetInstallForm() {
+interface Props {
+  installs: Install[]
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const installs = await prisma.install.findMany();
+
+  return {
+    props: {
+      installs,
+    }
+  }
+};
+
+export default withPageAuthRequired(function GetInstallForm({ installs }: Props) {
+
+  const getCampaigns = installs => {
+    const campaigns: any[] = [];
+    for (let i = 0; i < installs.length; i++) {
+      const campaign = installs[i].campaign;
+      if (!campaigns.includes(campaign)) {
+        campaigns.push(campaign);
+      }
+    }
+    console.log('campaigns: ', campaigns);
+  }
+  getCampaigns(installs);
 
   const router = useRouter();
   const [route, setRoute] = useState("");
@@ -32,6 +61,12 @@ export default withPageAuthRequired(function GetInstallForm() {
         <h1 className="font-ptserif text-gray-700 text-4xl">Looking for a specific install?</h1>
         <h1 className="font-roboto text-gray-700 text-base mt-[16px]">Just enter your store number below and submit!</h1>
         <form className="flex flex-col items-center mt-[15vh] mb-[70vh] md:items-start" onSubmit={handleSubmit}>
+
+          <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="campaigns">Choose Campaign</label>
+          <select name="campaigns" id="campaigns">
+          // map over array of campaigns here, render option for each
+          </select>
+
           <input className="w-[130px] border rounded pl-[6px] py-[3px]" type="text" id="storeNumber" name="storeNum" onChange={(e) => setRoute(e.target.value)} placeholder="Store #" required />
           <button className="submitButton" type="submit">Submit</button>
         </form>
