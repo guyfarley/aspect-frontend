@@ -36,7 +36,6 @@ export default withPageAuthRequired(function GetInstallForm() {
           <button className="submitButton" type="submit">Submit</button>
         </form>
       </div>
-      {/* footer */}
     </div>
   )
 })
