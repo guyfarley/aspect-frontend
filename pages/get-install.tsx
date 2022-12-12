@@ -111,7 +111,7 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
                 onChange={(e) => setRoute(e.target.value)}          >
                 <option></option>
                 {dynamicOptions.map((install) => (
-                  <option key={install.storeNum}>
+                  <option key={install.storeNum} value={install.storeNum}>
                     {install.location} - Store #{install.storeNum}
                   </option>
                 ))}
