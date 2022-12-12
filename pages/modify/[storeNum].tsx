@@ -86,7 +86,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
       return await response.json();
     };
 
-    updateInstall();
+    updateInstall().then
     router.push(`/installs/${route}`);
   }
 
