@@ -93,10 +93,10 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
   return (
     <>
       <Header />
-      <div className="flex items-center h-full w-full bg-slate-200 ">
+      <div className="flex items-center h-[140vh] w-full bg-slate-200 ">
         <div className="flex flex-col items-center h-full w-full bg-slate-200 p-8 md:max-w-md md:mx-auto">
-          <h1 className="mb-6 mt-[100px]">Modify Install</h1>
-          <form className="mb-6 mt-[15px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmitUpdate}>
+          <h1 className="font-ptserif text-gray-700 text-4xl mt-[100px]">Modify Install</h1>
+          <form className="mb-6 mt-[50px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmitUpdate}>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="storeNum">Store Number</label>
               <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="text" id="storeNum" name="storeNum" defaultValue={install.storeNum} onChange={handleChange} />
