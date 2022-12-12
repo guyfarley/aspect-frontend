@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
-import { GetStaticProps, GetStaticPaths } from 'next';
+import { GetStaticProps } from 'next';
 import prisma from '../db';
 import { Install } from '../typings'
 
@@ -22,8 +22,13 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default withPageAuthRequired(function GetInstallForm({ installs }: Props) {
 
-  const getCampaigns = installs => {
-    const campaigns: any[] = [];
+  const campaigns: string[] = [];
+  let filteredInstalls: Install[] = [];
+  const router = useRouter();
+  const [route, setRoute] = useState("");
+  const [dynamicOptions, setDynamicOptions] = useState<Install[]>([]);
+
+  const getCampaigns = (installs: Install[]) => {
     for (let i = 0; i < installs.length; i++) {
       const campaign = installs[i].campaign;
       if (!campaigns.includes(campaign)) {
@@ -31,11 +36,30 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
       }
     }
     console.log('campaigns: ', campaigns);
+    return campaigns;
   }
   getCampaigns(installs);
 
-  const router = useRouter();
-  const [route, setRoute] = useState("");
+  const getInstalls = (campaign: string) => {
+    console.log('campaign: ', campaign);
+
+    // filter installs down to only those installs for provided campaign
+    filteredInstalls = installs.filter(install => install.campaign === campaign);
+    console.log('filtered installs: ', filteredInstalls);
+    setDynamicOptions(filteredInstalls);
+  }
+
+  const handleSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    event.preventDefault();
+
+    const target = event.target as HTMLSelectElement;
+    console.log(target.value);
+
+    getInstalls(target.value);
+    console.log('installs filtered: ', filteredInstalls);
+    console.log('Dynamic Options', dynamicOptions);
+    return filteredInstalls;
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,11 +87,40 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
         <form className="flex flex-col items-center mt-[15vh] mb-[70vh] md:items-start" onSubmit={handleSubmit}>
 
           <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="campaigns">Choose Campaign</label>
-          <select name="campaigns" id="campaigns">
-          // map over array of campaigns here, render option for each
+          <select
+            className="w-[130px] border rounded pl-[6px] py-[3px]"
+            name="campaigns"
+            id="campaigns"
+            onChange={handleSelection}
+          >
+            <option></option>
+            {campaigns.map((campaign) => (
+              <option key={campaign}>
+                {campaign}
+              </option>
+            ))}
           </select>
 
-          <input className="w-[130px] border rounded pl-[6px] py-[3px]" type="text" id="storeNumber" name="storeNum" onChange={(e) => setRoute(e.target.value)} placeholder="Store #" required />
+          {dynamicOptions && (
+            <>
+              <label className="mb-2 uppercase font-bold text-sm mt-6 text-gray-700 md:mr-2" htmlFor="campaign-installs">Choose Install</label>
+              <select
+                className="w-[130px] border rounded pl-[6px] py-[3px]"
+                name="campaign-installs"
+                id="campaign-installs"
+                onChange={(e) => setRoute(e.target.value)}          >
+                <option></option>
+                {dynamicOptions.map((install) => (
+                  <option key={install.storeNum}>
+                    {install.location} - Store #{install.storeNum}
+                  </option>
+                ))}
+              </select>
+            </>
+          )}
+
+
+          {/* <input className="w-[130px] border rounded pl-[6px] py-[3px]" type="text" id="storeNumber" name="storeNum" onChange={(e) => setRoute(e.target.value)} placeholder="Store #" required /> */}
           <button className="submitButton" type="submit">Submit</button>
         </form>
       </div>
