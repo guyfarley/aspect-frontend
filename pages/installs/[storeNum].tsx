@@ -53,42 +53,44 @@ export default function OneInstall({ install }: Props): JSX.Element {
 
   return (
     <>
-      <Header />
-      <div className="flex items-center h-[120vh] w-full bg-slate-200 ">
-        <div className="flex flex-col items-center w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-lg md:mx-auto">
+      <div className="flex items-center h-[110vh] w-full bg-slate-200 ">
+        <Header />
+        <div className="flex flex-col items-center w-full bg-white rounded shadow-lg p-8 pt-[60px] m-4 md:max-w-lg md:mx-auto">
+          <h1 className="font-ptserif text-gray-700 text-4xl">{install.location}</h1>
 
-          <h1 className="mb-6 mt-[100px] text-xl font-bold">{install.location}</h1>
           <div className="flex flex-col mt-[60px]">
 
-            <p>Store Number: {install.storeNum}</p>
-            <p>Campaign: {install.campaign}</p>
-            <p>Project Manager: {install.pm}</p><br />
+            <p className="installInfo">Store Number: {install.storeNum}</p>
+            <p className="installInfo">Campaign: {install.campaign}</p>
+            <p className="installInfo">Project Manager: {install.pm}</p><br />
 
             {/* <p>Install Date: {install.installDate}</p>
             <p>Install Time: {install.installTime}</p> */}
-            <p>Install Vendor: {install.installer}</p>
-            <p>Install Vendor Phone #: {install.installerPhone}</p><br />
-            <p>Installer Notes: {install.installerNotes}</p>
+            <p className="installInfo">Install Vendor: {install.installer}</p>
+            <p className="installInfo">Install Vendor Phone #: {install.installerPhone}</p><br />
+            <p className="installInfo">Installer Notes: {install.installerNotes}</p><br />
 
-            <p>Production Vendor: {install.vendorName}</p>
-            <p>Production Vendor Phone #: {install.vendorPhone}</p><br />
+            <p className="installInfo">Production Vendor: {install.vendorName}</p>
+            <p className="installInfo">Production Vendor Phone #: {install.vendorPhone}</p><br />
 
             {/* <p>Install Complete? {install.complete}</p>
             <p>Revisit Needed? {install.revisitNeeded}</p>
             <p>Revisit Date: {install.revisitDate}</p> */}
 
-            <p>PM Notes: {install.pmNotes}</p>
+            <p className="installInfo">PM Notes: {install.pmNotes}</p>
+            <div className="flex flex-col items-center mt-[60px]">
 
-            <button
-              onClick={() => handleModify(install)}
-              className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-lg mx-auto p-4 rounded"
-              type="submit">Modify
-            </button>
-            <button
-              onClick={() => handleDelete(install)}
-              className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-lg mx-auto p-4 rounded"
-              type="submit">Delete
-            </button>
+              <button
+                onClick={() => handleModify(install)}
+                className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mt-2 rounded"
+                type="submit">Modify
+              </button>
+              <button
+                onClick={() => handleDelete(install)}
+                className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mt-2 rounded"
+                type="submit">Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>
