@@ -74,6 +74,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
 
     const updateInstall = async () => {
       const data = JSON.stringify(formData);
+      console.log('form data being sent: ', data);
       const response = await fetch(`/api/updates/${route}`, {
         method: 'POST',
         body: data,

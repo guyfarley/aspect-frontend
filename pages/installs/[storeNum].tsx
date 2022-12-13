@@ -15,7 +15,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       storeNum: install.storeNum
     },
   }))
-  return { paths, fallback: false }
+  return { paths, fallback: true }
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
