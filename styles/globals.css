@@ -6,29 +6,22 @@
 html {
   scroll-behavior: smooth;
 }
-
+body {
+  background-color: rgb(226 232 240);
+}
 @layer base {
   header {
-    @apply fixed top-0 z-50 flex w-full items-center justify-between px-4 py-4 bg-slate-200 md:justify-start;
+    @apply fixed top-0 z-50 flex w-full h-[68px] items-center justify-between px-4 py-4 bg-slate-200 md:justify-start;
   }
 }
 
 @layer components {
-  /* .headerLink {
-    @apply fixed right-8 cursor-pointer text-sm text-[#000000] transition duration-300 hover:text-[blue];
-  } */
-
   .menuButton {
-    @apply rounded mt-[0.5em] font-roboto tracking-wider text-sm transition hover:opacity-75 md:mt-[0.5em] md:mx-[1.8vw];
+    @apply rounded mt-[0.5em] font-roboto text-gray-800 tracking-widest text-xs font-semibold transition hover:opacity-75 md:mt-[0.5em] md:mx-[3vw];
   }
-/* 
-  .submitButton {
-    @apply rounded transition hover:opacity-75 bg-slate-600 text-white font-roboto text-sm w-[90px] mt-2 py-[2px];
-  } */
   .submitButton {
     @apply block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mt-2 rounded;
   }
-
   .installInfo {
     @apply font-roboto text-gray-700 text-base mt-[10px];
   }

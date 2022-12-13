@@ -56,9 +56,9 @@ export default withPageAuthRequired(function CreateInstallForm() {
   }
 
   return (
-    <div className="relative flex justify-center h-full w-full px-4 py-4 lg:h-[140vh]  bg-slate-200">
+    <div className="relative flex justify-center h-full w-full px-4 py-4 lg:h-[140vh]">
       <Header />
-      <div className="flex flex-col items-center h-full w-full bg-slate-200 px-8 pb-8 md:max-w-md md:mx-auto md:items-start">
+      <div className="flex flex-col items-center h-full w-full px-4 pb-8 md:max-w-md md:mx-auto md:items-start">
         <div className="flex flex-col">
           <h1 className="font-ptserif text-gray-700 text-4xl mt-[100px]">Create a new install.</h1>
           <h1 className="font-roboto text-gray-700 text-base mt-[20px]">Fill out the form below to create your installation!</h1>

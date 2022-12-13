@@ -8,7 +8,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 
 
 export default function BasicMenu() {
-  const { user, error, isLoading } = useUser();
+  const { user } = useUser();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -57,11 +57,11 @@ export default function BasicMenu() {
               CREATE INSTALL
             </Link>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          {/* <MenuItem onClick={handleClose}>
             <Link href="/report">
               CAMPAIGN REPORT
             </Link>
-          </MenuItem>
+          </MenuItem> */}
         </Menu>
       </div> :
       <div>
