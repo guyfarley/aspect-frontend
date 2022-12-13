@@ -21,7 +21,7 @@ function Header() {
               </div>
             </button>
           </Link>
-          <div className="hidden md:flex flex-row justify-between ml-[4vw]">
+          <div className="hidden mt-[.25em] md:flex flex-row justify-between ml-[4vw]">
             <button className="menuButton">
               <Link href="/api/auth/logout">
                 LOG OUT
@@ -37,11 +37,11 @@ function Header() {
                 CREATE INSTALL
               </Link>
             </button>
-            <button className="menuButton">
+            {/* <button className="menuButton">
               <Link href="/report">
                 CAMPAIGN REPORT
               </Link>
-            </button>
+            </button> */}
           </div>
           <BasicMenu />
         </header>
