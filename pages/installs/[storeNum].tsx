@@ -48,8 +48,9 @@ export default function OneInstall({ install }: Props): JSX.Element {
       return await response.json();
     };
 
-    deleteOne().then(data => alert(`Installation for store #${data.storeNum} has been deleted!`));
-    // router.push(`/modify/${install.storeNum}`)
+    deleteOne().then
+      (data => alert(`Installation for store #${data.storeNum} has been deleted!`)).then
+    router.push('/');
   }
 
   return (
