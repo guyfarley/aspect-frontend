@@ -2,27 +2,27 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Check for secret to confirm this is a valid request
-  console.log(req.query.secret);
-  if (req.query.secret !== process.env.MY_SECRET_TOKEN) {
-    return res.status(401).json({ message: 'Invalid token' })
-  }
+  // console.log(req.query.secret);
+  // if (req.query.secret !== process.env.MY_SECRET_TOKEN) {
+  //   return res.status(401).json({ message: 'Invalid token' })
+  // }
 
   try {
 
-    const body = req.body;
-    if (!body) {
-      res.status(400).send('Bad request (no body)');
-      return;
-    }
-
-    const slugToRevalidate = body.storeNum;
+    // const body = req.body;
+    // console.log('body: ', body);
+    // if (!body) {
+    //   res.status(400).send('Bad request (no body)');
+    //   return;
+    // }
+    console.log('req query: ', req.query.store);
+    const slugToRevalidate = req.query.store;
 
     if (slugToRevalidate) {
       // this should be the actual path not a rewritten path
       // e.g. for "/blog/[slug]" this should be "/blog/post-1"
       await res.revalidate(`/installs/${slugToRevalidate}`)
       return res.json({ revalidated: true })
-
     }
 
   } catch (err) {
@@ -30,4 +30,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // to show the last successfully generated page
     return res.status(500).send('Error revalidating')
   }
-}
+} 

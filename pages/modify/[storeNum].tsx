@@ -85,10 +85,11 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
       }
 
       return await response.json();
+
     };
 
     updateInstall().then
-    fetch('/api/revalidate-installs?secret=process.env.MY_SECRET_TOKEN').then
+    fetch(`/api/revalidate-installs?store=${route}`).then
     router.push(`/installs/${route}`);
   }
 
