@@ -78,14 +78,12 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
   // validate store number exists here?
 
   return (
-    <div className="relative flex justify-center h-screen px-4 py-4 lg:h-[140vh]  bg-slate-200">
+    <div className="relative flex justify-center h-screen px-4 py-4 lg:h-[140vh]">
       <Header />
-      <div className="flex flex-col h-full w-full mt-[100px] md:max-w-lg md:mx-auto md:items-start">
-
+      <div className="flex flex-col h-full w-full mt-[100px] px-4 pb-8 md:max-w-lg md:mx-auto md:items-start">
         <h1 className="font-ptserif text-gray-700 text-4xl">Looking for a specific install?</h1>
         <h1 className="font-roboto text-gray-700 text-base mt-[16px]">Just enter your store number below and submit!</h1>
-        <form className="flex flex-col items-center mt-[15vh] mb-[70vh] md:items-start" onSubmit={handleSubmit}>
-
+        <form className="flex flex-col items-center mt-[10vh] mb-[50vh] md:items-start" onSubmit={handleSubmit}>
           <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="campaigns">Choose Campaign</label>
           <select
             className="w-[130px] border rounded pl-[6px] py-[3px]"
@@ -100,7 +98,6 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
               </option>
             ))}
           </select>
-
           {dynamicOptions && (
             <>
               <label className="mb-2 uppercase font-bold text-sm mt-6 text-gray-700 md:mr-2" htmlFor="campaign-installs">Choose Install</label>
@@ -119,10 +116,9 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
               </select>
             </>
           )}
-
-
-          {/* <input className="w-[130px] border rounded pl-[6px] py-[3px]" type="text" id="storeNumber" name="storeNum" onChange={(e) => setRoute(e.target.value)} placeholder="Store #" required /> */}
-          <button className="submitButton" type="submit">Submit</button>
+          <div className="mt-[20px]">
+            <button className="submitButton" type="submit">Submit</button>
+          </div>
         </form>
       </div>
     </div>
