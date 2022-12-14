@@ -4,7 +4,26 @@ const InstallsContext = createContext();
 
 const InstallsProvider = ({ children }) => {
 
-  const [installs, setInstalls] = useState([]);
+  const [installs, setInstalls] = useState([
+    {
+      pm: "Guy Farley",
+      storeNum: "1122",
+      location: "Bend, OR",
+      campaign: "New Campaign",
+      vendorName: "New Vendor",
+      vendorPhone: "Vendor Phone",
+      // installDate: install.installDate,
+      // installTime: install.installTime,
+      installer: "New Installer",
+      installerPhone: "Installer Phone",
+      installerNotes: "Installer Notes",
+      // complete: install.complete,
+      // completionPics: install.completionPics,
+      // revisitNeeded: install.revisitNeeded,
+      // revisitDate: install.revisitDate,
+      pmNotes: "pmNotes",
+    }
+  ]);
   const [newStore, setNewStore] = useState("");
 
   const updateStateInstall = (formData) => {

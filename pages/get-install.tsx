@@ -25,7 +25,7 @@ export default withPageAuthRequired(function GetInstallForm({ allInstalls }: Pro
 
   const { installs, setInstalls } = useContext(InstallsContext);
 
-  if (installs.length < 1) setInstalls(allInstalls);
+  if (installs.length < 2) setInstalls(allInstalls);
 
   const campaigns: string[] = [];
   let filteredInstalls: Install[] = [];
