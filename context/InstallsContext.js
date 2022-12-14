@@ -9,7 +9,7 @@ const InstallsProvider = ({ children }) => {
   const updateStateInstall = (formData) => {
 
     let updatedInstalls = installs.map(install => {
-      if (install.id === formData.id) {
+      if (install.storeNum === formData.storeNum) {
         install = formData;
       }
       return install;
