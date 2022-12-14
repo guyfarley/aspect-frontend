@@ -56,8 +56,9 @@ export default withPageAuthRequired(function CreateInstallForm() {
       return await response.json();
     };
 
-    postData();
-    router.push(`/new-install`);
+    postData().then
+    alert(`New install for Store #${formData.storeNum} has been created!`);
+    router.push(`/`);
   }
 
   return (
