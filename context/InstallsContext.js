@@ -5,7 +5,9 @@ const InstallsContext = createContext();
 const InstallsProvider = ({ children }) => {
 
   const [installs, setInstalls] = useState([]);
-  const [newStore, setNewStore] = useState("");
+  // const [newStore, setNewStore] = useState("");
+  const [dynamicOptions, setDynamicOptions] = useState([]);
+
 
   const updateStateInstall = (formData) => {
 
@@ -23,7 +25,7 @@ const InstallsProvider = ({ children }) => {
     setInstalls([...installs, formData]);
   }
 
-  const createNewStore = (storeNum) => setNewStore(storeNum);
+  // const createNewStore = (storeNum) => setNewStore(storeNum);
 
   return (
     <InstallsContext.Provider
@@ -32,9 +34,11 @@ const InstallsProvider = ({ children }) => {
         setInstalls,
         updateStateInstall,
         addStateInstall,
-        newStore,
-        setNewStore,
-        createNewStore
+        dynamicOptions,
+        setDynamicOptions
+        // newStore,
+        // setNewStore,
+        // createNewStore
       }}
     >
       {children}
