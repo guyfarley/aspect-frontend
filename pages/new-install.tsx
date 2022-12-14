@@ -1,48 +1,51 @@
 import { useContext } from 'react';
-import Header from '../../components/Header'
-import { Install } from '../../typings'
+import Header from '../components/Header'
+import { Install } from '../typings'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
-import prisma from '../../db';
-import { InstallsContext } from '../../context/InstallsContext';
+import prisma from '../db';
+import { InstallsContext } from '../context/InstallsContext';
 
-interface Props {
-  install: Install
-}
+// interface Props {
+//   install: Install
+// }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+// export const getStaticPaths: GetStaticPaths = async () => {
 
-  const installs = await prisma.install.findMany();
-  const paths = installs.map((install) => ({
-    params: {
-      storeNum: install.storeNum
-    },
-  }))
-  return { paths, fallback: false }
-};
+//   const installs = await prisma.install.findMany();
+//   const paths = installs.map((install) => ({
+//     params: {
+//       storeNum: install.storeNum
+//     },
+//   }))
+//   return { paths, fallback: false }
+// };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const installs = await prisma.install.findMany();
+// export const getStaticProps: GetStaticProps = async ({ params }) => {
 
-  const allInstalls = installs.filter((install) => install.storeNum === params!.storeNum);
-  const install = allInstalls[0];
+//   const installs = await prisma.install.findMany();
+//   const allInstalls = installs.filter((install) => install.storeNum === params!.storeNum);
+//   const install = allInstalls[0];
 
-  return {
-    props: {
-      install,
-    },
-    revalidate: 60,
-  }
-};
+//   return {
+//     props: {
+//       install,
+//     },
+//     revalidate: 60,
+//   }
+// };
 
-export default function OneInstall({ install }: Props): JSX.Element {
+export default function CreatedInstall(): JSX.Element {
 
-  const { installs } = useContext(InstallsContext);
+  const { installs, newStore } = useContext(InstallsContext);
+  console.log('new store: ', newStore);
 
-  const stateInstalls = installs.filter((installFromState: Install) => installFromState.storeNum === install.storeNum);
-  const stateInstall = stateInstalls[0];
+  const newInstalls = installs.filter((installFromState: Install) => installFromState.storeNum === newStore.toString());
+  // console.log(newInstalls);
 
-  if (stateInstall) install = stateInstall;
+  const install = newInstalls[0];
+
+  console.log('install: ', install);
 
   const router = useRouter();
   const handleModify = (install: Install) => router.push(`/modify/${install.storeNum}`)
