@@ -6,7 +6,7 @@ import { InstallsContext } from '../context/InstallsContext';
 
 export default withPageAuthRequired(function CreateInstallForm() {
 
-  const { addStateInstall } = useContext(InstallsContext);
+  const { addStateInstall, createNewStore } = useContext(InstallsContext);
 
   const router = useRouter();
   const [route, setRoute] = useState("");
@@ -43,6 +43,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
     event.preventDefault();
 
     addStateInstall(formData);
+    createNewStore(formData.storeNum);
 
     const postData = async () => {
       const response = await fetch('/api/create', {
@@ -56,7 +57,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
     };
 
     postData();
-    router.push(`/installs/${route}`);
+    router.push(`/new-install`);
   }
 
   return (
