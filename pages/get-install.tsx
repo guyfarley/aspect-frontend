@@ -86,14 +86,14 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
         <form className="flex flex-col items-center mt-[10vh] mb-[50vh] md:items-start" onSubmit={handleSubmit}>
           <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="campaigns">Choose Campaign</label>
           <select
-            className="w-[130px] border rounded pl-[6px] py-[3px]"
+            className="w-[180px] border rounded pl-[6px] py-[3px]"
             name="campaigns"
             id="campaigns"
             onChange={handleSelection}
           >
-            <option></option>
+            <option selected></option>
             {campaigns.map((campaign) => (
-              <option key={campaign}>
+              <option className="font-roboto text-gray-600" key={campaign}>
                 {campaign}
               </option>
             ))}
@@ -102,15 +102,15 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
             <>
               <label className="mb-2 uppercase font-bold text-sm mt-6 text-gray-700 md:mr-2" htmlFor="campaign-installs">Choose Install</label>
               <select
-                className="w-[130px] border rounded pl-[6px] py-[3px]"
+                className="w-[180px] border rounded pl-[6px] py-[3px]"
                 name="campaign-installs"
                 id="campaign-installs"
                 onChange={(e) => setRoute(e.target.value)}
               >
-                <option></option>
+                <option selected></option>
                 {dynamicOptions.map((install) => (
-                  <option key={install.storeNum} value={install.storeNum}>
-                    {install.location} - Store #{install.storeNum}
+                  <option className="font-roboto text-gray-600" key={install.storeNum} value={install.storeNum}>
+                    {install.location} ({install.storeNum})
                   </option>
                 ))}
               </select>

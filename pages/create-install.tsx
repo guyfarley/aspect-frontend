@@ -61,7 +61,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
       <div className="flex flex-col items-center h-full w-full pb-8 md:max-w-md md:mx-auto md:items-start">
         <div className="flex flex-col">
           <h1 className="font-ptserif text-gray-700 text-4xl mt-[100px]">Create a new install.</h1>
-          <h1 className="font-roboto text-gray-700 text-base mt-[20px]">Fill out the form below to create your installation!</h1>
+          <h1 className="font-roboto text-gray-700 text-base mt-[12px]">Fill out the form below to create your installation!</h1>
         </div>
 
         <form className="mb-6 mt-[60px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmit}>
