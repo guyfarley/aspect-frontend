@@ -18,13 +18,17 @@ const InstallsProvider = ({ children }) => {
     console.log('NEW installs', installs);
   }
 
+  const addStateInstall = (formData) => {
+    setInstalls([...installs, formData]);
+  }
 
   return (
     <InstallsContext.Provider
       value={{
         installs,
         setInstalls,
-        updateStateInstall
+        updateStateInstall,
+        addStateInstall
       }}
     >
       {children}
