@@ -38,6 +38,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export default function OneInstall({ install }: Props): JSX.Element {
 
   const { installs } = useContext(InstallsContext);
+  console.log(installs);
 
   const stateInstalls = installs.filter((installFromState: Install) => installFromState.storeNum === install.storeNum);
   const stateInstall = stateInstalls[0];
