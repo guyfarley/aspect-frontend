@@ -17,7 +17,7 @@ export default function CreatedInstall(): JSX.Element {
 
   // if (installs.length < 1) setInstalls(databaseInstalls);
 
-  const newInstalls = installs.filter((installFromState: Install) => installFromState.storeNum === newStore.toString());
+  const newInstalls = installs.filter((installFromState: Install) => installFromState.storeNum === newStore);
   // console.log(newInstalls);
 
   const install: Install = newInstalls[0];
