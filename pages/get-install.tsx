@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default withPageAuthRequired(function GetInstallForm({ allInstalls }: Props) {
 
-  const { installs, setInstalls } = useContext(InstallsContext);
+  const { installs, setInstalls, dynamicOptions, setDynamicOptions } = useContext(InstallsContext);
 
   if (installs.length < 1) setInstalls(allInstalls);
 
@@ -31,7 +31,6 @@ export default withPageAuthRequired(function GetInstallForm({ allInstalls }: Pro
   let filteredInstalls: Install[] = [];
   const router = useRouter();
   const [route, setRoute] = useState("");
-  const [dynamicOptions, setDynamicOptions] = useState<Install[]>([]);
 
   const getCampaigns = (installs: Install[]) => {
     for (let i = 0; i < installs.length; i++) {
@@ -112,7 +111,7 @@ export default withPageAuthRequired(function GetInstallForm({ allInstalls }: Pro
                 onChange={(e) => setRoute(e.target.value)}
               >
                 <option></option>
-                {dynamicOptions.map((install) => (
+                {dynamicOptions.map((install: Install) => (
                   <option className="font-roboto text-gray-600" key={install.storeNum} value={install.storeNum}>
                     {install.location} ({install.storeNum})
                   </option>
