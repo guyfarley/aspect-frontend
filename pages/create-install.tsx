@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
-
+import { InstallsContext } from '../context/InstallsContext';
 
 export default withPageAuthRequired(function CreateInstallForm() {
+
+  const { addStateInstall } = useContext(InstallsContext);
 
   const router = useRouter();
   const [route, setRoute] = useState("");
@@ -39,6 +41,8 @@ export default withPageAuthRequired(function CreateInstallForm() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    addStateInstall(formData);
 
     const postData = async () => {
       const response = await fetch('/api/create', {
