@@ -1,37 +1,13 @@
 import { useContext } from 'react';
 import Header from '../components/Header'
 import { Install } from '../typings'
-import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import prisma from '../db';
 import { InstallsContext } from '../context/InstallsContext';
 
-// interface Props {
-//   databaseInstalls: Install[]
-// }
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-
-//   const installs = await prisma.install.findMany();
-//   const paths = installs.map((install) => ({
-//     params: {
-//       storeNum: install.storeNum
-//     },
-//   }))
-//   return { paths, fallback: false }
-// };
-
-// export const getStaticProps: GetStaticProps = async () => {
-
-//   const installs = await prisma.install.findMany();
-
-//   return {
-//     props: {
-//       databaseInstalls: installs,
-//     },
-//     revalidate: 60,
-//   }
-// };
+interface Props {
+  databaseInstalls: Install[]
+}
 
 export default function CreatedInstall(): JSX.Element {
 
