@@ -6,10 +6,10 @@ import { InstallsContext } from '../context/InstallsContext';
 
 export default withPageAuthRequired(function CreateInstallForm() {
 
-  const { addStateInstall, createNewStore } = useContext(InstallsContext);
+  const { addStateInstall } = useContext(InstallsContext);
 
   const router = useRouter();
-  const [route, setRoute] = useState("");
+  // const [route, setRoute] = useState("");
   const [formData, setFormData] = useState({
     pm: "",
     storeNum: "",
@@ -36,14 +36,13 @@ export default withPageAuthRequired(function CreateInstallForm() {
 
     setFormData({ ...formData, [target.name]: target.value });
 
-    setRoute(formData.storeNum);
+    // setRoute(formData.storeNum);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     addStateInstall(formData);
-    createNewStore(formData.storeNum);
 
     const postData = async () => {
       const response = await fetch('/api/create', {
