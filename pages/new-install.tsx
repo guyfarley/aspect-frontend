@@ -7,7 +7,7 @@ import prisma from '../db';
 import { InstallsContext } from '../context/InstallsContext';
 
 // interface Props {
-//   install: Install
+//   databaseInstalls: Install[]
 // }
 
 // export const getStaticPaths: GetStaticPaths = async () => {
@@ -21,15 +21,13 @@ import { InstallsContext } from '../context/InstallsContext';
 //   return { paths, fallback: false }
 // };
 
-// export const getStaticProps: GetStaticProps = async ({ params }) => {
+// export const getStaticProps: GetStaticProps = async () => {
 
 //   const installs = await prisma.install.findMany();
-//   const allInstalls = installs.filter((install) => install.storeNum === params!.storeNum);
-//   const install = allInstalls[0];
 
 //   return {
 //     props: {
-//       install,
+//       databaseInstalls: installs,
 //     },
 //     revalidate: 60,
 //   }
@@ -37,13 +35,16 @@ import { InstallsContext } from '../context/InstallsContext';
 
 export default function CreatedInstall(): JSX.Element {
 
-  const { installs, newStore } = useContext(InstallsContext);
+  // console.log(databaseInstalls);
+  const { installs, setInstalls, newStore } = useContext(InstallsContext);
   console.log('new store: ', newStore);
+
+  // if (installs.length < 1) setInstalls(databaseInstalls);
 
   const newInstalls = installs.filter((installFromState: Install) => installFromState.storeNum === newStore.toString());
   // console.log(newInstalls);
 
-  const install = newInstalls[0];
+  const install: Install = newInstalls[0];
 
   console.log('install: ', install);
 
