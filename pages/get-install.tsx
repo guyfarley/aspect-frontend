@@ -111,7 +111,7 @@ export default withPageAuthRequired(function GetInstallForm({ allInstalls }: Pro
                 onChange={(e) => setRoute(e.target.value)}
               >
                 <option></option>
-                {dynamicOptions.map((install) => (
+                {dynamicOptions.map((install: Install) => (
                   <option className="font-roboto text-gray-600" key={install.storeNum} value={install.storeNum}>
                     {install.location} ({install.storeNum})
                   </option>
