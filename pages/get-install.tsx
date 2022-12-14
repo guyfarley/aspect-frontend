@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { GetStaticProps } from 'next';
 import prisma from '../db';
 import { Install } from '../typings'
+import { InstallsContext } from '../context/InstallsContext';
 
 interface Props {
-  installs: Install[]
+  allInstalls: Install[]
 }
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -15,12 +16,16 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      installs,
+      allInstalls: installs,
     }
   }
 };
 
-export default withPageAuthRequired(function GetInstallForm({ installs }: Props) {
+export default withPageAuthRequired(function GetInstallForm({ allInstalls }: Props) {
+
+  const { installs, setInstalls } = useContext(InstallsContext);
+
+  if (installs.length < 1) setInstalls(allInstalls);
 
   const campaigns: string[] = [];
   let filteredInstalls: Install[] = [];
@@ -44,7 +49,7 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
     console.log('campaign: ', campaign);
 
     // filter installs down to only those installs for provided campaign
-    filteredInstalls = installs.filter(install => install.campaign === campaign);
+    filteredInstalls = installs.filter((install: Install) => install.campaign === campaign);
     console.log('filtered installs: ', filteredInstalls);
     setDynamicOptions(filteredInstalls);
   }
@@ -75,7 +80,6 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
     getOne();
     router.push(`/installs/${route}`);
   }
-  // validate store number exists here?
 
   return (
     <div className="relative flex justify-center h-screen px-6 py-4 lg:h-[140vh]">
