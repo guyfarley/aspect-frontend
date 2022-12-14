@@ -84,12 +84,12 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
         throw new Error(response.statusText);
       }
 
-      // await fetch(`/api/revalidate-installs?store=${route}`);
       return await response.json();
 
     };
 
     updateInstall().then
+    fetch(`/api/revalidate?store=${formData.storeNum}`).then
     router.push(`/installs/${route}`);
   }
 
