@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import Header from '../../components/Header'
 import { Install } from '../../typings'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import prisma from '../../db';
+import { InstallsContext } from '../../context/InstallsContext';
 
 interface Props {
   install: Install
@@ -27,11 +29,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       install,
     },
-    revalidate: 1,
+    revalidate: 60,
   }
 };
 
 export default function OneInstall({ install }: Props): JSX.Element {
+
+  const { installs, setInstalls } = useContext(InstallsContext);
+
+  const stateInstalls = installs.filter((installFromState: Install) => installFromState.storeNum === install.storeNum);
+  const stateInstall = stateInstalls[0];
+
+  if (stateInstall) install = stateInstall;
 
   const router = useRouter();
   const handleModify = (install: Install) => router.push(`/modify/${install.storeNum}`)
