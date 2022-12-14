@@ -91,7 +91,7 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
             id="campaigns"
             onChange={handleSelection}
           >
-            <option selected></option>
+            <option></option>
             {campaigns.map((campaign) => (
               <option className="font-roboto text-gray-600" key={campaign}>
                 {campaign}
@@ -107,7 +107,7 @@ export default withPageAuthRequired(function GetInstallForm({ installs }: Props)
                 id="campaign-installs"
                 onChange={(e) => setRoute(e.target.value)}
               >
-                <option selected></option>
+                <option></option>
                 {dynamicOptions.map((install) => (
                   <option className="font-roboto text-gray-600" key={install.storeNum} value={install.storeNum}>
                     {install.location} ({install.storeNum})
