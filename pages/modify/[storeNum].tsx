@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Header from '../../components/Header'
 import { Install } from '../../typings'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import prisma from '../../db';
+import { InstallsContext } from '../../context/InstallsContext';
 
 interface Props {
   install: Install
@@ -35,6 +36,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export default function ModifyInstall({ install }: Props): JSX.Element {
+
+  const { installs, updateStateInstall } = useContext(InstallsContext);
+
+  const stateInstalls = installs.filter((installFromState: Install) => installFromState.storeNum === install.storeNum);
+  const stateInstall = stateInstalls[0];
+
+  if (stateInstall) install = stateInstall;
 
   const router = useRouter();
   const [route, setRoute] = useState("");
@@ -71,6 +79,8 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
 
   const handleSubmitUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    updateStateInstall(formData);
 
     const updateInstall = async () => {
       const data = JSON.stringify(formData);
