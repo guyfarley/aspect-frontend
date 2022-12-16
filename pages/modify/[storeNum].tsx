@@ -19,7 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       storeNum: install.storeNum
     },
   }))
-  return { paths, fallback: false }
+  return { paths, fallback: 'blocking' }
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -99,7 +99,6 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     };
 
     updateInstall().then
-    fetch(`/api/revalidate?store=${formData.storeNum}`).then
     router.push(`/installs/${route}`);
   }
 
