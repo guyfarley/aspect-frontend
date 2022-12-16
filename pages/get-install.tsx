@@ -1,31 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
-import { GetStaticProps } from 'next';
-import prisma from '../db';
 import { Install } from '../typings'
 import { InstallsContext } from '../context/InstallsContext';
 
-interface Props {
-  allInstalls: Install[]
-}
+export default withPageAuthRequired(function GetInstallForm() {
 
-export const getStaticProps: GetStaticProps = async () => {
-  const installs = await prisma.install.findMany();
-
-  return {
-    props: {
-      allInstalls: installs,
-    }
-  }
-};
-
-export default withPageAuthRequired(function GetInstallForm({ allInstalls }: Props) {
-
-  const { installs, setInstalls, dynamicOptions, setDynamicOptions } = useContext(InstallsContext);
-
-  if (installs.length < 2) setInstalls(allInstalls);
+  const { installs, dynamicOptions, setDynamicOptions } = useContext(InstallsContext);
 
   const campaigns: string[] = [];
   let filteredInstalls: Install[] = [];
@@ -39,44 +21,57 @@ export default withPageAuthRequired(function GetInstallForm({ allInstalls }: Pro
         campaigns.push(campaign);
       }
     }
-    console.log('campaigns: ', campaigns);
     return campaigns;
   }
   getCampaigns(installs);
 
   const getInstalls = (campaign: string) => {
-    console.log('campaign: ', campaign);
 
     // filter installs down to only those installs for provided campaign
     filteredInstalls = installs.filter((install: Install) => install.campaign === campaign);
-    console.log('filtered installs: ', filteredInstalls);
-    setDynamicOptions(filteredInstalls);
+    return filteredInstalls;
   }
 
-  const handleSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCampaignSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
 
     const target = event.target as HTMLSelectElement;
     console.log(target.value);
 
     getInstalls(target.value);
-    console.log('installs filtered: ', filteredInstalls);
-    console.log('Dynamic Options', dynamicOptions);
-    return filteredInstalls;
+    setDynamicOptions(filteredInstalls);
+    console.log('Filtered Installs: ', filteredInstalls);
+  }
+  console.log('Dynamic Options', dynamicOptions);
+  console.log('route: ', route);
+
+  const handleInstallSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    event.preventDefault();
+
+    const target = event.target as HTMLSelectElement;
+    console.log('install target value: ', target.value);
+
+    const matchingInstalls = installs.filter((location: Install) => location.storeNum === target.value)
+    const oneInstall = matchingInstalls[0];
+    console.log(oneInstall);
+    setRoute(oneInstall.storeNum);
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const getOne = async () => {
-      const response = await fetch(`/api/installs/${route}`);
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      return await response.json();
-    };
+    console.log('route: ', route);
+    // const oneInstall = installs.filter((location: Install) => location.storeNum === route);
 
-    getOne();
+    // const getOne = async () => {
+    //   const response = await fetch(`/api/installs/${route}`);
+    //   if (!response.ok) {
+    //     throw new Error(response.statusText);
+    //   }
+    //   return await response.json();
+    // };
+
+    // getOne();
     router.push(`/installs/${route}`);
   }
 
@@ -92,7 +87,7 @@ export default withPageAuthRequired(function GetInstallForm({ allInstalls }: Pro
             className="w-[180px] border rounded pl-[6px] py-[3px]"
             name="campaigns"
             id="campaigns"
-            onChange={handleSelection}
+            onChange={handleCampaignSelection}
           >
             <option></option>
             {campaigns.map((campaign) => (
@@ -101,24 +96,23 @@ export default withPageAuthRequired(function GetInstallForm({ allInstalls }: Pro
               </option>
             ))}
           </select>
-          {dynamicOptions && (
-            <>
-              <label className="mb-2 uppercase font-bold text-sm mt-6 text-gray-700 md:mr-2" htmlFor="campaign-installs">Choose Install</label>
-              <select
-                className="w-[180px] border rounded pl-[6px] py-[3px]"
-                name="campaign-installs"
-                id="campaign-installs"
-                onChange={(e) => setRoute(e.target.value)}
-              >
-                <option></option>
-                {dynamicOptions.map((install: Install) => (
-                  <option className="font-roboto text-gray-600" key={install.storeNum} value={install.storeNum}>
-                    {install.location} ({install.storeNum})
-                  </option>
-                ))}
-              </select>
-            </>
-          )}
+
+          <label className="mb-2 uppercase font-bold text-sm mt-6 text-gray-700 md:mr-2" htmlFor="campaign-installs">Choose Install</label>
+          <select
+            className="w-[180px] border rounded pl-[6px] py-[3px]"
+            name="campaign-installs"
+            id="campaign-installs"
+            onChange={handleInstallSelection}
+          >
+            <option></option>
+            {dynamicOptions.map((install: Install) => (
+              <option className="font-roboto text-gray-600" key={install.storeNum} value={install.storeNum}>
+                {install.location} ({install.storeNum})
+              </option>
+            ))}
+          </select>
+
+
           <div className="mt-[20px]">
             <button className="submitButton" type="submit">Submit</button>
           </div>
