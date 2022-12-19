@@ -13,7 +13,6 @@ interface Props {
 
 export const getStaticProps: GetStaticProps = async () => {
   const installs = await prisma.install.findMany();
-
   return {
     props: {
       allInstalls: installs,
@@ -25,10 +24,7 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home = ({ allInstalls }: Props): JSX.Element => {
 
   const { installs, setInstalls } = useContext(InstallsContext);
-
   if (installs.length < 1) setInstalls(allInstalls);
-
-  console.log('installs from index: ', installs);
 
   return (
     <div className="relative flex justify-center h-screen lg:h-[140vh] bg-slate-200">
