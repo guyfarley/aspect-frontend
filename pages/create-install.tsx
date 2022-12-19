@@ -31,11 +31,9 @@ export default withPageAuthRequired(function CreateInstallForm() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-
     const target = event.target as HTMLInputElement;
 
     setFormData({ ...formData, [target.name]: target.value });
-
     // setRoute(formData.storeNum);
   };
 
