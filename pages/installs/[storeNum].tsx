@@ -42,7 +42,6 @@ export default function OneInstall({ install }: Props): JSX.Element {
 
   const stateInstalls = installs.filter((installFromState: Install) => installFromState.storeNum === install.storeNum);
   const stateInstall = stateInstalls[0];
-
   if (stateInstall) install = stateInstall;
 
   const router = useRouter();
@@ -71,9 +70,7 @@ export default function OneInstall({ install }: Props): JSX.Element {
         <Header />
         <div className="flex flex-col items-center w-full bg-white rounded shadow-lg p-8 pt-[60px] m-4 md:max-w-lg md:mx-auto">
           <h1 className="font-ptserif text-gray-700 text-4xl">{install.location}</h1>
-
           <div className="flex flex-col mt-[60px]">
-
             <p className="installInfo">Store Number: {install.storeNum}</p>
             <p className="installInfo">Campaign: {install.campaign}</p>
             <p className="installInfo">Project Manager: {install.pm}</p><br />
@@ -82,6 +79,7 @@ export default function OneInstall({ install }: Props): JSX.Element {
             <p>Install Time: {install.installTime}</p> */}
             <p className="installInfo">Install Vendor: {install.installer}</p>
             <p className="installInfo">Install Vendor Phone #: {install.installerPhone}</p><br />
+
             <p className="installInfo">Installer Notes: {install.installerNotes}</p><br />
 
             <p className="installInfo">Production Vendor: {install.vendorName}</p>
@@ -90,10 +88,8 @@ export default function OneInstall({ install }: Props): JSX.Element {
             {/* <p>Install Complete? {install.complete}</p>
             <p>Revisit Needed? {install.revisitNeeded}</p>
             <p>Revisit Date: {install.revisitDate}</p> */}
-
             <p className="installInfo">PM Notes: {install.pmNotes}</p>
             <div className="flex flex-col items-center mt-[60px]">
-
               <button
                 onClick={() => handleModify(install)}
                 className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mt-2 rounded"

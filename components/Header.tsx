@@ -5,7 +5,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 
 function Header() {
 
-  const { user, error, isLoading } = useUser();
+  const { user } = useUser();
 
   return (
     user ?

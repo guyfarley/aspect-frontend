@@ -5,7 +5,6 @@ export default async function deleteOneHandler(req: NextApiRequest, res: NextApi
 
   const deleteStoreNum = (req.query.storeNum)?.toString();
 
-
   const deleteInstall = await prisma.install.delete({
     where: {
       storeNum: deleteStoreNum,

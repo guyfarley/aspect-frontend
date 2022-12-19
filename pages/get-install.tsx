@@ -8,7 +8,6 @@ import { InstallsContext } from '../context/InstallsContext';
 export default withPageAuthRequired(function GetInstallForm() {
 
   const { installs, dynamicOptions, setDynamicOptions } = useContext(InstallsContext);
-
   const campaigns: string[] = [];
   let filteredInstalls: Install[] = [];
   const router = useRouter();
@@ -26,7 +25,6 @@ export default withPageAuthRequired(function GetInstallForm() {
   getCampaigns(installs);
 
   const getInstalls = (campaign: string) => {
-
     // filter installs down to only those installs for provided campaign
     filteredInstalls = installs.filter((install: Install) => install.campaign === campaign);
     return filteredInstalls;
@@ -34,44 +32,21 @@ export default withPageAuthRequired(function GetInstallForm() {
 
   const handleCampaignSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
-
     const target = event.target as HTMLSelectElement;
-    console.log(target.value);
-
     getInstalls(target.value);
     setDynamicOptions(filteredInstalls);
-    console.log('Filtered Installs: ', filteredInstalls);
   }
-  console.log('Dynamic Options', dynamicOptions);
-  console.log('route: ', route);
 
   const handleInstallSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
-
     const target = event.target as HTMLSelectElement;
-    console.log('install target value: ', target.value);
-
     const matchingInstalls = installs.filter((location: Install) => location.storeNum === target.value)
     const oneInstall = matchingInstalls[0];
-    console.log(oneInstall);
     setRoute(oneInstall.storeNum);
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log('route: ', route);
-    // const oneInstall = installs.filter((location: Install) => location.storeNum === route);
-
-    // const getOne = async () => {
-    //   const response = await fetch(`/api/installs/${route}`);
-    //   if (!response.ok) {
-    //     throw new Error(response.statusText);
-    //   }
-    //   return await response.json();
-    // };
-
-    // getOne();
     router.push(`/installs/${route}`);
   }
 
@@ -96,7 +71,6 @@ export default withPageAuthRequired(function GetInstallForm() {
               </option>
             ))}
           </select>
-
           <label className="mb-2 uppercase font-bold text-sm mt-6 text-gray-700 md:mr-2" htmlFor="campaign-installs">Choose Install</label>
           <select
             className="w-[180px] border rounded pl-[6px] py-[3px]"
@@ -111,8 +85,6 @@ export default withPageAuthRequired(function GetInstallForm() {
               </option>
             ))}
           </select>
-
-
           <div className="mt-[20px]">
             <button className="submitButton" type="submit">Submit</button>
           </div>

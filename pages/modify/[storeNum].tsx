@@ -13,7 +13,6 @@ interface Props {
 export const getStaticPaths: GetStaticPaths = async () => {
 
   const installs = await prisma.install.findMany();
-
   const paths = installs.map(install => ({
     params: {
       storeNum: install.storeNum
@@ -68,7 +67,6 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-
     // type assertion to access name and value properties on target
     const target = event.target as HTMLInputElement;
 
@@ -95,9 +93,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
       }
 
       return await response.json();
-
-    };
-
+    }
     updateInstall().then
     router.push(`/installs/${route}`);
   }
