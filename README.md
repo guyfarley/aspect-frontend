@@ -66,7 +66,9 @@ Visual Representation:
 
 Having recently learned the basics of Typescript, I wanted to incorporate the benefits of type safety into this app. And the Next.js framework, which sits on top of React, allows for easy incorporation of Typescript.
 
-On the back end, I decided to build an Express server that would handle the various database requests. And for the database itself I chose to use MongoDB (NoSQL database) due to the straightforward structure of the information.
+On the back end, I decided to use Next's built-in API routes to handle the various database requests - eliminating the need for a separate backend server application. And for the database itself I chose a PostgreSQL database hosted on Amazon RDS. I've incorporated the Prisma ORM to help the app communicate with the database.
+
+Application state is managed using the Context API. Tailwind CSS used for styling.
 
 ## Links and Resources
 

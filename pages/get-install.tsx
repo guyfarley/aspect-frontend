@@ -13,6 +13,7 @@ export default withPageAuthRequired(function GetInstallForm() {
   const router = useRouter();
   const [route, setRoute] = useState("");
 
+  // iterates through installs to capture an array of campaign names currently in database
   const getCampaigns = (installs: Install[]) => {
     for (let i = 0; i < installs.length; i++) {
       const campaign = installs[i].campaign;
@@ -24,12 +25,13 @@ export default withPageAuthRequired(function GetInstallForm() {
   }
   getCampaigns(installs);
 
+  // filter installs down to only those installs for provided campaign
   const getInstalls = (campaign: string) => {
-    // filter installs down to only those installs for provided campaign
     filteredInstalls = installs.filter((install: Install) => install.campaign === campaign);
     return filteredInstalls;
   }
 
+  // calls getInstalls function to get filtered-down installs, sets those to filteredInstalls
   const handleCampaignSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     const target = event.target as HTMLSelectElement;
@@ -37,6 +39,7 @@ export default withPageAuthRequired(function GetInstallForm() {
     setDynamicOptions(filteredInstalls);
   }
 
+  // when install selected from dropdown, route set to that install
   const handleInstallSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     const target = event.target as HTMLSelectElement;
@@ -45,6 +48,7 @@ export default withPageAuthRequired(function GetInstallForm() {
     setRoute(oneInstall.storeNum);
   }
 
+  // when Submit button clicked, user routed to dynamic route for the chosen install
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push(`/installs/${route}`);

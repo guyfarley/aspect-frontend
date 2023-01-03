@@ -11,6 +11,7 @@ interface Props {
   allInstalls: Install[]
 }
 
+// upon initial page load, fetch all installs from AWS database and pass into Home component
 export const getStaticProps: GetStaticProps = async () => {
   const installs = await prisma.install.findMany();
   return {

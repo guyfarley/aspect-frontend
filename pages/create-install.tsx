@@ -10,6 +10,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
 
   const router = useRouter();
   // const [route, setRoute] = useState("");
+  // initialize formData with correct keys and value types
   const [formData, setFormData] = useState({
     pm: "",
     storeNum: "",
@@ -40,8 +41,10 @@ export default withPageAuthRequired(function CreateInstallForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // calls addStateInstall function in InstallsContext, passes formData into it
     addStateInstall(formData);
 
+    // passes formData to create API, to be posted to AWS database
     const postData = async () => {
       const response = await fetch('/api/create', {
         method: 'POST',
@@ -53,6 +56,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
       return await response.json();
     };
 
+    // call postData function, alert confirmation, and route user back to home page
     postData().then
     alert(`New install for Store #${formData.storeNum} has been created!`);
     router.push(`/`);
