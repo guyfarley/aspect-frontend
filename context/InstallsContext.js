@@ -7,7 +7,7 @@ const InstallsProvider = ({ children }) => {
   const [installs, setInstalls] = useState([]);
   const [dynamicOptions, setDynamicOptions] = useState([]);
 
-
+  // update a specific install with submitted form data
   const updateStateInstall = (formData) => {
 
     let updatedInstalls = installs.map(install => {
@@ -20,6 +20,7 @@ const InstallsProvider = ({ children }) => {
     console.log('NEW installs', installs);
   }
 
+  // add an install to state installs, from submitted form data
   const addStateInstall = (formData) => {
     setInstalls([...installs, formData]);
   }
