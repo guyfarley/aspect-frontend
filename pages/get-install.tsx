@@ -98,7 +98,6 @@ export default withPageAuthRequired(function GetInstallForm() {
         </div>
       </div>
       <div className="flex flex-col items-center mb-[5vh]">
-
         <GetInstallHero />
       </div>
     </>
