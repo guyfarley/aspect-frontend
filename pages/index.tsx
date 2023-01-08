@@ -33,7 +33,7 @@ const Home = ({ allInstalls }: Props): JSX.Element => {
         <title>Aspect Install Tracker</title>
       </Head>
       <Header />
-      <main>
+      <main className="flex flex-col">
         <Hero />
       </main >
     </div >
