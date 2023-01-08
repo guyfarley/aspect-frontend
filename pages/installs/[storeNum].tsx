@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import Header from '../../components/Header'
-import { Install } from '../../typings'
+import Header from '../../components/Header';
+import { Install } from '../../typings';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import prisma from '../../db';
@@ -66,7 +66,7 @@ export default function OneInstall({ install }: Props): JSX.Element {
 
   return (
     <>
-      <div className="flex items-center h-[110vh] w-full pt-[130px] bg-slate-200 md:pt-0">
+      <div className="flex items-center h-[130vh] w-full pt-[130px] bg-slate-200 md:pt-0 md:h-[110vh]">
         <Header />
         <div className="flex flex-col items-center w-full bg-white rounded shadow-lg p-8 pt-[60px] m-4 md:max-w-lg md:mx-auto">
           <h1 className="font-ptserif text-gray-700 text-4xl">{install.location}</h1>
