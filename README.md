@@ -1,5 +1,5 @@
 
-# Graphic Installation Tracker - Frontend
+# Aspect - Retail Graphic Installation Tracker
 
 ## A tracking and reporting app for retail graphic installs
 

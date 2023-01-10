@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import GetInstallHero from '../components/GetInstallHero';
@@ -8,11 +8,20 @@ import { InstallsContext } from '../context/InstallsContext';
 
 export default withPageAuthRequired(function GetInstallForm() {
 
-  const { installs, dynamicOptions, setDynamicOptions } = useContext(InstallsContext);
+  const { installs, setInstalls, dynamicOptions, setDynamicOptions } = useContext(InstallsContext);
   const campaigns: string[] = [];
   let filteredInstalls: Install[] = [];
   const router = useRouter();
   const [route, setRoute] = useState("");
+
+
+  // const storedInstalls = JSON.parse(localStorage.getItem('localStorageInstalls') || "");
+  // if (storedInstalls) {
+  //   setInstalls(storedInstalls);
+  // }
+
+  // localStorage.setItem('localStorageInstalls', JSON.stringify(installs));
+
 
   // iterates through installs to capture an array of campaign names currently in database
   const getCampaigns = (installs: Install[]) => {
