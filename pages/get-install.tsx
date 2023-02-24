@@ -70,7 +70,7 @@ export default withPageAuthRequired(function GetInstallForm() {
         <Header />
         <div className="flex flex-col h-full w-full mt-[100px] pb-8 md:max-w-lg md:mx-auto md:items-start">
           <h1 className="font-ptserif text-gray-700 text-4xl">Looking for a specific install?</h1>
-          <h1 className="font-roboto text-gray-600 text-base mt-[12px]">Choose your marketing campaign and installation below, and submit!</h1>
+          <h1 className="font-roboto text-gray-600 text-base mt-[12px]">Choose your marketing campaign and installation below, and click Submit.</h1>
           <form className="flex flex-col items-center mt-[8vh] mb-[5vh] md:items-start" onSubmit={handleSubmit}>
             <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="campaigns">Choose Campaign</label>
             <select
