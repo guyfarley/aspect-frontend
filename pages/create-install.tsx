@@ -13,21 +13,21 @@ export default withPageAuthRequired(function CreateInstallForm() {
   // const [route, setRoute] = useState("");
   // initialize formData with correct keys and value types
   const [formData, setFormData] = useState({
-    pm: "",
     storeNum: "",
+    pm: "",
     location: "",
     campaign: "",
     vendorName: "",
     vendorPhone: "",
-    // installDate: install.installDate,
-    // installTime: install.installTime,
+    installDate: "",
+    installTime: "",
+    complete: "",
+    revisitNeeded: "",
+    revisitDate: "",
     installer: "",
     installerPhone: "",
     installerNotes: "",
-    // complete: install.complete,
     // completionPics: install.completionPics,
-    // revisitNeeded: install.revisitNeeded,
-    // revisitDate: install.revisitDate,
     pmNotes: "",
   });
 
@@ -98,14 +98,16 @@ export default withPageAuthRequired(function CreateInstallForm() {
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="vendorPhone">Vendor Phone #</label>
               <input className="border py-2 px-3  text-gray-700" type="tel" id="vendorPhone" name="vendorPhone" onChange={handleChange} />
             </div>
-            {/* <div className="flex flex-col mb-4 md:w-1/2">
+
+            <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="installDate">Install Date</label>
               <input className="border py-2 px-3  text-gray-700 md:mr-2" type="date" id="installDate" name="installDate" onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:ml-2" htmlFor="installTime">Install Time</label>
               <input className="border py-2 px-3  text-gray-700 md:ml-2" type="time" id="installTime" name="installTime" onChange={handleChange} />
-            </div> */}
+            </div>
+
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installer">Install Company</label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="installer" name="installer" onChange={handleChange} />
@@ -118,18 +120,20 @@ export default withPageAuthRequired(function CreateInstallForm() {
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installerNotes">Installer Notes</label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="installerNotes" name="installerNotes" onChange={handleChange} />
             </div>
-            {/* <div className="flex mb-4 md:w-full">
+
+            <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="complete">Install Complete?</label>
               <input className="border mb-[6px] ml-3 px-3  text-gray-700" type="checkbox" id="complete" name="complete" onChange={handleChange} />
             </div>
             <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="revisitNeeded">Revisit Needed?</label>
               <input className="border mb-[6px] ml-3 px-3  text-gray-700" type="checkbox" id="revisitNeeded" name="revisitNeeded" onChange={handleChange} />
-            </div> */}
-            {/* <div className="flex flex-col mb-4 md:w-1/2">
+            </div>
+            <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="revisitDate">Revisit Date</label>
               <input className="border py-2 px-3  text-gray-700 md:mr-2" type="date" id="revisitDate" name="revisitDate" onChange={handleChange} />
-            </div> */}
+            </div>
+
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="pmNotes">PM Notes</label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="pmNotes" name="pmNotes" onChange={handleChange} />
