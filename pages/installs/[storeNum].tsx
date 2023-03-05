@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       install,
     },
-    // revalidate: 60,
+    revalidate: 60,
   }
 };
 
