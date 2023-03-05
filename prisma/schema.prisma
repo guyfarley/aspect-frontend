@@ -17,6 +17,11 @@ model Install {
   campaign       String
   vendorName     String
   vendorPhone    String?
+  installDate    String?
+  installTime    String?
+  complete       String?
+  revisitNeeded  String?
+  revisitDate    String?
   installer      String
   installerPhone String?
   installerNotes String?

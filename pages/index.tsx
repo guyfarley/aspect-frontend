@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       allInstalls: installs,
     },
-    revalidate: 60,
+    // revalidate: 60,
   }
 };
 
