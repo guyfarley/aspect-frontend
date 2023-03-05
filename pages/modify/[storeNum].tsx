@@ -101,7 +101,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
   return (
     <>
       <Header />
-      <div className="flex items-center h-[140vh] w-full bg-slate-200 ">
+      <div className="flex items-center h-[210vh] w-full bg-slate-200 md:h-[170vh]">
         <div className="flex flex-col items-center h-full w-full bg-slate-200 p-8 md:max-w-md md:mx-auto">
           <h1 className="font-ptserif text-gray-700 text-4xl mt-[100px]">Modify Install</h1>
           <form className="mb-6 mt-[50px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmitUpdate}>
