@@ -1,5 +1,5 @@
 export interface Install {
-  id: string
+  // id: string
   pm: string
   storeNum: string
   location: string
@@ -12,7 +12,7 @@ export interface Install {
   installerPhone: string
   installerNotes: string
   complete: string
-  completionPics: object
+  // completionPics: object
   revisitNeeded: string
   revisitDate: string
   pmNotes: string

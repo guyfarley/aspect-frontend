@@ -4,13 +4,15 @@ import Header from '../components/Header';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { InstallsContext } from '../context/InstallsContext';
 import CreateInstallHero from '../components/CreateInstallHero';
+import { Install } from '../typings';
 
 export default withPageAuthRequired(function CreateInstallForm() {
 
-  const { addStateInstall } = useContext(InstallsContext);
+  const { addStateInstall, installs } = useContext(InstallsContext);
 
   const router = useRouter();
   // const [route, setRoute] = useState("");
+
   // initialize formData with correct keys and value types
   const [formData, setFormData] = useState({
     storeNum: "",
@@ -30,7 +32,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
     // completionPics: install.completionPics,
     pmNotes: "",
   });
-  const [formErrors, setFormErrors] = useState({});
+  const [formErrors, setFormErrors] = useState(Object);
   const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,10 +46,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log('form data: ', formData);
-
     setFormErrors(validate(formData));
-    console.log('form errors: ', formErrors);
     setIsSubmit(true);
 
     if (Object.keys(formErrors).length <= 1 && isSubmit === true) {
@@ -70,11 +69,16 @@ export default withPageAuthRequired(function CreateInstallForm() {
       postData().then
       alert(`New install for Store #${formData.storeNum} has been created!`);
       router.push(`/`);
+    } else {
+      window.scrollTo(0, 0);
     }
   }
 
-  const validate = (values) => {
-    const errors = {};
+  const validate = (values: Install) => {
+    const storeNums = installs.map((install: Install) => install.storeNum)
+    // console.log('store numbers: ', storeNums);
+
+    const errors: any = {};
     if (!values.storeNum) {
       errors.storeNum = "Store number is required!";
     }
@@ -103,40 +107,35 @@ export default withPageAuthRequired(function CreateInstallForm() {
             <h1 className="font-ptserif text-gray-700 text-4xl mt-[100px]">Create a new install.</h1>
             <h1 className="font-roboto text-gray-700 text-base mt-[12px]">Fill out the form below to create your installation!</h1>
           </div>
-
           <form className="mb-6 mt-[60px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmit}>
             <div className="flex flex-col mb-4 md:w-1/2">
-              <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="storeNum">Store Number</label>
+              <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="storeNum">Store Number<span className="text-red-500"> *</span></label>
               <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="text" id="storeNum" name="storeNum" onChange={handleChange} />
-              <p className="text-red-500">{formErrors.storeNum}</p>
+              <p className="text-red-500 ml-1">{formErrors.storeNum}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
-              <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:ml-2" htmlFor="location">Location</label>
+              <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:ml-2" htmlFor="location">Location<span className="text-red-500"> *</span></label>
               <input className="border py-2 px-3  text-gray-700 md:ml-2" type="text" id="location" name="location" onChange={handleChange} />
-              <p className="text-red-500">{formErrors.location}</p>
+              <p className="text-red-500 ml-1 md:ml-3">{formErrors.location}</p>
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="pm">Project Manager</label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="pm" name="pm" onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
-              <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="campaign">Campaign</label>
+              <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="campaign">Campaign<span className="text-red-500"> *</span></label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="campaign" name="campaign" onChange={handleChange} />
-              <p className="text-red-500">{formErrors.campaign}</p>
+              <p className="text-red-500 ml-1">{formErrors.campaign}</p>
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
-              <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="vendorName">Vendor Name</label>
+              <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="vendorName">Vendor Name<span className="text-red-500"> *</span></label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="vendorName" name="vendorName" onChange={handleChange} />
-              <p className="text-red-500">{formErrors.vendorName}</p>
+              <p className="text-red-500 ml-1">{formErrors.vendorName}</p>
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="vendorPhone">Vendor Phone #</label>
               <input className="border py-2 px-3  text-gray-700" type="tel" id="vendorPhone" name="vendorPhone" onChange={handleChange} />
             </div>
-
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="installDate">Install Date</label>
               <input className="border py-2 px-3  text-gray-700 md:mr-2" type="date" id="installDate" name="installDate" onChange={handleChange} />
@@ -145,13 +144,11 @@ export default withPageAuthRequired(function CreateInstallForm() {
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:ml-2" htmlFor="installTime">Install Time</label>
               <input className="border py-2 px-3  text-gray-700 md:ml-2" type="time" id="installTime" name="installTime" onChange={handleChange} />
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
-              <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installer">Install Company</label>
+              <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installer">Install Company<span className="text-red-500"> *</span></label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="installer" name="installer" onChange={handleChange} />
-              <p className="text-red-500">{formErrors.installer}</p>
+              <p className="text-red-500 ml-1">{formErrors.installer}</p>
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installerPhone">Installer Phone #</label>
               <input className="border py-2 px-3  text-gray-700" type="tel" id="installerPhone" name="installerPhone" onChange={handleChange} />
@@ -160,7 +157,6 @@ export default withPageAuthRequired(function CreateInstallForm() {
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installerNotes">Installer Notes</label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="installerNotes" name="installerNotes" onChange={handleChange} />
             </div>
-
             <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="complete">Install Complete?</label>
               <input className="border mb-[6px] ml-3 px-3  text-gray-700" type="checkbox" id="complete" name="complete" onChange={handleChange} />
@@ -173,7 +169,6 @@ export default withPageAuthRequired(function CreateInstallForm() {
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="revisitDate">Revisit Date</label>
               <input className="border py-2 px-3  text-gray-700 md:mr-2" type="date" id="revisitDate" name="revisitDate" onChange={handleChange} />
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="pmNotes">PM Notes</label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="pmNotes" name="pmNotes" onChange={handleChange} />
@@ -181,7 +176,6 @@ export default withPageAuthRequired(function CreateInstallForm() {
             <button className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mx-auto mt-6 rounded" type="submit">Submit</button>
           </form>
         </div>
-        }
       </div>
       <div className="flex flex-col items-center mb-[5vh]">
         <CreateInstallHero />
