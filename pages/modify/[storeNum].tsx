@@ -64,6 +64,8 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     revisitDate: install.revisitDate,
     pmNotes: install.pmNotes,
   });
+  const [formErrors, setFormErrors] = useState(Object);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -71,32 +73,64 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     const target = event.target as HTMLInputElement;
 
     setFormData({ ...formData, [target.name]: target.value });
-    setRoute(formData.storeNum);
+    setRoute(formData.storeNum.toString());
     console.log('form data: ', formData)
   };
 
   const handleSubmitUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    updateStateInstall(formData);
+    setFormErrors(validate(formData));
+    console.log('form errors: ', formErrors);
+    setIsSubmit(true);
 
-    const updateInstall = async () => {
-      const data = JSON.stringify(formData);
-      console.log('form data being sent: ', data);
-      const response = await fetch(`/api/updates/${route}`, {
-        method: 'POST',
-        body: data,
-      });
+    if (Object.keys(formErrors).length <= 1 && isSubmit === true) {
 
-      if (!response.ok) {
-        throw new Error(response.statusText);
+      updateStateInstall(formData);
+
+      const updateInstall = async () => {
+        const data = JSON.stringify(formData);
+        console.log('form data being sent: ', data);
+        const response = await fetch(`/api/updates/${route}`, {
+          method: 'POST',
+          body: data,
+        });
+
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+
+        return await response.json();
       }
-
-      return await response.json();
+      updateInstall().then
+      router.push(`/installs/${route}`);
+    } else {
+      window.scrollTo(0, 0);
     }
-    updateInstall().then
-    router.push(`/installs/${route}`);
   }
+
+  const validate = (values: Install) => {
+    const storeNums = installs.map((install: Install) => install.storeNum)
+    // console.log('store numbers: ', storeNums);
+
+    const errors: any = {};
+    if (!values.storeNum) {
+      errors.storeNum = "Store number required!";
+    }
+    if (!values.location) {
+      errors.location = "Store location required!";
+    }
+    if (!values.campaign) {
+      errors.campaign = "Marketing campaign is required!";
+    }
+    if (!values.vendorName) {
+      errors.vendorName = "Vendor name is required!";
+    }
+    if (!values.installer) {
+      errors.installer = "Installer name is required!";
+    }
+    return errors;
+  };
 
   return (
     <>
@@ -106,24 +140,28 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
           <h1 className="font-ptserif text-gray-700 text-4xl mt-[100px]">Modify Install</h1>
           <form className="mb-6 mt-[50px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmitUpdate}>
             <div className="flex flex-col mb-4 md:w-1/2">
-              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="storeNum">Store Number</label>
-              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="text" id="storeNum" name="storeNum" defaultValue={install.storeNum} onChange={handleChange} />
+              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="storeNum">Store Number<span className="text-red-500"> *</span></label>
+              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="text" id="storeNum" name="storeNum" defaultValue={(install.storeNum)} onChange={handleChange} />
+              <p className="text-red-500 ml-1">{formErrors.storeNum}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
-              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:ml-2" htmlFor="location">Location</label>
+              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:ml-2" htmlFor="location">Location<span className="text-red-500"> *</span></label>
               <input className="border py-2 px-3 text-grey-darkest md:ml-2" type="text" id="location" name="location" defaultValue={(install.location)} onChange={handleChange} />
+              <p className="text-red-500 ml-1 md:ml-3">{formErrors.location}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="pm">Project Manager</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="pm" name="pm" defaultValue={install.pm} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
-              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="campaign">Campaign</label>
+              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="campaign">Campaign<span className="text-red-500"> *</span></label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="campaign" name="campaign" defaultValue={(install.campaign)} onChange={handleChange} />
+              <p className="text-red-500 ml-1">{formErrors.campaign}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-full">
-              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="vendorName">Vendor Name</label>
+              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="vendorName">Vendor Name<span className="text-red-500"> *</span></label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="vendorName" name="vendorName" defaultValue={install.vendorName} onChange={handleChange} />
+              <p className="text-red-500 ml-1">{formErrors.vendorName}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="vendorPhone">Vendor Phone #</label>
@@ -138,8 +176,9 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
               <input className="border py-2 px-3 text-grey-darkest md:ml-2" type="time" id="installTime" name="installTime" defaultValue={(install.installTime)} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
-              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installer">Install Company</label>
+              <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installer">Install Company<span className="text-red-500"> *</span></label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="installer" name="installer" defaultValue={install.installer} onChange={handleChange} />
+              <p className="text-red-500 ml-1">{formErrors.installer}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installerPhone">Installer Phone #</label>
@@ -151,11 +190,11 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
             </div>
             <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="complete">Install Complete?</label>
-              <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="complete" name="complete" defaultChecked={(install.complete)} onChange={handleChange} />
+              <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="complete" name="complete" defaultValue={(install.complete)} onChange={handleChange} />
             </div>
             <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="revisitNeeded">Revisit Needed?</label>
-              <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="revisitNeeded" name="revisitNeeded" defaultChecked={(install.revisitNeeded)} onChange={handleChange} />
+              <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="revisitNeeded" name="revisitNeeded" defaultValue={(install.revisitNeeded)} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="revisitDate">Revisit Date</label>
