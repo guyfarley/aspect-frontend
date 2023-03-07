@@ -84,7 +84,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     console.log('form errors: ', formErrors);
     setIsSubmit(true);
 
-    if (Object.keys(formErrors).length <= 1 && isSubmit === true) {
+    if (Object.keys(formErrors).length < 1 && isSubmit === true) {
 
       updateStateInstall(formData);
 

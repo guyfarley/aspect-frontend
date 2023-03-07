@@ -49,7 +49,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
     setFormErrors(validate(formData));
     setIsSubmit(true);
 
-    if (Object.keys(formErrors).length <= 1 && isSubmit === true) {
+    if (Object.keys(formErrors).length < 1 && isSubmit === true) {
       // calls addStateInstall function in InstallsContext, passes formData into it
       addStateInstall(formData);
 
