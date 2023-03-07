@@ -46,10 +46,11 @@ export default withPageAuthRequired(function CreateInstallForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setFormErrors(validate(formData));
+    let nextErrors = validate(formData);
+    setFormErrors(nextErrors);
     setIsSubmit(true);
 
-    if (Object.keys(formErrors).length < 1 && isSubmit === true) {
+    if (Object.keys(nextErrors).length < 1 && isSubmit === true) {
       // calls addStateInstall function in InstallsContext, passes formData into it
       addStateInstall(formData);
 
@@ -75,7 +76,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
   }
 
   const validate = (values: Install) => {
-    const storeNums = installs.map((install: Install) => install.storeNum)
+    // const storeNums = installs.map((install: Install) => install.storeNum)
     // console.log('store numbers: ', storeNums);
 
     const errors: any = {};

@@ -46,6 +46,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
   const router = useRouter();
   const [route, setRoute] = useState("");
 
+  // initialize formData with current install data
   const [formData, setFormData] = useState({
     pm: install.pm,
     storeNum: install.storeNum,
@@ -74,17 +75,16 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
 
     setFormData({ ...formData, [target.name]: target.value });
     setRoute(formData.storeNum.toString());
-    console.log('form data: ', formData)
   };
 
   const handleSubmitUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setFormErrors(validate(formData));
-    console.log('form errors: ', formErrors);
+    let nextErrors = validate(formData);
+    setFormErrors(nextErrors);
     setIsSubmit(true);
 
-    if (Object.keys(formErrors).length < 1 && isSubmit === true) {
+    if (Object.keys(nextErrors).length < 1 && isSubmit === true) {
 
       updateStateInstall(formData);
 
@@ -110,7 +110,7 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
   }
 
   const validate = (values: Install) => {
-    const storeNums = installs.map((install: Install) => install.storeNum)
+    // const storeNums = installs.map((install: Install) => install.storeNum)
     // console.log('store numbers: ', storeNums);
 
     const errors: any = {};
