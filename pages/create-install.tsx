@@ -47,8 +47,6 @@ export default withPageAuthRequired(function CreateInstallForm() {
     event.preventDefault();
 
     let nextErrors = validate(formData);
-    console.log('errors', nextErrors);
-
     setFormErrors(nextErrors);
     setIsSubmit(true);
 
@@ -78,7 +76,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
   }
 
   const validate = (values: Install) => {
-    const storeNums = installs.map((install: Install) => install.storeNum)
+    // const storeNums = installs.map((install: Install) => install.storeNum)
     // console.log('store numbers: ', storeNums);
 
     const errors: any = {};
