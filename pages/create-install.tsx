@@ -46,10 +46,13 @@ export default withPageAuthRequired(function CreateInstallForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setFormErrors(validate(formData));
+    let nextErrors = validate(formData);
+    console.log('errors', nextErrors);
+
+    setFormErrors(nextErrors);
     setIsSubmit(true);
 
-    if (Object.keys(formErrors).length < 1 && isSubmit === true) {
+    if (Object.keys(nextErrors).length < 1 && isSubmit === true) {
       // calls addStateInstall function in InstallsContext, passes formData into it
       addStateInstall(formData);
 
