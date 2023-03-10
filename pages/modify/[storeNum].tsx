@@ -90,7 +90,6 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     setIsSubmit(true);
 
     if (Object.keys(nextErrors).length < 1 && isSubmit === true) {
-      console.log('we got here');
       updateStateInstall(formData);
 
       const updateInstall = async () => {
