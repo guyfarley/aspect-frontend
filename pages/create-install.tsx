@@ -23,8 +23,8 @@ export default withPageAuthRequired(function CreateInstallForm() {
     vendorPhone: "",
     installDate: "",
     installTime: "",
-    complete: "",
-    revisitNeeded: "",
+    complete: false,
+    revisitNeeded: false,
     revisitDate: "",
     installer: "",
     installerPhone: "",
@@ -43,9 +43,14 @@ export default withPageAuthRequired(function CreateInstallForm() {
     // setRoute(formData.storeNum);
   };
 
+  const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // event.preventDefault();
+    const target = event.target as HTMLInputElement;
+    setFormData({ ...formData, [target.name]: target.checked });
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     let nextErrors = validate(formData);
     setFormErrors(nextErrors);
     setIsSubmit(true);
@@ -160,11 +165,11 @@ export default withPageAuthRequired(function CreateInstallForm() {
             </div>
             <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="complete">Install Complete?</label>
-              <input className="border mb-[6px] ml-3 px-3  text-gray-700" type="checkbox" id="complete" name="complete" onChange={handleChange} />
+              <input className="border mb-[6px] ml-3 px-3  text-gray-700" type="checkbox" id="complete" name="complete" onChange={onChangeCheckbox} />
             </div>
             <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="revisitNeeded">Revisit Needed?</label>
-              <input className="border mb-[6px] ml-3 px-3  text-gray-700" type="checkbox" id="revisitNeeded" name="revisitNeeded" onChange={handleChange} />
+              <input className="border mb-[6px] ml-3 px-3  text-gray-700" type="checkbox" id="revisitNeeded" name="revisitNeeded" onChange={onChangeCheckbox} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="revisitDate">Revisit Date</label>

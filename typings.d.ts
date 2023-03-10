@@ -11,9 +11,9 @@ export interface Install {
   installer: string
   installerPhone: string
   installerNotes: string
-  complete: string
+  complete: boolean
   // completionPics: object
-  revisitNeeded: string
+  revisitNeeded: boolean
   revisitDate: string
   pmNotes: string
 }
