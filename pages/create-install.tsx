@@ -38,7 +38,6 @@ export default withPageAuthRequired(function CreateInstallForm() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const target = event.target as HTMLInputElement;
-
     setFormData({ ...formData, [target.name]: target.value });
     // setRoute(formData.storeNum);
   };
@@ -116,21 +115,21 @@ export default withPageAuthRequired(function CreateInstallForm() {
           <form className="mb-6 mt-[60px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmit}>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="storeNum">Store Number<span className="text-red-500"> *</span></label>
-              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="text" id="storeNum" name="storeNum" onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="text" id="storeNum" name="storeNum" placeholder="201" onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.storeNum}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:ml-2" htmlFor="location">Location<span className="text-red-500"> *</span></label>
-              <input className="border py-2 px-3  text-gray-700 md:ml-2" type="text" id="location" name="location" onChange={handleChange} />
+              <input className="border py-2 px-3  text-gray-700 md:ml-2" type="text" id="location" name="location" placeholder="Seattle, WA" onChange={handleChange} />
               <p className="text-red-500 ml-1 md:ml-3">{formErrors.location}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="pm">Project Manager</label>
-              <input className="border py-2 px-3  text-gray-700" type="text" id="pm" name="pm" onChange={handleChange} />
+              <input className="border py-2 px-3  text-gray-700" type="text" id="pm" name="pm" placeholder="Full Name" onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="campaign">Campaign<span className="text-red-500"> *</span></label>
-              <input className="border py-2 px-3  text-gray-700" type="text" id="campaign" name="campaign" onChange={handleChange} />
+              <input className="border py-2 px-3  text-gray-700" type="text" id="campaign" name="campaign" placeholder="Marketing Campaign" onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.campaign}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-full">
@@ -140,7 +139,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="vendorPhone">Vendor Phone #</label>
-              <input className="border py-2 px-3  text-gray-700" type="tel" id="vendorPhone" name="vendorPhone" onChange={handleChange} />
+              <input className="border py-2 px-3  text-gray-700" type="tel" id="vendorPhone" name="vendorPhone" placeholder="555-123-4567" onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="installDate">Install Date</label>
@@ -157,7 +156,7 @@ export default withPageAuthRequired(function CreateInstallForm() {
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installerPhone">Installer Phone #</label>
-              <input className="border py-2 px-3  text-gray-700" type="tel" id="installerPhone" name="installerPhone" onChange={handleChange} />
+              <input className="border py-2 px-3  text-gray-700" type="tel" id="installerPhone" name="installerPhone" placeholder="555-123-4567" onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installerNotes">Installer Notes</label>
