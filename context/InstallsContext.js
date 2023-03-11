@@ -17,7 +17,6 @@ const InstallsProvider = ({ children }) => {
       return install;
     })
     setInstalls(updatedInstalls);
-    console.log('NEW installs', installs);
   }
 
   // add an install to state installs, from submitted form data

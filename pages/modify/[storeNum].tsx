@@ -72,25 +72,28 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     event.preventDefault();
     // type assertion to access name and value properties on target
     const target = event.target as HTMLInputElement;
-
     setFormData({ ...formData, [target.name]: target.value });
-    setRoute(formData.storeNum.toString());
+    setRoute(formData.storeNum);
   };
 
-  const handleSubmitUpdate = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // event.preventDefault();
+    const target = event.target as HTMLInputElement;
+    setFormData({ ...formData, [target.name]: target.checked });
+    setRoute(formData.storeNum);
+  };
 
+  const handleSubmitUpdate = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     let nextErrors = validate(formData);
     setFormErrors(nextErrors);
     setIsSubmit(true);
 
     if (Object.keys(nextErrors).length < 1 && isSubmit === true) {
-
       updateStateInstall(formData);
 
       const updateInstall = async () => {
         const data = JSON.stringify(formData);
-        console.log('form data being sent: ', data);
         const response = await fetch(`/api/updates/${route}`, {
           method: 'POST',
           body: data,
@@ -141,68 +144,68 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
           <form className="mb-6 mt-[50px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmitUpdate}>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="storeNum">Store Number<span className="text-red-500"> *</span></label>
-              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="text" id="storeNum" name="storeNum" defaultValue={(install.storeNum)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="text" id="storeNum" name="storeNum" defaultValue={(formData.storeNum)} onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.storeNum}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:ml-2" htmlFor="location">Location<span className="text-red-500"> *</span></label>
-              <input className="border py-2 px-3 text-grey-darkest md:ml-2" type="text" id="location" name="location" defaultValue={(install.location)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest md:ml-2" type="text" id="location" name="location" defaultValue={(formData.location)} onChange={handleChange} />
               <p className="text-red-500 ml-1 md:ml-3">{formErrors.location}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="pm">Project Manager</label>
-              <input className="border py-2 px-3 text-grey-darkest" type="text" id="pm" name="pm" defaultValue={install.pm} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest" type="text" id="pm" name="pm" defaultValue={formData.pm} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="campaign">Campaign<span className="text-red-500"> *</span></label>
-              <input className="border py-2 px-3 text-grey-darkest" type="text" id="campaign" name="campaign" defaultValue={(install.campaign)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest" type="text" id="campaign" name="campaign" defaultValue={(formData.campaign)} onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.campaign}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="vendorName">Vendor Name<span className="text-red-500"> *</span></label>
-              <input className="border py-2 px-3 text-grey-darkest" type="text" id="vendorName" name="vendorName" defaultValue={install.vendorName} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest" type="text" id="vendorName" name="vendorName" defaultValue={formData.vendorName} onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.vendorName}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="vendorPhone">Vendor Phone #</label>
-              <input className="border py-2 px-3 text-grey-darkest" type="tel" id="vendorPhone" name="vendorPhone" defaultValue={(install.vendorPhone)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest" type="tel" id="vendorPhone" name="vendorPhone" defaultValue={(formData.vendorPhone)} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="installDate">Install Date</label>
-              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="date" id="installDate" name="installDate" defaultValue={(install.installDate)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="date" id="installDate" name="installDate" defaultValue={(formData.installDate)} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:ml-2" htmlFor="installTime">Install Time</label>
-              <input className="border py-2 px-3 text-grey-darkest md:ml-2" type="time" id="installTime" name="installTime" defaultValue={(install.installTime)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest md:ml-2" type="time" id="installTime" name="installTime" defaultValue={(formData.installTime)} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installer">Install Company<span className="text-red-500"> *</span></label>
-              <input className="border py-2 px-3 text-grey-darkest" type="text" id="installer" name="installer" defaultValue={install.installer} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest" type="text" id="installer" name="installer" defaultValue={formData.installer} onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.installer}</p>
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installerPhone">Installer Phone #</label>
-              <input className="border py-2 px-3 text-grey-darkest" type="tel" id="installerPhone" name="installerPhone" defaultValue={(install.installerPhone)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest" type="tel" id="installerPhone" name="installerPhone" defaultValue={(formData.installerPhone)} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installerNotes">Installer Notes</label>
-              <input className="border py-2 px-3 text-grey-darkest" type="text" id="installerNotes" name="installerNotes" defaultValue={(install.installerNotes)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest" type="text" id="installerNotes" name="installerNotes" defaultValue={(formData.installerNotes)} onChange={handleChange} />
             </div>
             <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="complete">Install Complete?</label>
-              <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="complete" name="complete" defaultValue={(install.complete)} onChange={handleChange} />
+              <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="complete" name="complete" checked={formData.complete} onChange={onChangeCheckbox} />
             </div>
             <div className="flex mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="revisitNeeded">Revisit Needed?</label>
-              <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="revisitNeeded" name="revisitNeeded" defaultValue={(install.revisitNeeded)} onChange={handleChange} />
+              <input className="border mb-[6px] ml-3 px-3 text-grey-darkest" type="checkbox" id="revisitNeeded" name="revisitNeeded" checked={formData.revisitNeeded} onChange={onChangeCheckbox} />
             </div>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="revisitDate">Revisit Date</label>
-              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="date" id="revisitDate" name="revisitDate" defaultValue={(install.revisitDate)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="date" id="revisitDate" name="revisitDate" defaultValue={(formData.revisitDate)} onChange={handleChange} />
             </div>
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="pmNotes">PM Notes</label>
-              <input className="border py-2 px-3 text-grey-darkest" type="text" id="pmNotes" name="pmNotes" defaultValue={(install.pmNotes)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest" type="text" id="pmNotes" name="pmNotes" defaultValue={(formData.pmNotes)} onChange={handleChange} />
             </div>
             <button className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mx-auto mt-6 rounded" type="submit">Submit</button>
           </form>
