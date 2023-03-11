@@ -66,15 +66,44 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     pmNotes: install.pmNotes,
   });
   const [formErrors, setFormErrors] = useState(Object);
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [vendorPhoneInput, setVendorPhoneInput] = useState(install.vendorPhone);
+  const [installerPhoneInput, setInstallerPhoneInput] = useState(install.installerPhone);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     // type assertion to access name and value properties on target
     const target = event.target as HTMLInputElement;
+
+    // handle vendor phone number input
+    if (target.name === 'vendorPhone') {
+      const formattedPhoneNumber = formatPhoneNumber(target.value);
+      setVendorPhoneInput(formattedPhoneNumber);
+    }
+
+    // handle installer phone number input
+    if (target.name === 'installerPhone') {
+      const formattedPhoneNumber = formatPhoneNumber(target.value);
+      setInstallerPhoneInput(formattedPhoneNumber);
+    }
+
     setFormData({ ...formData, [target.name]: target.value });
     setRoute(formData.storeNum);
   };
+
+  // formats phone number while user types
+  const formatPhoneNumber = (value: any) => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumberLength = phoneNumber.length;
+    if (phoneNumberLength < 4) return phoneNumber;
+    if (phoneNumberLength < 7) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    }
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+      3,
+      6,
+    )}-${phoneNumber.slice(6, 10)}`;
+  }
 
   const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     // event.preventDefault();
@@ -165,10 +194,12 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="vendorName" name="vendorName" defaultValue={formData.vendorName} onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.vendorName}</p>
             </div>
+
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="vendorPhone">Vendor Phone #</label>
-              <input className="border py-2 px-3 text-grey-darkest" type="tel" id="vendorPhone" name="vendorPhone" defaultValue={(formData.vendorPhone)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest" type="tel" id="vendorPhone" name="vendorPhone" value={vendorPhoneInput} onChange={handleChange} />
             </div>
+
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="installDate">Install Date</label>
               <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="date" id="installDate" name="installDate" defaultValue={(formData.installDate)} onChange={handleChange} />
@@ -182,10 +213,12 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="installer" name="installer" defaultValue={formData.installer} onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.installer}</p>
             </div>
+
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installerPhone">Installer Phone #</label>
-              <input className="border py-2 px-3 text-grey-darkest" type="tel" id="installerPhone" name="installerPhone" defaultValue={(formData.installerPhone)} onChange={handleChange} />
+              <input className="border py-2 px-3 text-grey-darkest" type="tel" id="installerPhone" name="installerPhone" value={installerPhoneInput} onChange={handleChange} />
             </div>
+
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installerNotes">Installer Notes</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="installerNotes" name="installerNotes" defaultValue={(formData.installerNotes)} onChange={handleChange} />

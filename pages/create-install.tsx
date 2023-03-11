@@ -33,14 +33,43 @@ export default withPageAuthRequired(function CreateInstallForm() {
     pmNotes: "",
   });
   const [formErrors, setFormErrors] = useState(Object);
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [vendorPhoneInput, setVendorPhoneInput] = useState('');
+  const [installerPhoneInput, setInstallerPhoneInput] = useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const target = event.target as HTMLInputElement;
+
+    // handle vendor phone number input
+    if (target.name === 'vendorPhone') {
+      const formattedPhoneNumber = formatPhoneNumber(target.value);
+      setVendorPhoneInput(formattedPhoneNumber);
+    }
+
+    // handle installer phone number input
+    if (target.name === 'installerPhone') {
+      const formattedPhoneNumber = formatPhoneNumber(target.value);
+      setInstallerPhoneInput(formattedPhoneNumber);
+    }
+
     setFormData({ ...formData, [target.name]: target.value });
     // setRoute(formData.storeNum);
   };
+
+  // formats phone number while user types
+  const formatPhoneNumber = (value: any) => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumberLength = phoneNumber.length;
+    if (phoneNumberLength < 4) return phoneNumber;
+    if (phoneNumberLength < 7) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    }
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+      3,
+      6,
+    )}-${phoneNumber.slice(6, 10)}`;
+  }
 
   const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     // event.preventDefault();
@@ -79,12 +108,14 @@ export default withPageAuthRequired(function CreateInstallForm() {
   }
 
   const validate = (values: Install) => {
-    // const storeNums = installs.map((install: Install) => install.storeNum)
-    // console.log('store numbers: ', storeNums);
+    const storeNums = installs.map((install: Install) => install.storeNum)
+    console.log('store numbers: ', storeNums);
 
     const errors: any = {};
     if (!values.storeNum) {
       errors.storeNum = "Store number is required!";
+    } else if (storeNums.includes(values.storeNum)) {
+      errors.storeNum = "Store number already exists!"
     }
     if (!values.location) {
       errors.location = "Store location is required!";
@@ -136,10 +167,12 @@ export default withPageAuthRequired(function CreateInstallForm() {
               <input className="border py-2 px-3  text-gray-700" type="text" id="vendorName" name="vendorName" onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.vendorName}</p>
             </div>
+
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="vendorPhone">Vendor Phone #</label>
-              <input className="border py-2 px-3  text-gray-700" type="tel" id="vendorPhone" name="vendorPhone" placeholder="555-123-4567" onChange={handleChange} />
+              <input className="border py-2 px-3  text-gray-700" type="tel" id="vendorPhone" name="vendorPhone" placeholder="(555) 123-4567" onChange={handleChange} value={vendorPhoneInput} />
             </div>
+
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="installDate">Install Date</label>
               <input className="border py-2 px-3  text-gray-700 md:mr-2" type="date" id="installDate" name="installDate" onChange={handleChange} />
@@ -153,10 +186,12 @@ export default withPageAuthRequired(function CreateInstallForm() {
               <input className="border py-2 px-3  text-gray-700" type="text" id="installer" name="installer" onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.installer}</p>
             </div>
+
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installerPhone">Installer Phone #</label>
-              <input className="border py-2 px-3  text-gray-700" type="tel" id="installerPhone" name="installerPhone" placeholder="555-123-4567" onChange={handleChange} />
+              <input className="border py-2 px-3  text-gray-700" type="tel" id="installerPhone" name="installerPhone" placeholder="(555) 123-4567" onChange={handleChange} value={installerPhoneInput} />
             </div>
+
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installerNotes">Installer Notes</label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="installerNotes" name="installerNotes" onChange={handleChange} />
