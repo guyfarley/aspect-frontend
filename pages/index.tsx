@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home = ({ allInstalls }: Props): JSX.Element => {
 
   const { installs, setInstalls } = useContext(InstallsContext);
-  if (installs.length < 1) setInstalls(allInstalls);
+  if (installs.length <= 1) setInstalls(allInstalls);
 
   return (
     <div className="relative flex justify-center h-screen lg:h-[140vh] bg-slate-200">

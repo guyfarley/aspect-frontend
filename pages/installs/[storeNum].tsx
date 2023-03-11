@@ -43,6 +43,16 @@ export default function OneInstall({ install }: Props): JSX.Element {
   const stateInstall = stateInstalls[0];
   if (stateInstall) install = stateInstall;
 
+  let installComplete = "No";
+  if (install.complete === true) {
+    installComplete = "Yes";
+  }
+
+  let revisitNeeded = "No";
+  if (install.revisitNeeded === true) {
+    revisitNeeded = "Yes";
+  }
+
   const router = useRouter();
   const handleModify = (install: Install) => router.push(`/modify/${install.storeNum}`)
 
@@ -80,8 +90,8 @@ export default function OneInstall({ install }: Props): JSX.Element {
             <p className="installInfo">Installer Notes: {install.installerNotes}</p><br />
             <p className="installInfo">Production Vendor: {install.vendorName}</p>
             <p className="installInfo">Production Vendor Phone #: {install.vendorPhone}</p><br />
-            <p className="installInfo">Install Complete? {install.complete}</p>
-            <p className="installInfo">Revisit Needed? {install.revisitNeeded}</p>
+            <p className="installInfo">Install Complete? {installComplete}</p>
+            <p className="installInfo">Revisit Needed? {revisitNeeded}</p>
             <p className="installInfo">Revisit Date: {install.revisitDate}</p>
             <p className="installInfo">PM Notes: {install.pmNotes}</p>
             <div className="flex flex-col items-center mt-[60px]">
