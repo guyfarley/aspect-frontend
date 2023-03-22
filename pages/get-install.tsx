@@ -72,28 +72,28 @@ export default withPageAuthRequired(function GetInstallForm() {
           <h1 className="font-ptserif text-gray-700 text-4xl">Looking for a specific install?</h1>
           <h1 className="font-roboto text-gray-600 text-base mt-[12px]">Choose your marketing campaign and installation below, and click Submit.</h1>
           <form className="flex flex-col items-center mt-[8vh] mb-[5vh] md:items-start" onSubmit={handleSubmit}>
-            <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="campaigns">Choose Campaign</label>
+            <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="campaigns">Campaign</label>
             <select
               className="w-[180px] border rounded pl-[6px] py-[3px]"
               name="campaigns"
               id="campaigns"
               onChange={handleCampaignSelection}
             >
-              <option></option>
+              <option className="font-roboto text-gray-400">Select Campaign</option>
               {campaigns.map((campaign) => (
                 <option className="font-roboto text-gray-600" key={campaign}>
                   {campaign}
                 </option>
               ))}
             </select>
-            <label className="mb-2 uppercase font-bold text-sm mt-6 text-gray-700 md:mr-2" htmlFor="campaign-installs">Choose Install</label>
+            <label className="mb-2 uppercase font-bold text-sm mt-6 text-gray-700 md:mr-2" htmlFor="campaign-installs">Install</label>
             <select
               className="w-[180px] border rounded pl-[6px] py-[3px]"
               name="campaign-installs"
               id="campaign-installs"
               onChange={handleInstallSelection}
             >
-              <option></option>
+              <option className="font-roboto text-gray-400">Select Install</option>
               {dynamicOptions.map((install: Install) => (
                 <option className="font-roboto text-gray-600" key={install.storeNum} value={install.storeNum}>
                   {install.location} ({install.storeNum})
