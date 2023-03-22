@@ -48,30 +48,17 @@ const Home = ({ allInstalls }: Props): JSX.Element => {
   }
   getCampaigns(installs);
 
-  // console.log('campaigns from home page: ', campaigns);
-
   // calls getInstalls function to get filtered-down installs, sets those to filteredInstalls
   const handleCampaignSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     const target = event.target as HTMLSelectElement;
-
-    const slugifiedCampaign = slugify(target.value);
-    // setRoute(target.value); ?
+    setRoute(target.value);
   }
 
   // when Submit button clicked, user routed to dynamic route for the chosen install
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push(`/reports/${route}`);
-  }
-
-  const slugify = (str: String) => {
-    return str
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/[\s_-]+/g, '-')
-      .replace(/^-+|-+$/g, '');
   }
 
   return (
@@ -110,6 +97,9 @@ const Home = ({ allInstalls }: Props): JSX.Element => {
                   </option>
                 ))}
               </select>
+              <div className="mt-[20px]">
+                <button className="submitButton" type="submit">Submit</button>
+              </div>
             </form>
           </div>
           <h1 className="font-ptserif text-gray-700 text-4xl mt-[40px]">Add your installs.</h1>
