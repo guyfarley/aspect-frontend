@@ -27,7 +27,6 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 
-
 const Home = ({ allInstalls }: Props): JSX.Element => {
 
   const { installs, setInstalls } = useContext(InstallsContext);
@@ -56,13 +55,23 @@ const Home = ({ allInstalls }: Props): JSX.Element => {
     event.preventDefault();
     const target = event.target as HTMLSelectElement;
 
+    const slugifiedCampaign = slugify(target.value);
     // setRoute(target.value); ?
   }
 
   // when Submit button clicked, user routed to dynamic route for the chosen install
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(`/installs/${route}`);
+    router.push(`/reports/${route}`);
+  }
+
+  const slugify = (str: String) => {
+    return str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
   }
 
   return (
