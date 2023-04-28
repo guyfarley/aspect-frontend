@@ -13,7 +13,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import prisma from '../../db';
 import { InstallsContext } from '../../context/InstallsContext';
-import { Checkbox } from '@mui/material';
+import { Checkbox, Toolbar, Typography } from '@mui/material';
 
 interface Props {
   campaignInstalls: Install[]
@@ -109,19 +109,26 @@ export default function Report({ campaignInstalls }: Props): JSX.Element {
         <div className="flex flex-col items-center h-full w-full mt-[120px] pb-8 md:mx-auto">
           <TableContainer component={Paper}>
             <Table
-              sx={{ minWidth: 300 }}
+              sx={{ minWidth: '1400px' }}
               aria-label="simple table"
+              stickyHeader
             >
               <TableHead>
                 <TableRow>
+                  <Toolbar
+                    sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}
+                  ><Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>{reportInstalls[0].campaign}</Typography>
+                  </Toolbar>
+                </TableRow>
+                <TableRow>
                   <TableCell>Store Number</TableCell>
-                  <TableCell align="right">Location</TableCell>
-                  <TableCell align="right">Install Date</TableCell>
-                  <TableCell align="right">Install Complete</TableCell>
-                  <TableCell align="right">Revisit Needed</TableCell>
-                  <TableCell align="right">Revisit Date</TableCell>
-                  <TableCell align="right">Installer Notes</TableCell>
-                  <TableCell align="right">PM Notes</TableCell>
+                  <TableCell align="left">Location</TableCell>
+                  <TableCell align="left">Install Date</TableCell>
+                  <TableCell align="left">Install Complete</TableCell>
+                  <TableCell align="left">Revisit Needed</TableCell>
+                  <TableCell align="left">Revisit Date</TableCell>
+                  <TableCell align="left">Installer Notes</TableCell>
+                  <TableCell align="left">PM Notes</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -133,17 +140,17 @@ export default function Report({ campaignInstalls }: Props): JSX.Element {
                     <TableCell component="th" scope="row">
                       {install.storeNum}
                     </TableCell>
-                    <TableCell align="right">{install.location}</TableCell>
-                    <TableCell align="right">{install.installDate}</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="left">{install.location}</TableCell>
+                    <TableCell align="left">{install.installDate}</TableCell>
+                    <TableCell align="left">
                       <Checkbox checked={install.complete} />
                     </TableCell>
-                    <TableCell align="right">{install.revisitDate}</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="left">
                       <Checkbox checked={install.revisitNeeded} />
                     </TableCell>
-                    <TableCell align="right">{install.installerNotes}</TableCell>
-                    <TableCell align="right">{install.pmNotes}</TableCell>
+                    <TableCell align="left">{install.revisitDate}</TableCell>
+                    <TableCell align="left">{install.installerNotes}</TableCell>
+                    <TableCell align="left">{install.pmNotes}</TableCell>
                   </TableRow>
                 ))}
                 {/* <TableRow
