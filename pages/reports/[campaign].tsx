@@ -58,48 +58,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export default function Report({ campaignInstalls }: Props): JSX.Element {
 
-  console.log('campaign installs from props: ', campaignInstalls);
-
   const { installs } = useContext(InstallsContext);
   const stateInstalls: Install[] = installs.filter((installFromState: Install) => installFromState.campaign === campaignInstalls[0].campaign);
-  console.log('campaign installs from state: ', stateInstalls);
-
-  // const stateInstall = stateInstalls[0];
 
   let reportInstalls: Install[] = [];
   if (stateInstalls) reportInstalls = stateInstalls;
 
-  console.log('report installs: ', reportInstalls);
+  console.log('reportInstalls: ', reportInstalls);
 
-  // let installComplete = "No";
-  // if (install.complete === true) {
-  //   installComplete = "Yes";
-  // }
-
-  // let revisitNeeded = "No";
-  // if (install.revisitNeeded === true) {
-  //   revisitNeeded = "Yes";
-  // }
-
-  // const router = useRouter();
-  // const handleModify = (install: Install) => router.push(`/modify/${install.storeNum}`)
-
-  // const handleDelete = (install: Install) => {
-
-  //   const storeNumber: string = install.storeNum;
-
-  //   const deleteOne = async () => {
-  //     const response = await fetch(`/api/delete/${storeNumber}`);
-  //     if (!response.ok) {
-  //       throw new Error(response.statusText);
-  //     }
-  //     return await response.json();
-  //   };
-
-  //   deleteOne().then
-  //     (data => alert(`Installation for store #${data.storeNum} has been deleted!`)).then
-  //   router.push('/');
-  // }
+  const thisCampaign = campaignInstalls[0].campaign;
 
   return (
     <>
@@ -117,7 +84,7 @@ export default function Report({ campaignInstalls }: Props): JSX.Element {
                 <TableRow>
                   <Toolbar
                     sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}
-                  ><Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>{reportInstalls[0].campaign}</Typography>
+                  ><Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>{thisCampaign}</Typography>
                   </Toolbar>
                 </TableRow>
                 <TableRow>
@@ -153,14 +120,6 @@ export default function Report({ campaignInstalls }: Props): JSX.Element {
                     <TableCell align="left">{install.pmNotes}</TableCell>
                   </TableRow>
                 ))}
-                {/* <TableRow
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">TOTAL
-                  </TableCell>
-                  <TableCell align="right">{cartQty}</TableCell>
-                  <TableCell align="right">${cartPrice}</TableCell>
-                </TableRow> */}
               </TableBody>
             </Table>
           </TableContainer>
