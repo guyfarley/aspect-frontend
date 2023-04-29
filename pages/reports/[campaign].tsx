@@ -1,3 +1,11 @@
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import { useContext } from 'react';
 import Header from '../../components/Header';
 import { Install } from '../../typings';
@@ -5,6 +13,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import prisma from '../../db';
 import { InstallsContext } from '../../context/InstallsContext';
+import { Checkbox, Toolbar, Typography } from '@mui/material';
 
 interface Props {
   campaignInstalls: Install[]
@@ -38,7 +47,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // filters installs to those matching the campaign passed into params
   const campaignInstalls = installs.filter((install) => install.campaign === params!.campaign);
 
-  // returns filtered-down installs, to be passed to OneInstall component as props
+  // returns filtered-down installs, to be passed to CampaignReport component as props
   return {
     props: {
       campaignInstalls,
@@ -47,92 +56,76 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 };
 
-export default function OneInstall({ campaignInstalls }: Props): JSX.Element {
-
-  console.log('campaign installs from props: ', campaignInstalls);
+export default function Report({ campaignInstalls }: Props): JSX.Element {
 
   const { installs } = useContext(InstallsContext);
   const stateInstalls: Install[] = installs.filter((installFromState: Install) => installFromState.campaign === campaignInstalls[0].campaign);
-  console.log('campaign installs from state: ', stateInstalls);
-
-  // const stateInstall = stateInstalls[0];
 
   let reportInstalls: Install[] = [];
   if (stateInstalls) reportInstalls = stateInstalls;
 
-  console.log('report installs: ', reportInstalls);
+  console.log('reportInstalls: ', reportInstalls);
 
-  // let installComplete = "No";
-  // if (install.complete === true) {
-  //   installComplete = "Yes";
-  // }
-
-  // let revisitNeeded = "No";
-  // if (install.revisitNeeded === true) {
-  //   revisitNeeded = "Yes";
-  // }
-
-  // const router = useRouter();
-  // const handleModify = (install: Install) => router.push(`/modify/${install.storeNum}`)
-
-  // const handleDelete = (install: Install) => {
-
-  //   const storeNumber: string = install.storeNum;
-
-  //   const deleteOne = async () => {
-  //     const response = await fetch(`/api/delete/${storeNumber}`);
-  //     if (!response.ok) {
-  //       throw new Error(response.statusText);
-  //     }
-  //     return await response.json();
-  //   };
-
-  //   deleteOne().then
-  //     (data => alert(`Installation for store #${data.storeNum} has been deleted!`)).then
-  //   router.push('/');
-  // }
+  const thisCampaign = campaignInstalls[0].campaign;
 
   return (
-    <div className="flex items-center h-[150vh] w-full pt-[130px] bg-slate-200 md:pt-30 md:h-[130vh]">
-      <Header />
-      <p>{campaignInstalls[0].location}</p>
-    </div>
+    <>
+      <div className="relative flex justify-center h-full w-full px-6 py-4">
+        <Header />
 
-    // <>
-    //   <div className="flex items-center h-[150vh] w-full pt-[130px] bg-slate-200 md:pt-30 md:h-[130vh]">
-    //     <Header />
-    //     <div className="flex flex-col items-center w-full bg-white rounded shadow-lg p-8 pt-[60px] m-4 md:max-w-lg md:mx-auto">
-    //       <h1 className="font-ptserif text-gray-700 text-4xl">{install.location}</h1>
-    //       <div className="flex flex-col mt-[60px]">
-    //         <p className="installInfo">Store Number: {install.storeNum}</p>
-    //         <p className="installInfo">Campaign: {install.campaign}</p>
-    //         <p className="installInfo">Project Manager: {install.pm}</p><br />
-    //         <p className="installInfo">Install Date: {install.installDate}</p>
-    //         <p className="installInfo">Install Time: {install.installTime}</p><br />
-    //         <p className="installInfo">Install Vendor: {install.installer}</p>
-    //         <p className="installInfo">Install Vendor Phone #: {install.installerPhone}</p>
-    //         <p className="installInfo">Installer Notes: {install.installerNotes}</p><br />
-    //         <p className="installInfo">Production Vendor: {install.vendorName}</p>
-    //         <p className="installInfo">Production Vendor Phone #: {install.vendorPhone}</p><br />
-    //         <p className="installInfo">Install Complete? {installComplete}</p>
-    //         <p className="installInfo">Revisit Needed? {revisitNeeded}</p>
-    //         <p className="installInfo">Revisit Date: {install.revisitDate}</p>
-    //         <p className="installInfo">PM Notes: {install.pmNotes}</p>
-    //         <div className="flex flex-col items-center mt-[60px]">
-    //           <button
-    //             onClick={() => handleModify(install)}
-    //             className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mt-2 rounded"
-    //             type="submit">Modify
-    //           </button>
-    //           <button
-    //             onClick={() => handleDelete(install)}
-    //             className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mt-2 rounded"
-    //             type="submit">Delete
-    //           </button>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </>
+        <div className="flex flex-col items-center h-full w-full mt-[120px] pb-8 md:mx-auto">
+          <TableContainer component={Paper}>
+            <Table
+              sx={{ minWidth: '1400px' }}
+              aria-label="simple table"
+              stickyHeader
+            >
+              <TableHead>
+                <TableRow>
+                  <Toolbar
+                    sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}
+                  ><Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>{thisCampaign}</Typography>
+                  </Toolbar>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Store Number</TableCell>
+                  <TableCell align="left">Location</TableCell>
+                  <TableCell align="left">Install Date</TableCell>
+                  <TableCell align="left">Install Complete</TableCell>
+                  <TableCell align="left">Revisit Needed</TableCell>
+                  <TableCell align="left">Revisit Date</TableCell>
+                  <TableCell align="left">Installer Notes</TableCell>
+                  <TableCell align="left">PM Notes</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {campaignInstalls.map((install) => (
+                  <TableRow
+                    key={install.storeNum}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {install.storeNum}
+                    </TableCell>
+                    <TableCell align="left">{install.location}</TableCell>
+                    <TableCell align="left">{install.installDate}</TableCell>
+                    <TableCell align="left">
+                      <Checkbox checked={install.complete} />
+                    </TableCell>
+                    <TableCell align="left">
+                      <Checkbox checked={install.revisitNeeded} />
+                    </TableCell>
+                    <TableCell align="left">{install.revisitDate}</TableCell>
+                    <TableCell align="left">{install.installerNotes}</TableCell>
+                    <TableCell align="left">{install.pmNotes}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+      </div>
+    </>
+
   );
 }

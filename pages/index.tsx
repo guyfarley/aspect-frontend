@@ -80,27 +80,30 @@ const Home = ({ allInstalls }: Props): JSX.Element => {
             />
           </div>
           <h3 className="font-roboto text-gray-600 text-base mt-[30px]">With Aspect, tracking your retail graphic and fixture installations has never been easier. Aspect allows you to add install information to a central database held securely in the cloud. Then you may access that install, modify its details, or delete it entirely!</h3>
-          <div className="flex justify-center">
+          <div className="mt-[30px]">
 
-            <form className="flex flex-col items-center mt-[8vh] mb-[5vh]" onSubmit={handleSubmit}>
-              <label className="font-roboto uppercase mb-4 py-2 px-4 bg-gray-800 text-md text-white" htmlFor="campaigns">Get Full Campaign Report</label>
-              <select
-                className="w-[180px] border rounded pl-[6px] py-[3px]"
-                name="campaigns"
-                id="campaigns"
-                onChange={handleCampaignSelection}
-              >
-                <option className="font-roboto text-gray-400">Select Campaign</option>
-                {campaigns.map((campaign) => (
-                  <option className="font-roboto text-gray-600" key={campaign}>
-                    {campaign}
-                  </option>
-                ))}
-              </select>
-              <div className="mt-[20px]">
-                <button className="submitButton" type="submit">Submit</button>
-              </div>
-            </form>
+            <h1 className="font-ptserif text-gray-700 text-4xl">Get full campaign report.</h1>
+            <div className="flex justify-center md:justify-start">
+              <form className="flex flex-col items-center mt-[7vh] mb-[4vh] md:items-start" onSubmit={handleSubmit}>
+
+                <select
+                  className="w-[180px] border rounded pl-[6px] py-[3px] mb-2 md:ml-2"
+                  name="campaigns"
+                  id="campaigns"
+                  onChange={handleCampaignSelection}
+                >
+                  <option className="font-roboto text-gray-400">Select Campaign</option>
+                  {campaigns.map((campaign) => (
+                    <option className="font-roboto text-gray-600" key={campaign}>
+                      {campaign}
+                    </option>
+                  ))}
+                </select>
+                <div className="md:ml-2">
+                  <button className="submitButton" type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
           </div>
           <h1 className="font-ptserif text-gray-700 text-4xl mt-[40px]">Add your installs.</h1>
           <h3 className="font-roboto text-gray-600 text-base mt-[30px]">To add an installation simply visit the <Link href="/create-install">CREATE INSTALL</Link> page and enter the information. Once submitted, the data for that install will be posted to the central database - where it can then be accessed by your project management team, install crews, or the customer!</h3>
