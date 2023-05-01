@@ -1,7 +1,4 @@
-import Image from 'next/image'
-import Footer from './Footer';
-import Link from 'next/link';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
 interface Campaigns {

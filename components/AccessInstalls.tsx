@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Footer from './Footer';
 import Link from 'next/link';
 
 function AccessInstalls() {

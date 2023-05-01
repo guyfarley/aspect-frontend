@@ -1,17 +1,16 @@
 import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { InstallsContext } from '../context/InstallsContext';
 import CreateInstallHero from '../components/CreateInstallHero';
 import { Install } from '../typings';
+import Footer from '../components/Footer';
+import CreateInstallTitle from '../components/CreateInstallTitle';
 
-export default withPageAuthRequired(function CreateInstallForm() {
+export default function CreateInstallForm() {
 
   const { addStateInstall, installs } = useContext(InstallsContext);
-
   const router = useRouter();
-  // const [route, setRoute] = useState("");
 
   // initialize formData with correct keys and value types
   const [formData, setFormData] = useState({
@@ -29,7 +28,6 @@ export default withPageAuthRequired(function CreateInstallForm() {
     installer: "",
     installerPhone: "",
     installerNotes: "",
-    // completionPics: install.completionPics,
     pmNotes: "",
   });
   const [formErrors, setFormErrors] = useState(Object);
@@ -134,14 +132,10 @@ export default withPageAuthRequired(function CreateInstallForm() {
 
   return (
     <>
-      <div className="relative flex justify-center h-full w-full px-6 py-4">
+      <div className="flex flex-col items-center">
         <Header />
-
+        <CreateInstallTitle />
         <div className="flex flex-col items-center h-full w-full pb-8 md:max-w-md md:mx-auto md:items-start">
-          <div className="flex flex-col">
-            <h1 className="font-ptserif text-gray-700 text-4xl mt-[100px]">Create a new install.</h1>
-            <h1 className="font-roboto text-gray-700 text-base mt-[12px]">Fill out the form below to create your installation!</h1>
-          </div>
           <form className="mb-6 mt-[60px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmit}>
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="storeNum">Store Number<span className="text-red-500"> *</span></label>
@@ -167,12 +161,10 @@ export default withPageAuthRequired(function CreateInstallForm() {
               <input className="border py-2 px-3  text-gray-700" type="text" id="vendorName" name="vendorName" onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.vendorName}</p>
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="vendorPhone">Vendor Phone #</label>
               <input className="border py-2 px-3  text-gray-700" type="tel" id="vendorPhone" name="vendorPhone" placeholder="(555) 123-4567" onChange={handleChange} value={vendorPhoneInput} />
             </div>
-
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="installDate">Install Date</label>
               <input className="border py-2 px-3  text-gray-700 md:mr-2" type="date" id="installDate" name="installDate" onChange={handleChange} />
@@ -186,12 +178,10 @@ export default withPageAuthRequired(function CreateInstallForm() {
               <input className="border py-2 px-3  text-gray-700" type="text" id="installer" name="installer" onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.installer}</p>
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installerPhone">Installer Phone #</label>
               <input className="border py-2 px-3  text-gray-700" type="tel" id="installerPhone" name="installerPhone" placeholder="(555) 123-4567" onChange={handleChange} value={installerPhoneInput} />
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm  text-gray-700" htmlFor="installerNotes">Installer Notes</label>
               <input className="border py-2 px-3  text-gray-700" type="text" id="installerNotes" name="installerNotes" onChange={handleChange} />
@@ -215,11 +205,9 @@ export default withPageAuthRequired(function CreateInstallForm() {
             <button className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mx-auto mt-6 rounded" type="submit">Submit</button>
           </form>
         </div>
-      </div>
-      <div className="flex flex-col items-center mb-[5vh]">
         <CreateInstallHero />
+        <Footer />
       </div>
     </>
-    // footer
   )
-})
+}

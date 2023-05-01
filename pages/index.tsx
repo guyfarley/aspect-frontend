@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
@@ -7,9 +6,7 @@ import { GetStaticProps } from 'next';
 import prisma from '../db';
 import { Install } from '../typings'
 import { InstallsContext } from '../context/InstallsContext';
-import Image from 'next/image'
 import Footer from '../components/Footer';
-import Link from 'next/link';
 import GetReport from '../components/GetReport';
 import AddInstalls from '../components/AddInstalls';
 import AccessInstalls from '../components/AccessInstalls';
@@ -17,8 +14,6 @@ import AccessInstalls from '../components/AccessInstalls';
 interface Props {
   allInstalls: Install[]
 }
-
-
 
 // upon initial page load, fetch all installs from AWS database and pass into Home component
 export const getStaticProps: GetStaticProps = async () => {
@@ -31,13 +26,10 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 };
 
-
 const Home = ({ allInstalls }: Props): JSX.Element => {
 
   const { installs, setInstalls } = useContext(InstallsContext);
   const campaigns: string[] = [];
-  // const router = useRouter();
-  // const [route, setRoute] = useState("");
 
   if (installs.length <= 1) setInstalls(allInstalls);
 

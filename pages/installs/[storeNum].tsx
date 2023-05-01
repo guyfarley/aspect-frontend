@@ -5,6 +5,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import prisma from '../../db';
 import { InstallsContext } from '../../context/InstallsContext';
+import Footer from '../../components/Footer';
 
 interface Props {
   install: Install
@@ -75,9 +76,9 @@ export default function OneInstall({ install }: Props): JSX.Element {
 
   return (
     <>
-      <div className="flex items-center h-[150vh] w-full pt-[130px] bg-slate-200 md:pt-30 md:h-[130vh]">
+      <div className="flex flex-col items-center">
         <Header />
-        <div className="flex flex-col items-center w-full bg-white rounded shadow-lg p-8 pt-[60px] m-4 md:max-w-lg md:mx-auto">
+        <div className="flex flex-col justify-center bg-white rounded shadow-lg p-8 pt-[40px] m-4 mt-[110px] md:max-w-lg md:mx-auto">
           <h1 className="font-ptserif text-gray-700 text-4xl">{install.location}</h1>
           <div className="flex flex-col mt-[60px]">
             <p className="installInfo">Store Number: {install.storeNum}</p>
@@ -107,6 +108,9 @@ export default function OneInstall({ install }: Props): JSX.Element {
               </button>
             </div>
           </div>
+        </div>
+        <div className="mb-[20px]">
+          <Footer />
         </div>
       </div>
     </>

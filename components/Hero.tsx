@@ -1,12 +1,8 @@
 import Image from 'next/image'
-import Footer from './Footer';
-import Link from 'next/link';
 
 function Hero() {
   return (
     <div className="flex flex-col justify-center mt-[8rem] w-[100vw] px-6 py-4 md:w-[60vw]">
-
-      {/* <div className="flex flex-col items-center justify-center h-[45vh] w-[100vw] px-6 py-4 mt-[100px] md:h-[30vh] md:w-[60vw]"> */}
       <h1 className="font-ptserif text-gray-700 text-4xl">See your marketing,</h1>
       <h1 className="font-ptserif text-gray-700 text-4xl mb-10">delivered.</h1>
       <div className="shadow-lg">

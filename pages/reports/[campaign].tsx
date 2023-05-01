@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import prisma from '../../db';
 import { InstallsContext } from '../../context/InstallsContext';
 import { Checkbox, Toolbar, Typography } from '@mui/material';
+import Footer from '../../components/Footer';
 
 interface Props {
   campaignInstalls: Install[]
@@ -64,16 +65,15 @@ export default function Report({ campaignInstalls }: Props): JSX.Element {
   let reportInstalls: Install[] = [];
   if (stateInstalls) reportInstalls = stateInstalls;
 
-  console.log('reportInstalls: ', reportInstalls);
-
   const thisCampaign = campaignInstalls[0].campaign;
 
   return (
     <>
-      <div className="relative flex justify-center h-full w-full px-6 py-4">
+      <div className="flex flex-col items-center">
+
         <Header />
 
-        <div className="flex flex-col items-center h-full w-full mt-[120px] pb-8 md:mx-auto">
+        <div className="flex flex-col items-center h-full w-[90vw] mt-[120px] pb-8">
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: '1400px' }}
@@ -84,7 +84,7 @@ export default function Report({ campaignInstalls }: Props): JSX.Element {
                 <TableRow>
                   <Toolbar
                     sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}
-                  ><Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>{thisCampaign}</Typography>
+                  ><Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>{thisCampaign}</Typography>
                   </Toolbar>
                 </TableRow>
                 <TableRow>
@@ -124,8 +124,8 @@ export default function Report({ campaignInstalls }: Props): JSX.Element {
             </Table>
           </TableContainer>
         </div>
+        <Footer />
       </div>
     </>
-
   );
 }
