@@ -5,6 +5,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import prisma from '../../db';
 import { InstallsContext } from '../../context/InstallsContext';
+import Footer from '../../components/Footer';
 
 interface Props {
   install: Install
@@ -60,7 +61,6 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
     installerPhone: install.installerPhone,
     installerNotes: install.installerNotes,
     complete: install.complete,
-    // completionPics: install.completionPics,
     revisitNeeded: install.revisitNeeded,
     revisitDate: install.revisitDate,
     pmNotes: install.pmNotes,
@@ -106,7 +106,6 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
   }
 
   const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // event.preventDefault();
     const target = event.target as HTMLInputElement;
     setFormData({ ...formData, [target.name]: target.checked });
     setRoute(formData.storeNum);
@@ -141,9 +140,6 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
   }
 
   const validate = (values: Install) => {
-    // const storeNums = installs.map((install: Install) => install.storeNum)
-    // console.log('store numbers: ', storeNums);
-
     const errors: any = {};
     if (!values.storeNum) {
       errors.storeNum = "Store number required!";
@@ -165,9 +161,9 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
 
   return (
     <>
-      <Header />
-      <div className="flex items-center h-[210vh] w-full bg-slate-200 md:h-[170vh]">
-        <div className="flex flex-col items-center h-full w-full bg-slate-200 p-8 md:max-w-md md:mx-auto">
+      <div className="flex flex-col items-center">
+        <Header />
+        <div className="flex flex-col items-center h-full w-full pb-8 pt-8 md:max-w-md md:mx-auto md:items-start">
           <h1 className="font-ptserif text-gray-700 text-4xl mt-[100px]">Modify Install</h1>
           <form className="mb-6 mt-[50px] md:flex md:flex-wrap md:justify-between" onSubmit={handleSubmitUpdate}>
             <div className="flex flex-col mb-4 md:w-1/2">
@@ -194,12 +190,10 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="vendorName" name="vendorName" defaultValue={formData.vendorName} onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.vendorName}</p>
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="vendorPhone">Vendor Phone #</label>
               <input className="border py-2 px-3 text-grey-darkest" type="tel" id="vendorPhone" name="vendorPhone" value={vendorPhoneInput} onChange={handleChange} />
             </div>
-
             <div className="flex flex-col mb-4 md:w-1/2">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest md:mr-2" htmlFor="installDate">Install Date</label>
               <input className="border py-2 px-3 text-grey-darkest md:mr-2" type="date" id="installDate" name="installDate" defaultValue={(formData.installDate)} onChange={handleChange} />
@@ -213,12 +207,10 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="installer" name="installer" defaultValue={formData.installer} onChange={handleChange} />
               <p className="text-red-500 ml-1">{formErrors.installer}</p>
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installerPhone">Installer Phone #</label>
               <input className="border py-2 px-3 text-grey-darkest" type="tel" id="installerPhone" name="installerPhone" value={installerPhoneInput} onChange={handleChange} />
             </div>
-
             <div className="flex flex-col mb-4 md:w-full">
               <label className="mb-2 uppercase font-bold text-sm text-grey-darkest" htmlFor="installerNotes">Installer Notes</label>
               <input className="border py-2 px-3 text-grey-darkest" type="text" id="installerNotes" name="installerNotes" defaultValue={(formData.installerNotes)} onChange={handleChange} />
@@ -241,6 +233,9 @@ export default function ModifyInstall({ install }: Props): JSX.Element {
             </div>
             <button className="block bg-slate-600 hover:bg-slate-400 text-white uppercase text-base px-4 py-2 mx-auto mt-6 rounded" type="submit">Submit</button>
           </form>
+        </div>
+        <div className="mb-[20px]">
+          <Footer />
         </div>
       </div>
     </>

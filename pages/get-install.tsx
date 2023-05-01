@@ -1,27 +1,19 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import GetInstallHero from '../components/GetInstallHero';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import { Install } from '../typings'
 import { InstallsContext } from '../context/InstallsContext';
+import GetInstallTitle from '../components/GetInstallTitle';
+import Footer from '../components/Footer';
 
-export default withPageAuthRequired(function GetInstallForm() {
+export default function GetInstallForm() {
 
-  const { installs, setInstalls, dynamicOptions, setDynamicOptions } = useContext(InstallsContext);
+  const { installs, dynamicOptions, setDynamicOptions } = useContext(InstallsContext);
   const campaigns: string[] = [];
   let filteredInstalls: Install[] = [];
   const router = useRouter();
   const [route, setRoute] = useState("");
-
-
-  // const storedInstalls = JSON.parse(localStorage.getItem('localStorageInstalls') || "");
-  // if (storedInstalls) {
-  //   setInstalls(storedInstalls);
-  // }
-
-  // localStorage.setItem('localStorageInstalls', JSON.stringify(installs));
-
 
   // iterates through installs to capture an array of campaign names currently in database
   const getCampaigns = (installs: Install[]) => {
@@ -66,12 +58,11 @@ export default withPageAuthRequired(function GetInstallForm() {
 
   return (
     <>
-      <div className="relative flex justify-center px-6 py-4">
+      <div className="flex flex-col items-center">
         <Header />
-        <div className="flex flex-col h-full w-full mt-[100px] pb-8 md:max-w-lg md:mx-auto md:items-start">
-          <h1 className="font-ptserif text-gray-700 text-4xl">Looking for a specific install?</h1>
-          <h1 className="font-roboto text-gray-600 text-base mt-[12px]">Choose your marketing campaign and installation below, and click Submit.</h1>
-          <form className="flex flex-col items-center mt-[8vh] mb-[5vh] md:items-start" onSubmit={handleSubmit}>
+        <GetInstallTitle />
+        <div className="flex flex-col items-center justify-center mt-[20px] mb-[40px] w-[100vw] px-6 py-4 md:w-[60vw] md:items-start">
+          <form className="flex flex-col items-center md:items-start" onSubmit={handleSubmit}>
             <label className="mb-2 uppercase font-bold text-sm  text-gray-700 md:mr-2" htmlFor="campaigns">Campaign</label>
             <select
               className="w-[180px] border rounded pl-[6px] py-[3px]"
@@ -106,9 +97,10 @@ export default withPageAuthRequired(function GetInstallForm() {
           </form>
         </div>
       </div>
-      <div className="flex flex-col items-center mb-[5vh]">
+      <div className="flex flex-col items-center">
         <GetInstallHero />
+        <Footer />
       </div>
     </>
   )
-})
+}
