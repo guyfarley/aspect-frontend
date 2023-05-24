@@ -38,13 +38,11 @@ export default function CreateInstallForm() {
     event.preventDefault();
     const target = event.target as HTMLInputElement;
 
-    // handle vendor phone number input
     if (target.name === 'vendorPhone') {
       const formattedPhoneNumber = formatPhoneNumber(target.value);
       setVendorPhoneInput(formattedPhoneNumber);
     }
 
-    // handle installer phone number input
     if (target.name === 'installerPhone') {
       const formattedPhoneNumber = formatPhoneNumber(target.value);
       setInstallerPhoneInput(formattedPhoneNumber);
@@ -107,26 +105,18 @@ export default function CreateInstallForm() {
 
   const validate = (values: Install) => {
     const storeNums = installs.map((install: Install) => install.storeNum)
-    console.log('store numbers: ', storeNums);
-
     const errors: any = {};
+
     if (!values.storeNum) {
       errors.storeNum = "Store number is required!";
     } else if (storeNums.includes(values.storeNum)) {
       errors.storeNum = "Store number already exists!"
     }
-    if (!values.location) {
-      errors.location = "Store location is required!";
-    }
-    if (!values.campaign) {
-      errors.campaign = "Marketing campaign is required!";
-    }
-    if (!values.vendorName) {
-      errors.vendorName = "Vendor name is required!";
-    }
-    if (!values.installer) {
-      errors.installer = "Installer name is required!";
-    }
+    if (!values.location) errors.location = "Store location is required!";
+    if (!values.campaign) errors.campaign = "Marketing campaign is required!";
+    if (!values.vendorName) errors.vendorName = "Vendor name is required!";
+    if (!values.installer) errors.installer = "Installer name is required!";
+
     return errors;
   };
 
