@@ -5,7 +5,7 @@ const InstallsContext = createContext();
 const InstallsProvider = ({ children }) => {
 
   const [installs, setInstalls] = useState([]);
-  const [dynamicOptions, setDynamicOptions] = useState([]);
+  const [installOptions, setInstallOptions] = useState([]);
 
   // update a specific install with submitted form data
   const updateStateInstall = (formData) => {
@@ -31,8 +31,8 @@ const InstallsProvider = ({ children }) => {
         setInstalls,
         updateStateInstall,
         addStateInstall,
-        dynamicOptions,
-        setDynamicOptions
+        installOptions,
+        setInstallOptions
       }}
     >
       {children}

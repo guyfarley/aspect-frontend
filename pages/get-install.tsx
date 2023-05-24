@@ -9,48 +9,40 @@ import Footer from '../components/Footer';
 
 export default function GetInstallForm() {
 
-  const { installs, dynamicOptions, setDynamicOptions } = useContext(InstallsContext);
-  const campaigns: string[] = [];
-  let filteredInstalls: Install[] = [];
+  const { installs, installOptions, setInstallOptions } = useContext(InstallsContext);
   const router = useRouter();
   const [route, setRoute] = useState("");
+  let filteredInstalls: Install[] = [];
 
-  // iterates through installs to capture an array of campaign names currently in database
-  const getCampaigns = (installs: Install[]) => {
-    for (let i = 0; i < installs.length; i++) {
-      const campaign = installs[i].campaign;
-      if (!campaigns.includes(campaign)) {
-        campaigns.push(campaign);
-      }
+  // iterates through installs to capture an array of campaign names:
+  const campaigns: string[] = installs.reduce((installArray: Install[], currentInstall: any) => {
+    if (!installArray.includes(currentInstall.campaign)) {
+      installArray.push(currentInstall.campaign);
     }
-    return campaigns;
-  }
-  getCampaigns(installs);
+    return installArray;
+  }, []);
 
-  // filter installs down to only those installs for provided campaign
+  // filters installs down to only those installs for selected campaign:
   const getInstalls = (campaign: string) => {
-    filteredInstalls = installs.filter((install: Install) => install.campaign === campaign);
-    return filteredInstalls;
+    return filteredInstalls = installs.filter((install: Install) => install.campaign === campaign);
   }
 
-  // calls getInstalls function to get filtered-down installs, sets those to filteredInstalls
+  // calls getInstalls function to get filteredInstalls, sets those to installOptions
   const handleCampaignSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     const target = event.target as HTMLSelectElement;
     getInstalls(target.value);
-    setDynamicOptions(filteredInstalls);
+    setInstallOptions(filteredInstalls);
   }
 
   // when install selected from dropdown, route set to that install
   const handleInstallSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
     const target = event.target as HTMLSelectElement;
-    const matchingInstalls = installs.filter((location: Install) => location.storeNum === target.value)
-    const oneInstall = matchingInstalls[0];
-    setRoute(oneInstall.storeNum);
+    setRoute(target.value);
   }
 
-  // when Submit button clicked, user routed to dynamic route for the chosen install
+  // when Submit button clicked, user routed to install-specific page
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     router.push(`/installs/${route}`);
@@ -85,7 +77,7 @@ export default function GetInstallForm() {
               onChange={handleInstallSelection}
             >
               <option className="font-roboto text-gray-400">Select Install</option>
-              {dynamicOptions.map((install: Install) => (
+              {installOptions.map((install: Install) => (
                 <option className="font-roboto text-gray-600" key={install.storeNum} value={install.storeNum}>
                   {install.location} ({install.storeNum})
                 </option>
