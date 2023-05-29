@@ -10,7 +10,6 @@ import { useContext } from 'react';
 import Header from '../../components/Header';
 import { Install } from '../../typings';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { useRouter } from 'next/router';
 import prisma from '../../db';
 import { InstallsContext } from '../../context/InstallsContext';
 import { Checkbox, Toolbar, Typography } from '@mui/material';
@@ -26,8 +25,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const campaigns: string[] = [];
 
   // iterates through installs to capture an array of campaign names currently in database
-  for (let i = 0; i < installs.length; i++) {
-    const campaign = installs[i].campaign;
+  for (let install of installs) {
+    const campaign = install.campaign;
     if (!campaigns.includes(campaign)) {
       campaigns.push(campaign);
     }
@@ -45,7 +44,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const installs = await prisma.install.findMany();
-  // filters installs to those matching the campaign passed into params
   const campaignInstalls = installs.filter((install) => install.campaign === params!.campaign);
 
   // returns filtered-down installs, to be passed to CampaignReport component as props

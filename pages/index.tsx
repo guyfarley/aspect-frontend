@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
@@ -29,21 +29,15 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home = ({ allInstalls }: Props): JSX.Element => {
 
   const { installs, setInstalls } = useContext(InstallsContext);
-  const campaigns: string[] = [];
-
   if (installs.length <= 1) setInstalls(allInstalls);
 
   // iterates through installs to capture an array of campaign names currently in database
-  const getCampaigns = (installs: Install[]) => {
-    for (let i = 0; i < installs.length; i++) {
-      const campaign = installs[i].campaign;
-      if (!campaigns.includes(campaign)) {
-        campaigns.push(campaign);
-      }
+  const campaigns: string[] = installs.reduce((installArray: Install[], currentInstall: any) => {
+    if (!installArray.includes(currentInstall.campaign)) {
+      installArray.push(currentInstall.campaign);
     }
-    return campaigns;
-  }
-  getCampaigns(installs);
+    return installArray;
+  }, []);
 
   return (
     <div className="flex flex-col items-center">
